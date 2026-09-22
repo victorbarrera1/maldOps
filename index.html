@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- estilos css -->
     <link rel="stylesheet" href="estilos.css">
     <title> Maldops - Dashboard </title>
@@ -67,11 +67,61 @@
         <!--dashboard -->
         <div class="container">
             <!-- barra superior -->
-
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu"></ion-icon>
+                </div>
+                <div class="buscar">
+                    <label for="">
+                        <input type="text" placeholder="Buscar..." name="" id="">
+                        <ion-icon name="search"></ion-icon>
+                    </label>
+                </div>
+                <div class="perfil-usuario">
+                    <img src="profile-photo.jpg" alt="">
+                </div>
+            </div>
             <!-- fin barra superior-->
 
             <!-- cards -->
-
+            <div class="cards">
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">2,345</span>
+                        <span class="card-nombre">Visitas</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="eye"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">1,342</span>
+                        <span class="card-nombre">Ventas</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="cash"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">475</span>
+                        <span class="card-nombre">Mensajes</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="mail"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">$6,879</span>
+                        <span class="card-nombre">Ganancias</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="trending-up"></ion-icon>
+                    </div>
+                </div>
+            </div>
             <!-- fin cards -->
 
             <!-- detalles -->
@@ -94,7 +144,7 @@
     <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
     <!-- script index.js-->
-    <script src="index.js"></script>
+    <script type="module" src="index.js"></script>
 
 </body>
 
