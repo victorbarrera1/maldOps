@@ -1,0 +1,113 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+/* variables css */
+:root {
+    --white: #fff6ff;
+    --grey: #0b0b0b;
+    --black: #221824;
+    --blue: #431fd7;
+    --font: "Roboto Slab", serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+}
+
+/*  body */
+body {
+    background: var(--white);
+    overflow-x: hidden;
+
+}
+
+/* section */
+section {
+    position: relative;
+    width: 100%;
+}
+
+/* menu */
+.nav {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--grey);
+    border-left: 10px solid var(--black);
+    overflow: hidden;
+    transition: 0.5s;
+
+}
+
+.nav ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.nav ul li {
+    position: relative;
+    list-style: none;
+    width: 200%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.nav ul li:hover .nav ul li.active {
+    background: var(--white);
+}
+
+.nav ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.nav ul li a {
+    position: relative;
+    display: flex;
+    width: 100%;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.nav ul li:hover a,
+.nav ul li.active a {
+    color: var(--blue);
+}
+
+.nav ul li a .icono {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+
+.nav ul li a .iconoo ion-icon {
+    font-size: 1.75em;
+}
+
+.nav ul li a .titulo {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+/*  dashboard */
+
+/* topbar */
+
+/*  cards */
+
+/*  detalles */
+
+/*  bkp. */
