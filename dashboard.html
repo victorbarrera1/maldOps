@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- estilos css -->
+    <link rel="stylesheet" href="estilos.css">
+    <title> Maldops - Dashboard </title>
+</head>
+
+<body>
+
+    <section>
+        <!-- menu -->
+        <div class="nav">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icono"><ion-icon name="flag"></ion-icon></span>
+                        <span class="titulo">Logo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icono"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="titulo">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icono"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="titulo">Clientes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icono"><ion-icon name="card-outline"></ion-icon></span>
+                        <span class="titulo">Ventas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icono"><ion-icon name="information-circle-outline"></ion-icon></span>
+                        <span class="titulo">Ayuda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icono"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="titulo">Configuracion</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icono"><ion-icon name="log-in-outline"></ion-icon></span>
+                        <span class="titulo">Cerrar sesion</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <!-- fin menu -->
+
+        <!--dashboard -->
+        <div class="container">
+            <!-- barra superior -->
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu"></ion-icon>
+                </div>
+                <div class="buscar">
+                    <label for="">
+                        <input type="text" placeholder="Buscar..." name="" id="">
+                        <ion-icon name="search"></ion-icon>
+                    </label>
+                </div>
+                <div class="perfil-usuario">
+                    <img src="profile.png" alt="">
+                </div>
+            </div>
+            <!-- fin barra superior-->
+
+            <!-- cards -->
+            <div class="cards">
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">2,345</span>
+                        <span class="card-nombre">Visitas por AD</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="eye"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">1,342</span>
+                        <span class="card-nombre">Ventas obtenidas</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="cash"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">+999</span>
+                        <span class="card-nombre">Mensajes</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="mail"></ion-icon>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <span class="card-numeros">$6.879.350</span>
+                        <span class="card-nombre">Ganancias</span>
+                    </div>
+                    <div class="card-icono">
+                        <ion-icon name="trending-up"></ion-icon>
+                    </div>
+                </div>
+            </div>
+            <!-- fin cards -->
+
+            <!-- detalles -->
+            <div class="detalles">
+                <!-- Órdenes Recientes -->
+                <div class="ordenes-recientes">
+                    <div class="header">
+                        <h2>Campañas recientes</h2>
+                        <a href="#" class="boton">Ver todos</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Pago</th>
+                            <th>Estatus</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Campaña Instagram</td>
+                                <td>$110.000</td>
+                                <td>Pendiente</td>
+                                <td><span class="estatus pendiente">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                                <td>META ADS</td>
+                                <td>$89.000</td>
+                                <td>Pagado</td>
+                                <td><span class="estatus devuelto">Devuelto</span></td>
+                            </tr>
+                            <tr>
+                                <td>TIKTOK ADS</td>
+                                <td>$650.000</td>
+                                <td>Pendiente</td>
+                                <td><span class="estatus en-progreso">En Progreso</span></td>
+                            </tr>
+                            <tr>
+                                <td>WHATSAPP ADS</td>
+                                <td>$40.500</td>
+                                <td>Pagado</td>
+                                <td><span class="estatus pendiente">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                                <td>GOOGLE ADS</td>
+                                <td>$150.000</td>
+                                <td>Pagado</td>
+                                <td><span class="estatus entregado">Entregado</span></td>
+                            </tr>
+                            <tr>
+                                <td>YOUTUBE ADS</td>
+                                <td>$1.500.300</td>
+                                <td>Pendiente</td>
+                                <td><span class="estatus en-progreso">En Progreso</span></td>
+                            </tr>
+                            <tr>
+                                <td>LINKEDIN ADS</td>
+                                <td>$567.000</td>
+                                <td>Pagado</td>
+                                <td><span class="estatus entregado">Entregado</span></td>
+                            </tr>
+                            <tr>
+                                <td>REELS ADS</td>
+                                <td>$350.000</td>
+                                <td>Pendiente</td>
+                                <td><span class="estatus devuelto">Devuelto</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Fin Órdenes Recientes -->
+
+                <!-- Nuevos Clientes -->
+                <div class="nuevos-clientes">
+                    <div class="header">
+                        <h2>Clientes</h2>
+                    </div>
+                    <table>
+                        <tr>
+
+                            <td>
+                                <h4>Josemanuel Rodriguez</h4>
+                            </td>
+                            <td>
+                                <a href="#"><ion-icon name="chatbubbles"></ion-icon></a>
+                                <a href="#"><ion-icon name="call"></ion-icon></a>
+                                <a href="#"><ion-icon name="mail"></ion-icon></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4>Martin Maldonado</h4>
+                            </td>
+                            <td>
+                                <a href="#"><ion-icon name="chatbubbles"></ion-icon></a>
+                                <a href="#"><ion-icon name="call"></ion-icon></a>
+                                <a href="#"><ion-icon name="mail"></ion-icon></a>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <h4>Victor Barrera</h4>
+                            </td>
+                            <td>
+                                <a href="#"><ion-icon name="chatbubbles"></ion-icon></a>
+                                <a href="#"><ion-icon name="call"></ion-icon></a>
+                                <a href="#"><ion-icon name="mail"></ion-icon></a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <!-- Fin Nuevos Clientes -->
+            </div>
+            <!-- Fin Detalles -->
+        </div>
+        <!-- Fin Dashboard -->
+    </section>
+
+    <!-- scripts librerias de iconos-->
+    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+    <!-- script index.js-->
+    <script type="module" src="index.js"></script>
+
+</body>
+
+</html>

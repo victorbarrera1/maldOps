@@ -212,7 +212,7 @@ section {
     background: var(--grey);
 }
 
-.cards .card > div:first-child {
+.cards .card>div:first-child {
     display: flex;
     flex-direction: column;
 }
