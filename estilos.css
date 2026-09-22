@@ -3,10 +3,9 @@
 
 /* variables css */
 :root {
-    --white: #fff6ff;
-    --grey: #0b0b0b;
-    --black: #221824;
-    --blue: #431fd7;
+    --white: #ffffff;
+    --grey: #565454;
+    --black: #000000;
     --font: "Roboto Slab", serif;
 }
 
@@ -36,7 +35,7 @@ section {
     width: 300px;
     height: 100%;
     background: var(--grey);
-    border-left: 10px solid var(--black);
+    border-left: 10px solid var(--white);
     overflow: hidden;
     transition: 0.5s;
 
@@ -57,7 +56,8 @@ section {
     border-bottom-left-radius: 10px;
 }
 
-.nav ul li:hover .nav ul li.active {
+.nav ul li:hover,
+.nav ul li.active {
     background: var(--white);
 }
 
@@ -76,7 +76,7 @@ section {
 
 .nav ul li:hover a,
 .nav ul li.active a {
-    color: var(--blue);
+    color: var(--black);
 }
 
 .nav ul li a .icono {
@@ -88,7 +88,7 @@ section {
     text-align: center;
 }
 
-.nav ul li a .iconoo ion-icon {
+.nav ul li a .icono ion-icon {
     font-size: 1.75em;
 }
 
@@ -102,12 +102,374 @@ section {
     white-space: nowrap;
 }
 
-/*  dashboard */
+.container {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.4s;
+}
 
-/* topbar */
+.container.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
 
-/*  cards */
+/* -- top bar -- */
 
-/*  detalles */
+.container .topbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
 
-/*  bkp. */
+.container .topbar .toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+    cursor: pointer;
+}
+
+.container .topbar .buscar {
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+
+.container .topbar .buscar label {
+    position: relative;
+    width: 100%;
+}
+
+.container .topbar .buscar label input {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 35px;
+    font-size: 1em;
+    outline: none;
+    border: 1px solid var(--grey);
+}
+
+.container .topbar .buscar label ion-icon {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 1.2em;
+}
+
+.container .topbar .perfil-usuario {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.container .topbar .perfil-usuario img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* -- cards -- */
+
+.cards {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.cards .card {
+    position: relative;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.cards .card:hover {
+    background: var(--grey);
+}
+
+.cards .card > div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.cards .card .card-numeros {
+    position: relative;
+    font-weight: 700;
+    font-size: 2em;
+    color: var(--grey);
+}
+
+.cards .card .card-nombre {
+    color: var(--grey);
+    font-size: 1.1em;
+    margin-top: 5px;
+    margin-right: 0;
+}
+
+.cards .card .card-icono {
+    font-size: 3.5em;
+    color: var(--grey);
+}
+
+.cards .card:hover .card-numeros,
+.cards .card:hover .card-nombre,
+.cards .card:hover .card-icono {
+    color: var(--white);
+}
+
+/* -- Detalles -- */
+
+.detalles {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    margin-top: 10px;
+}
+
+.detalles .ordenes-recientes,
+.detalles .nuevos-clientes {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header h2 {
+    font-weight: 700;
+    color: var(--blue);
+}
+
+.boton {
+    position: relative;
+    padding: 5px 10px;
+    background: var(--grey);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 5px;
+}
+
+.detalles table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.detalles .ordenes-recientes table tr {
+    color: var(--black);
+    border-radius: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.detalles .ordenes-recientes table tr:hover {
+    background: var(--grey);
+    color: var(--white);
+}
+
+.detalles .ordenes-recientes table th,
+.detalles .ordenes-recientes table tr td {
+    padding: 10px;
+}
+
+.detalles .ordenes-recientes table th:last-child,
+.detalles .ordenes-recientes table tr td:last-child {
+    text-align: end;
+}
+
+.detalles .ordenes-recientes table th:nth-child(3),
+.detalles .ordenes-recientes table tr td:nth-child(3) {
+    text-align: center;
+}
+
+.estatus {
+    padding: 2px 10px;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.estatus.pendiente {
+    background: rgba(229, 206, 7, 0.3);
+    color: #e5ce07;
+}
+
+.estatus.devuelto {
+    background: rgba(227, 1, 1, 0.3);
+    color: #e30101;
+}
+
+.estatus.en-progreso {
+    background: rgba(1, 155, 227, 0.3);
+    color: #019be3;
+}
+
+.estatus.entregado {
+    background: rgba(141, 224, 44, 0.3);
+    color: #8de02c;
+}
+
+.detalles .nuevos-clientes .imgBox {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.detalles .nuevos-clientes .imgBox img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalles .nuevos-clientes table tr:hover {
+    background: var(--grey);
+    color: var(--white);
+}
+
+.detalles .nuevos-clientes table tr td:nth-child(1) {
+    width: 60px;
+}
+
+.detalles .nuevos-clientes table tr td {
+    padding: 12px 10px;
+}
+
+.detalles .nuevos-clientes table tr:hover td a {
+    color: var(--white);
+}
+
+/* Breakpoints */
+
+
+/* -- Pantallas Largas -- */
+
+@media only screen and (max-width: 1200px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* -- Laptops -- */
+@media only screen and (max-width: 992px) {
+    .nav {
+        left: -300px;
+    }
+
+    .nav.active {
+        left: 0;
+        width: 300px;
+    }
+
+    .container {
+        width: 100%;
+        left: 0;
+    }
+
+    .container.active {
+        left: 300px;
+    }
+}
+
+/* -- Tablets -- */
+@media only screen and (max-width: 768px) {
+    .detalles {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .ordenes-recientes,
+    .nuevos-clientes {
+        overflow-x: auto;
+    }
+
+    .estatus.en-progreso {
+        white-space: nowrap;
+    }
+}
+
+/* -- Celulares -- */
+@media only screen and (max-width: 400px) {
+    .nav {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+
+    .nav.active {
+        width: 100%;
+        left: 0;
+    }
+
+    .container.active .toggle {
+        color: var(--white);
+    }
+
+    .toggle {
+        position: fixed;
+        left: initial;
+        right: 0;
+        z-index: 10000;
+    }
+
+    .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .perfil-usuario {
+        min-width: 40px;
+    }
+
+    .header h2 {
+        font-size: 1.2em;
+    }
+
+    .detalles {
+        grid-template-columns: 1fr;
+    }
+
+    .detalles .nuevos-clientes table tr td a {
+        font-size: 1em;
+        margin-right: 5px;
+    }
+}
