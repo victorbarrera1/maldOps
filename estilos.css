@@ -257,7 +257,9 @@ section {
 .detalles .ordenes-recientes,
 .detalles .nuevos-clientes {
     position: relative;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     min-height: 500px;
     background: var(--white);
     padding: 20px;
@@ -374,6 +376,13 @@ section {
 
 .detalles .nuevos-clientes table tr td {
     padding: 12px 10px;
+}
+
+.detalles .nuevos-clientes table tr td a {
+    color: var(--black);
+    font-size: 1.15em;
+    margin-right: 6px;
+    text-decoration: none;
 }
 
 .detalles .nuevos-clientes table tr:hover td a {
