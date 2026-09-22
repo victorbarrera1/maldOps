@@ -19,6 +19,18 @@
 
 1. **Descargar el repositorio:**
    Clona el repositorio o descárgalo directamente como archivo ZIP:
-   - bash - 
-   
+   - bash
+
    git clone https://github.com/victorbarrera1/maldOps.git
+
+2. Ingresar a la carpeta desde la terminal
+   - cd /Downloads/maldoops
+
+3. Instalar las dependencias
+   - npm install
+
+4. Ejecutar el servidor
+   - npm run dev
+
+5. Abrir el navegador en la dirección proporiconada (Normalmente localhost:3000)
+
