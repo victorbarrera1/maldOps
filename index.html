@@ -4,21 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width-device.width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - MaldOps</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="formulario">
-        <h1> Inicio de sesion</h1>
-        <form method="post">
+        <h1> Login - MaldOps</h1>
+        <form action="dashboard.html">
             <div class="username">
                 <input type="text" required>
                 <label> Nombre de usuario</label>
             </div>
+            <div class="password">
+                <input type="password" required>
+                <label> Contraseña</label>
+            </div>
+            <input type="submit" value="Iniciar sesion">
         </form>
     </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            window.location.href = 'dashboard.html';
+        });
+    </script>
 </body>
 
 </html>
