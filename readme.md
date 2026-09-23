@@ -28,7 +28,7 @@ Contiene herramientas para centralizar los principales servicios de publicidad e
    npm -v
 
 2. **Descargar el repositorio**
-   Descargar el repositorio: Descárgalo directamente como archivo ZIP o Clona el repositorio:
+   Descárgalo directamente como archivo ZIP o Clona el repositorio:
 
    (en tu terminal)
    git clone https://github.com/victorbarrera1/maldOps.git
