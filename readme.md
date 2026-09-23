@@ -30,7 +30,7 @@ Contiene herramientas para centralizar los principales servicios de publicidad e
 2. **Descargar el repositorio**
    Descárgalo directamente como archivo ZIP o Clona el repositorio:
 
-   (en tu terminal)
+   (en la terminal)
    git clone https://github.com/victorbarrera1/maldOps.git
 
 3. **Ingresar a la carpeta del proyecto desde la terminal**
