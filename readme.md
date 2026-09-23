@@ -35,7 +35,7 @@ Contiene herramientas para centralizar los principales servicios de publicidad e
 
 3. **Ingresar a la carpeta del proyecto desde la terminal**
   -  (en la terminal)
-   -- cd maldoOps
+   -- cd maldOps
 
 4. **Instalar dependencias**
   - (en la terminal, dentro de la carpeta del proyecto)
