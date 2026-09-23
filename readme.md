@@ -14,25 +14,34 @@
 * Vite
 * Ionicons
 
-
 ### Cómo ejecutar MaldOps localmente?
+1. **Requisitos previos**
 
-1. **Descargar el repositorio:**
+   - Se necesita tener Node.js npm instalado (Node incluye npm).
+     Descarga del sitio oficial: https://nodejs.org/
+     
+     Para confirmar su instalación, en cualquier sistema:
+     -bash
+     node -v
+     npm -v
+
+2. **Descargar el repositorio:**
    Clona el repositorio o descárgalo directamente como archivo ZIP:
    - bash
 
    git clone https://github.com/victorbarrera1/maldOps.git
 
-2. Ingresar a la carpeta desde la terminal
-   - cd /Downloads/maldoops
+3. Navegar hasta la carpeta donde se clonó o descomprimió el repositorio.
+   Ejemplo:
+   - cd /Downloads/maldOps
 
-3. Instalar las dependencias
-   - npm install
-
-4. Ejecutar el servidor
+4. Instalar las dependencias
+   - npm install 
+   
+5. Ejecutar el servidor
    - npm run dev
 
-5. Abrir el navegador en la dirección proporiconada (Normalmente localhost:3000)
+6. Abrir el navegador en la dirección proporiconada (Normalmente localhost:3000)
 
 
 
