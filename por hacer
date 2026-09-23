@@ -30,8 +30,4 @@ Cerrar sesion
 <td>Pendiente</td>
 <td><span class="estatus pendiente">Pendiente</span></td>
 
-
-
-
-
-
+crear un archivo vite config en la raiz para el dashboard
