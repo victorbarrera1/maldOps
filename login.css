@@ -25,12 +25,14 @@ body {
     margin-bottom: 20px;
 }
 
+.correo,
 .username,
 .password {
     position: relative;
     margin-bottom: 30px;
 }
 
+.correo input,
 .username input,
 .password input {
     width: 100%;
@@ -42,6 +44,7 @@ body {
     font-size: 16px;
 }
 
+.correo label,
 .username label,
 .password label {
     position: absolute;
@@ -53,8 +56,10 @@ body {
     pointer-events: none;
 }
 
+.correo input:focus+label,
 .username input:focus+label,
 .password input:focus+label,
+.correo input:valid+label,
 .username input:valid+label,
 .password input:valid+label {
     top: -15px;
@@ -62,6 +67,7 @@ body {
     color: #2691d9;
 }
 
+.correo input:focus,
 .username input:focus,
 .password input:focus {
     border-bottom-color: #2691d9;
