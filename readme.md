@@ -23,30 +23,30 @@ Contiene herramientas para centralizar los principales servicios de publicidad e
    Tener instalado Node.js (que incluye npm) puedes descargarlo desde [nodejs.org](https://nodejs.org/).
    Para comprobar si lo tienes instalado: 
 
-   (en tu terminal)
+  - (en tu terminal)
    node -v
    npm -v
 
 2. **Descargar el repositorio**
    Descárgalo directamente como archivo ZIP o Clona el repositorio:
 
-   (en la terminal)
+   - (en la terminal)
    git clone https://github.com/victorbarrera1/maldOps.git
 
 3. **Ingresar a la carpeta del proyecto desde la terminal**
-   (en la terminal)
+  -  (en la terminal)
    cd maldoops
 
 4. **Instalar dependencias**
-   (en la terminal, dentro de la carpeta del proyecto)
+  - (en la terminal, dentro de la carpeta del proyecto)
    npm install
 
 5. **Ejecutar el proyecto de manera local**
-   (en la terminal, dentro de la carpeta del proyecto)
+   -(en la terminal, dentro de la carpeta del proyecto)
    npm run dev
 
 6. **Abrir en el navegador**
-En tu terminal se desplegara un mensaje como:
+- En tu terminal se desplegara un mensaje como:
 -> maldoops@1.0.0 dev
 > vite
 
