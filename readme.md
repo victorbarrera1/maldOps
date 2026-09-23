@@ -20,8 +20,9 @@
    - Se necesita tener Node.js npm instalado (Node incluye npm).
      Descarga del sitio oficial: https://nodejs.org/
      
-     Para confirmar su instalación, en cualquier sistema:
-     bash
+      Para confirmar su instalación, en cualquier sistema:
+     
+     -bash
      
      node -v
      
