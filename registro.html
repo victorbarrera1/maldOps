@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="formulario">
+        <h1> Regístrarse</h1>
+        <form action="index.html">
+            <div class="username">
+                <input type="text" required>
+                <label> Nombre de usuario</label>
+            </div>
+          <div class="correo">
+                <input type="text" required>
+                <label> Mail</label>
+            </div>
+            <div class="password">
+                <input type="password" required>
+                <label> Contraseña</label>
+            </div>
+          <div class="confirm password">
+                <input type="password" required>
+                <label> Confirmar Contraseña</label>
+            </div>
+            <input type="submit" value="Registrarse">
+        </form>
+    </div>
+	<script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>
