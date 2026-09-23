@@ -1,7 +1,8 @@
- **MALDOPS** es una plataforma web que permite gestionar campañas publicitarias. Su enfoque es en el marketing digital, para poder optimizar y gestionar campañas publicitarias en diferentes plataformas. 
- 
- Contiene herramientas para centralizar los principales servicios de publicidad en internet como: Meta Ads (Facebook e Instagram), Google Ads (YouTube, Google Search), TikTok Ads, LinkedIn Ads, etc., además de analizar el rendimiento de las campañas y optimizarlas.
+# MaldOps
 
+**MALDOPS** es una plataforma web que permite gestionar campañas publicitarias. Su enfoque es en el marketing digital, para poder optimizar y gestionar campañas publicitarias en diferentes plataformas. 
+
+Contiene herramientas para centralizar los principales servicios de publicidad en internet como: Meta Ads (Facebook e Instagram), Google Ads (YouTube, Google Search), TikTok Ads, LinkedIn Ads, etc., además de analizar el rendimiento de las campañas y optimizarlas.
 
 ### Integrantes
 * Victor Barrera
@@ -12,40 +13,48 @@
 * HTML5 & CSS3
 * JavaScript
 * Vite
-* Ionicons
+* Ionicons (vía CDN)
 
-### Cómo ejecutar MaldOps localmente?
-1. **Requisitos previos**
+---
 
-   - Se necesita tener Node.js npm instalado (Node incluye npm).
-     Descarga del sitio oficial: https://nodejs.org/
-     
-      Para confirmar su instalación, en cualquier sistema:
-     
-     -bash
-     
-     node -v
-     
-     npm -v
-     
+### Como ejecutar MaldOps localmente?
 
-2. **Descargar el repositorio:**
-   Clona el repositorio o descárgalo directamente como archivo ZIP:
-   - bash
+1. **Requisitos previos:**
+   Tener instalado Node.js (que incluye npm) puedes descargarlo desde [nodejs.org] (https://nodejs.org/).
+   Para comprobar si lo tienes instalado: 
 
+   (en tu terminal)
+   node -v
+   npm -v
+
+2. **Descargar el repositorio**
+   Descargar el repositorio: Descárgalo directamente como archivo ZIP o Clona el repositorio:
+
+   (en tu terminal)
    git clone https://github.com/victorbarrera1/maldOps.git
 
-3. Navegar hasta la carpeta donde se clonó o descomprimió el repositorio.
-   Ejemplo:
-   - cd /Downloads/maldOps
+3. **Ingresar a la carpeta del proyecto desde la terminal**
+   (en la terminal)
+   cd maldoops
 
-4. Instalar las dependencias
-   - npm install 
-   
-5. Ejecutar el servidor
-   - npm run dev
+4. **Instalar dependencias**
+   (en la terminal, dentro de la carpeta del proyecto)
+   npm install
 
-6. Abrir el navegador en la dirección proporiconada (Normalmente localhost:3000)
+5. **Ejecutar el proyecto de manera local**
+   (en la terminal, dentro de la carpeta del proyecto)
+   npm run dev
+
+6. **Abrir en el navegador**
+En tu terminal se desplegara un mensaje como:
+-> maldoops@1.0.0 dev
+> vite
 
 
+  VITE v8.3.0  ready in 225 ms
 
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+  ## Con este mismo localhost ya podras ingresar en tu navegador al sistema MaldOps.
