@@ -22,8 +22,11 @@
      
      Para confirmar su instalación, en cualquier sistema:
      -bash
+     
      node -v
+     
      npm -v
+     
 
 2. **Descargar el repositorio:**
    Clona el repositorio o descárgalo directamente como archivo ZIP:
