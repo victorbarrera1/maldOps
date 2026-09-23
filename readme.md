@@ -21,7 +21,7 @@
      Descarga del sitio oficial: https://nodejs.org/
      
      Para confirmar su instalación, en cualquier sistema:
-     -bash
+     bash
      
      node -v
      
