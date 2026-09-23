@@ -20,7 +20,7 @@ Contiene herramientas para centralizar los principales servicios de publicidad e
 ### Como ejecutar MaldOps localmente?
 
 1. **Requisitos previos:**
-   Tener instalado Node.js (que incluye npm) puedes descargarlo desde [nodejs.org] (https://nodejs.org/).
+   Tener instalado Node.js (que incluye npm) puedes descargarlo desde [nodejs.org](https://nodejs.org/).
    Para comprobar si lo tienes instalado: 
 
    (en tu terminal)
@@ -57,4 +57,4 @@ En tu terminal se desplegara un mensaje como:
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 
-  ## Con este mismo localhost ya podras ingresar en tu navegador al sistema MaldOps.
+  ## Con este mismo localhost ya podras ingresar en tu navegador al sistema MaldOps, si tienes windows solo haz ctrl + click en el link o si tienes mac cmd + click en el link.
