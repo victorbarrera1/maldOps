@@ -92,6 +92,13 @@ section {
     font-size: 1.75em;
 }
 
+.nav ul li a .icono img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
 .nav ul li a .titulo {
     position: relative;
     display: block;
