@@ -76,9 +76,65 @@
         </div>
     </div>
 
-    <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
-    <script type="module" src="index.js"></script>
+    <!--configuracion -->
+    <div class="container">
+        <!-- barra superior -->
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu"></ion-icon>
+            </div>
+            <div class="buscar">
+                <label for="">
+                    <input type="text" placeholder="Buscar..." name="" id="">
+                    <ion-icon name="search"></ion-icon>
+                </label>
+            </div>
+            <div class="perfil-usuario">
+                <img src="profile.png" alt="">
+            </div>
+        </div>
+        <!-- fin barra superior-->
+
+
+        <!-- detalles -->
+        <div class="detalles">
+            <!-- panel de configuraciones -->
+            <div class="ordenes-recientes">
+                <div class="header">
+                    <h2>Panel de configuraciones</h2>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Editar nombre de la cuenta</td>
+                            <td><input type="text" placeholder="Usuario 1"></td>
+                        </tr>
+                        <tr>
+                            <td>Cambiar contraseña</td>
+                            <td><input type="password" placeholder="Contraseña"></td>
+                        </tr>
+                        <tr>
+                            <td>Cambiar correo</td>
+                            <td><input type="text" placeholder="Correo Electronico"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Modo oscuro</td>
+                            <td><input type="checkbox" name="" id=""></td>
+                        </tr>
+                        <tr>
+                            <td>Eliminar cuenta</td>
+                            <td><button>Eliminar</button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- Fin Clientes activos -->
+
+            <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
+            <script type="module" src="index.js"></script>
 
 </body>
 
