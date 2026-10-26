@@ -60,3 +60,8 @@ Contiene herramientas para centralizar los principales servicios de publicidad e
   ➜  press h + enter to show help
 
   ## Con este mismo localhost ya podras ingresar en tu navegador al sistema MaldOps, si tienes windows solo haz ctrl + click en el link o si tienes mac cmd + click en el link.
+
+
+  ### Prompts utilizados para la segunda entrega:
+
+  1.
