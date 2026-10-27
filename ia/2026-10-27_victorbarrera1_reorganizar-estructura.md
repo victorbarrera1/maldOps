@@ -2,8 +2,6 @@
 
 - **Fecha:** 2026-10-27
 - **Integrante:** Victor Barrera (@victorbarrera1)
-- **Herramienta y modelo:** OpenCode (DeepSeek V4.1 Flash Free)
-- **Enlace a la conversación:** no disponible (sesión local de OpenCode)
 - **Archivos afectados:** `css/login.css`, `css/dashboard.css`, `js/index.js`, `img/logo-maldops.png`, `img/profile.png` (movidos); `index.html`, `registro.html`, `dashboard.html`, `clientes.html`, `ventas.html`, `configuracion.html`, `ayuda.html` (atributos `href`/`src`)
 
 ## Objetivo
