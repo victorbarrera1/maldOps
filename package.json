@@ -22,5 +22,10 @@
   "homepage": "https://github.com/victorbarrera1/maldOps#readme",
   "devDependencies": {
     "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "alpinejs": "^3.17.5",
+    "tailwindcss": "^4.3.3"
   }
 }
