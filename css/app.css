@@ -1,0 +1,17 @@
+/* al migrar estilos, reemplazar por @import "tailwindcss" para activar preflight */
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme static {
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-grey: #565454;
+    --color-login-bg: #c5c4c4;
+    --color-text: #333;
+    --color-border: #ccc;
+    --color-accent: #2691d9;
+    --font-roboto-slab: "Roboto Slab", serif;
+}
