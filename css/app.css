@@ -351,3 +351,200 @@
         }
     }
 }
+
+[x-cloak] {
+    display: none !important;
+}
+
+/* ===== Navegación ===== */
+
+/* .nav-barra: barra superior compartida. */
+.nav-barra {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    min-height: 4rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--color-borde);
+    background-color: var(--color-superficie);
+    color: var(--color-texto);
+}
+
+/* .nav-hamburguesa: botón que abre el menú en móvil. */
+.nav-hamburguesa {
+    flex: 0 0 auto;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+}
+
+/* .nav-busqueda: buscador de la barra superior. */
+.nav-busqueda {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 24rem;
+}
+
+.nav-busqueda .input {
+    padding: 0.625rem 0.75rem 0.625rem 2.25rem;
+}
+
+.nav-busqueda ion-icon {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    color: var(--color-texto-suave);
+    font-size: 1.125rem;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+/* .nav-usuario: bloque de usuario de la barra superior. */
+.nav-usuario {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-left: auto;
+    min-width: 0;
+}
+
+/* .nav-avatar: avatar del usuario. */
+.nav-avatar {
+    flex: 0 0 auto;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    object-fit: cover;
+}
+
+/* .nav-usuario-datos: nombre y rol del usuario. */
+.nav-usuario-datos {
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* .nav-usuario-nombre: nombre del usuario. */
+.nav-usuario-nombre {
+    overflow: hidden;
+    color: var(--color-texto);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* .nav-usuario-rol: rol del usuario. */
+.nav-usuario-rol {
+    overflow: hidden;
+    color: var(--color-texto-suave);
+    font-size: var(--text-xs);
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* .nav-lateral: menú lateral compartido. */
+.nav-lateral {
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 300px;
+    max-width: 100%;
+    padding: 1rem 0.75rem;
+    overflow-y: auto;
+    border-right: 1px solid var(--color-borde);
+    background-color: var(--color-superficie-2);
+    color: var(--color-texto);
+}
+
+/* .nav-logo: marca de MaldOps en el menú. */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.75rem;
+    border-radius: var(--radius-md);
+}
+
+.nav-logo img {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: contain;
+}
+
+/* .nav-enlace: opción del menú lateral. */
+.nav-enlace {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    color: var(--color-texto);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.nav-enlace ion-icon {
+    flex: 0 0 auto;
+    font-size: 1.25rem;
+}
+
+.nav-enlace:hover {
+    background-color: var(--color-superficie);
+}
+
+.nav-enlace:focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+/* .nav-enlace-activo: opción de la página actual. */
+.nav-enlace-activo {
+    background-color: var(--color-primario-600);
+    color: var(--color-white);
+}
+
+.nav-enlace-activo:hover {
+    background-color: var(--color-primario-700);
+}
+
+/* .nav-enlace-salir: opción para cerrar sesión. */
+.nav-enlace-salir {
+    margin-top: auto;
+    color: var(--color-peligro);
+}
+
+.dark .nav-enlace-salir {
+    color: #fca5a5;
+}
+
+@media (min-width: 768px) {
+    .nav-lateral {
+        top: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    body:has(#nav-root) .container {
+        padding-left: 300px;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-lateral {
+        width: 100%;
+    }
+}
