@@ -27,9 +27,9 @@ Cómo trabajar:
 2. Trabaja solo dentro de ARCHIVOS PERMITIDOS. Antes de commitear corre `git diff --name-only main` y `git status --short` (archivos nuevos). Si aparece algo fuera de la lista, revierte ese cambio y repórtalo; no lo "arregles" editándolo.
 3. BUCLE DE VERIFICACIÓN: ejecuta todas las comprobaciones de la tarea. Si una falla, busca la causa raíz, corrige dentro del alcance y vuelve a correr TODAS desde el principio. Máximo 4 vueltas; si sigue fallando, detente y reporta qué falla, qué probaste y qué decisión necesitas de mí. Prohibido saltarse un check, usar --force o --legacy-peer-deps, o borrar lo que falla para que pase.
 4. No inventes ni cambies nada fuera de lo pedido (diseño, contenido, comportamiento). Si falta un dato, usa lo que ya existe en el repo; si no existe, márcalo como "pendiente de confirmar" en tu respuesta.
-5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado (termina en `[IA]`), y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
+5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado, y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
 TAREA V2 — Base Tailwind CSS v4 + Alpine.js en Vite 8
-Rama: feat/base-tailwind-alpine · Commit: "feat(build): base Tailwind v4 + Alpine y entrada multipágina automática [IA]" · slug: base-tailwind-alpine
+Rama: feat/base-tailwind-alpine · Commit: "feat(build): base Tailwind v4 + Alpine y entrada multipágina automática" · slug: base-tailwind-alpine
 PRERREQUISITOS: V1 ya en main (existen css/, js/, img/ y los HTML apuntan a ellos); package.json con vite 8 y scripts dev/build/preview.
 ARCHIVOS PERMITIDOS: package.json, package-lock.json, vite.config.js, css/app.css, js/main.js, js/store.js, los 7 HTML (solo agregar UNA línea `<script type="module" src="/js/main.js"></script>` antes de </body>), ia/*.md.
 
@@ -74,7 +74,7 @@ Listo. V2 implementada y verificada en `feat/base-tailwind-alpine`.
 - e) CSS emitido: todas las variables de tema presentes y sin reset de preflight.
 - f) Los 7 HTML: exactamente +1/−0 líneas.
 
-Commit `feat(build): base Tailwind v4 + Alpine y entrada multipágina automática [IA]` pusheado en `feat/base-tailwind-alpine`. Sin merge.
+Commit `feat(build): base Tailwind v4 + Alpine y entrada multipágina automática` pusheado en `feat/base-tailwind-alpine`. Sin merge.
 ```
 
 ## Qué se incorporó

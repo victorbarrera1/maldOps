@@ -27,10 +27,10 @@ Cómo trabajar:
 2. Trabaja solo dentro de ARCHIVOS PERMITIDOS. Antes de commitear corre `git diff --name-only main` y `git status --short` (archivos nuevos). Si aparece algo fuera de la lista, revierte ese cambio y repórtalo; no lo "arregles" editándolo.
 3. BUCLE DE VERIFICACIÓN: ejecuta todas las comprobaciones de la tarea. Si una falla, busca la causa raíz, corrige dentro del alcance y vuelve a correr TODAS desde el principio. Máximo 4 vueltas; si sigue fallando, detente y reporta qué falla, qué probaste y qué decisión necesitas de mí. Prohibido saltarse un check, usar --force o --legacy-peer-deps, o borrar lo que falla para que pase.
 4. No inventes ni cambies nada fuera de lo pedido (diseño, contenido, comportamiento). Si falta un dato, usa lo que ya existe en el repo; si no existe, márcalo como "pendiente de confirmar" en tu respuesta.
-5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado (termina en `[IA]`), y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
+5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado, y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
 
 TAREA V4 — Navegación compartida (js/nav.js)
-Rama: feat/nav-compartida · Commit: "feat(nav): menú lateral y barra superior compartidos con Alpine [IA]" · slug: nav-compartida
+Rama: feat/nav-compartida · Commit: "feat(nav): menú lateral y barra superior compartidos con Alpine" · slug: nav-compartida
 PRERREQUISITOS: V2 y V3 en main (js/main.js con Alpine.start(), css/app.css con el sistema de diseño).
 ARCHIVOS PERMITIDOS: js/nav.js, js/main.js, css/app.css (solo para agregar, si falta, un componente de navegación con comentario de una línea, p. ej. .nav-link / .nav-link-activo, y `[x-cloak]{display:none !important}`), dashboard.html, clientes.html, ventas.html, configuracion.html, ayuda.html (solo el bloque de menú/barra superior), ia/*.md. NO tocar index.html ni registro.html.
 
@@ -75,7 +75,7 @@ Listo. V4 implementada y verificada en `feat/nav-compartida`.
 **Observación fuera de alcance**
 - `js/index.js:19` sigue lanzando `TypeError: Cannot set properties of null (setting 'onclick')` en cada carga porque busca `.toggle`, que ya no existe. No está en ARCHIVOS PERMITIDOS y quitar sus `<script>` de los HTML tampoco entra en "solo el bloque de menú/barra", así que no lo toqué. La navegación funciona; dime si autorizas eliminarlo en una tarea aparte.
 
-Commit `feat(nav): menú lateral y barra superior compartidos con Alpine [IA]` pusheado en `feat/nav-compartida`. PR abierto sin merge.
+Commit `feat(nav): menú lateral y barra superior compartidos con Alpine` pusheado en `feat/nav-compartida`. PR abierto sin merge.
 
 Recordatorio: V1–V4 deben estar mergeados en `main` antes de avisar a Josemanuel y Martin; después, `git pull origin main`.
 ```

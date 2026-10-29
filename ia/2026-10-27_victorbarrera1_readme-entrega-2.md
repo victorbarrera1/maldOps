@@ -22,7 +22,7 @@ repara el readme antes de que sigamos con el v2
 Listo. Reescribí el README completo y lo renombré a `README.md` (antes `readme.md`), así coincide
 con la convención que pide el enunciado.
 
-**Rama:** `docs/readme-entrega-2` · **Commit:** `docs: reescribe el README de la Entrega 2 [IA]`
+**Rama:** `docs/readme-entrega-2` · **Commit:** `docs: reescribe el README de la Entrega 2`
 
 ## Qué cambió
 

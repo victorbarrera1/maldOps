@@ -27,9 +27,9 @@ Cómo trabajar:
 2. Trabaja solo dentro de ARCHIVOS PERMITIDOS. Antes de commitear corre `git diff --name-only main` y `git status --short` (archivos nuevos). Si aparece algo fuera de la lista, revierte ese cambio y repórtalo; no lo "arregles" editándolo.
 3. BUCLE DE VERIFICACIÓN: ejecuta todas las comprobaciones de la tarea. Si una falla, busca la causa raíz, corrige dentro del alcance y vuelve a correr TODAS desde el principio. Máximo 4 vueltas; si sigue fallando, detente y reporta qué falla, qué probaste y qué decisión necesitas de mí. Prohibido saltarse un check, usar --force o --legacy-peer-deps, o borrar lo que falla para que pase.
 4. No inventes ni cambies nada fuera de lo pedido (diseño, contenido, comportamiento). Si falta un dato, usa lo que ya existe en el repo; si no existe, márcalo como "pendiente de confirmar" en tu respuesta.
-5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado (termina en `[IA]`), y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
+5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado, y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
 TAREA V3 — Sistema de diseño MaldOps en css/app.css (Tailwind v4)
-Rama: feat/sistema-diseno · Commit: "feat(ui): sistema de diseño MaldOps en css/app.css [IA]" · slug: sistema-diseno
+Rama: feat/sistema-diseno · Commit: "feat(ui): sistema de diseño MaldOps en css/app.css" · slug: sistema-diseno
 PRERREQUISITOS: V2 en main (css/app.css con imports de Tailwind y @theme, vite.config.js, js/main.js).
 ARCHIVOS PERMITIDOS: css/app.css, ia/*.md. No toques ningún HTML ni otro archivo.
 
@@ -65,7 +65,7 @@ Listo. V3 implementada y verificada en `feat/sistema-diseno`.
 - c) Contraste: 30/30 pares OK; textos ≥5.01:1 y foco/borde ≥3.07:1. Tabla completa en `ia/2026-10-29_victorbarrera1_sistema-diseno.md`.
 - d) Un comentario por clase y `git diff --name-only main` solo `css/app.css` y el registro.
 
-Commit `feat(ui): sistema de diseño MaldOps en css/app.css [IA]` pusheado en `feat/sistema-diseno`. Sin merge.
+Commit `feat(ui): sistema de diseño MaldOps en css/app.css` pusheado en `feat/sistema-diseno`. Sin merge.
 ```
 
 ## Qué se incorporó

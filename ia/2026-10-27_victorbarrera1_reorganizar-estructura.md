@@ -27,9 +27,9 @@ Cómo trabajar:
 2. Trabaja solo dentro de ARCHIVOS PERMITIDOS. Antes de commitear corre `git diff --name-only main` y `git status --short` (archivos nuevos). Si aparece algo fuera de la lista, revierte ese cambio y repórtalo; no lo "arregles" editándolo.
 3. BUCLE DE VERIFICACIÓN: ejecuta todas las comprobaciones de la tarea. Si una falla, busca la causa raíz, corrige dentro del alcance y vuelve a correr TODAS desde el principio. Máximo 4 vueltas; si sigue fallando, detente y reporta qué falla, qué probaste y qué decisión necesitas de mí. Prohibido saltarse un check, usar --force o --legacy-peer-deps, o borrar lo que falla para que pase.
 4. No inventes ni cambies nada fuera de lo pedido (diseño, contenido, comportamiento). Si falta un dato, usa lo que ya existe en el repo; si no existe, márcalo como "pendiente de confirmar" en tu respuesta.
-5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado (termina en `[IA]`), y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
+5. Cierre: crea `ia/AAAA-MM-DD_victorbarrera1_<slug>.md` (fecha con `date +%F`) con: el prompt literal completo de esta tarea, tu respuesta final completa (la misma que me das en el chat), `## Qué se incorporó` y `## Verificación` (comandos corridos y resultado de cada uno). Haz UN commit con el código + ese .md, con el mensaje indicado, y `git push -u origin <rama>`. No hagas merge: yo reviso y mergeo.
 TAREA V1 — Reorganizar proyecto Vite multipágina (solo rutas y ubicación)
-Rama: chore/reorganizar-estructura · Commit: "chore(estructura): ordenar css/js/img y renombrar logo [IA]" · slug: reorganizar-estructura
+Rama: chore/reorganizar-estructura · Commit: "chore(estructura): ordenar css/js/img y renombrar logo" · slug: reorganizar-estructura
 PRERREQUISITOS: ninguno.
 ARCHIVOS PERMITIDOS: los 7 HTML (solo atributos href/src), login.css, dashboard.css, index.js, "logo maldops.png", profile.png (mover/renombrar), ia/*.md.
 
@@ -60,7 +60,7 @@ historia huérfana (`999ed74`, sin ancestro común con `origin/main`), así que 
 no aplicaba. Creé `backup/local-2026-09-13` apuntando a `999ed74` y luego
 `git reset --hard origin/main` (quedó en `5034b4e`). El backup es local, no se subió.
 
-COMMIT: chore(estructura): ordenar css/js/img y renombrar logo [IA]
+COMMIT: chore(estructura): ordenar css/js/img y renombrar logo
 RAMA: chore/reorganizar-estructura
 
 1) Archivos movidos (git mv, historial conservado — R100)

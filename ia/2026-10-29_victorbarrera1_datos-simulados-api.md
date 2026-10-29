@@ -14,7 +14,7 @@ Documentar en el README el contrato de la capa de datos simulada: modelos de usu
 
 ```text
 TAREA V5 — README: sección "Datos simulados (API)"
-Rama: docs/datos-simulados-api · Commit: "docs(readme): sección Datos simulados (API) [IA]" · slug: datos-simulados-api
+Rama: docs/datos-simulados-api · Commit: "docs(readme): sección Datos simulados (API)" · slug: datos-simulados-api
 PRERREQUISITOS: ninguno (independiente de V1–V4).
 ARCHIVOS PERMITIDOS: readme.md (agregar la sección sin modificar el resto), ia/*.md. No crees ni edites js/api.js ni los mocks: esto es el contrato que el equipo seguirá.
 
@@ -63,7 +63,7 @@ Listo. V5 documentada y verificada en `docs/datos-simulados-api`.
 - c) La venta de ejemplo usa `cli-005`, el mismo id del cliente de ejemplo; clientes, ventas y preguntas usan los campos de las tablas/formularios existentes. `rol` queda marcado como propuesto.
 - d) `git diff --unified=0 main -- README.md`: 178 líneas agregadas, 0 eliminadas.
 
-Separé en 2 commits para que se vea el desarrollo: el registro IA y la sección del README; el HEAD es `docs(readme): sección Datos simulados (API) [IA]`. Rama `docs/datos-simulados-api`, PR abierto sin merge.
+Separé en 2 commits para que se vea el desarrollo: el registro IA y la sección del README; el HEAD es `docs(readme): sección Datos simulados (API)`. Rama `docs/datos-simulados-api`, PR abierto sin merge.
 
 Recordatorio: V1–V4 deben estar mergeados en `main` antes de avisar a Josemanuel y Martin; después, `git pull origin main`.
 ```
