@@ -12,28 +12,26 @@
 <body>
     <div class="formulario">
         <h1> Login - MaldOps</h1>
-        <form action="dashboard.html">
-            <div class="username">
-                <input type="text" required>
-                <label> Nombre de usuario</label>
+        <form id="form-login" action="dashboard.html" novalidate>
+            <div class="correo">
+                <input type="email" id="correo" name="correo" placeholder=" " autocomplete="email" required
+                    aria-describedby="login-error">
+                <label for="correo">Correo electrónico</label>
             </div>
             <div class="password">
-                <input type="password" required>
-                <label> Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" placeholder=" " autocomplete="current-password"
+                    required aria-describedby="login-error">
+                <label for="contrasena">Contraseña</label>
             </div>
-            <input type="submit" value="Iniciar sesion">
+            <p class="campo-error" id="login-error" role="alert" hidden></p>
+            <input type="submit" value="Iniciar sesión">
         </form>
         <div class="registro.html">
             <p>¿No tienes cuenta? <a href="registro.html">Regístrate </a></p>
         </div>
     </div>
 
-    <script>
-        document.querySelector('form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            window.location.href = 'dashboard.html';
-        });
-    </script>
+    <script type="module" src="/js/login.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 
