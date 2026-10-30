@@ -84,3 +84,28 @@ body {
     outline: none;
 
 }
+
+.campo-error {
+    margin: -16px 0 18px;
+    color: #b00020;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.campo-error[hidden] {
+    display: none;
+}
+
+#form-login input[aria-invalid="true"] {
+    border-bottom-color: #b00020;
+}
+
+#form-login .correo input:not(:placeholder-shown)+label,
+#form-login .password input:not(:placeholder-shown)+label,
+#form-login .correo input:focus+label,
+#form-login .password input:focus+label {
+    top: -20px;
+    padding: 0;
+    font-size: 12px;
+    color: #2691d9;
+}
