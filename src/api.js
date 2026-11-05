@@ -4,103 +4,128 @@
  * Las vistas solo importan este archivo. Ninguna vista debe usar `fetch`,
  * leer los JSON de `public/mocks/` ni tocar `localStorage` directamente.
  *
+ * La fuente se elige con `VITE_API_MODO`:
+ * - `mock` (por defecto): `src/api/servidor.js` sobre localStorage.
+ * - `http`: `src/api/http.js` contra `VITE_API_URL`.
+ *
  * Todas las funciones devuelven el mismo objeto:
  * { ok, status, data, error, errores }
  */
 
-import * as servidor from './api/servidor.js'
+const MODO = String(import.meta.env.VITE_API_MODO || 'mock').toLowerCase() === 'http'
+    ? 'http'
+    : 'mock'
+
+const cargarFuente =
+    MODO === 'http' ? () => import('./api/http.js') : () => import('./api/servidor.js')
+
+let fuentePromesa = null
+
+function fuente() {
+    if (!fuentePromesa) {
+        fuentePromesa = cargarFuente()
+    }
+
+    return fuentePromesa
+}
+
+async function llamar(nombre, ...argumentos) {
+    const modulo = await fuente()
+
+    return modulo[nombre](...argumentos)
+}
 
 export const auth = {
     async iniciarSesion(datos) {
-        return servidor.iniciarSesion(datos)
+        return llamar('iniciarSesion', datos)
     },
 
     async registrar(datos) {
-        return servidor.registrar(datos)
+        return llamar('registrar', datos)
     },
 
     async cerrarSesion() {
-        return servidor.cerrarSesion()
+        return llamar('cerrarSesion')
     },
 
     async perfil() {
-        return servidor.perfil()
+        return llamar('perfil')
     },
 }
 
 export const clientes = {
     async listar() {
-        return servidor.listarClientes()
+        return llamar('listarClientes')
     },
 
     async obtener(id) {
-        return servidor.obtenerCliente(id)
+        return llamar('obtenerCliente', id)
     },
 
     async crear(datos) {
-        return servidor.crearCliente(datos)
+        return llamar('crearCliente', datos)
     },
 
     async actualizar(id, datos) {
-        return servidor.actualizarCliente(id, datos)
+        return llamar('actualizarCliente', id, datos)
     },
 
     async eliminar(id) {
-        return servidor.eliminarCliente(id)
+        return llamar('eliminarCliente', id)
     },
 }
 
 export const ventas = {
     async listar() {
-        return servidor.listarVentas()
+        return llamar('listarVentas')
     },
 
     async obtener(id) {
-        return servidor.obtenerVenta(id)
+        return llamar('obtenerVenta', id)
     },
 
     async crear(datos) {
-        return servidor.crearVenta(datos)
+        return llamar('crearVenta', datos)
     },
 
     async actualizar(id, datos) {
-        return servidor.actualizarVenta(id, datos)
+        return llamar('actualizarVenta', id, datos)
     },
 
     async eliminar(id) {
-        return servidor.eliminarVenta(id)
+        return llamar('eliminarVenta', id)
     },
 
     async deCliente(clienteId) {
-        return servidor.ventasDeCliente(clienteId)
+        return llamar('ventasDeCliente', clienteId)
     },
 }
 
 export const preguntas = {
     async listar() {
-        return servidor.listarPreguntas()
+        return llamar('listarPreguntas')
     },
 }
 
 export const simulador = {
     async obtenerConfiguracion() {
-        return servidor.obtenerConfiguracionSimulador()
+        return llamar('obtenerConfiguracionSimulador')
     },
 
     async configurar(cambios) {
-        return servidor.configurarSimulador(cambios)
+        return llamar('configurarSimulador', cambios)
     },
 
     async simularFallo(status) {
-        return servidor.simularSiguienteFallo(status)
+        return llamar('simularSiguienteFallo', status)
     },
 
     async estado() {
-        return servidor.obtenerEstadoSimulador()
+        return llamar('obtenerEstadoSimulador')
     },
 
     async reiniciarDatos() {
-        return servidor.reiniciarDatosDePrueba()
+        return llamar('reiniciarDatosDePrueba')
     },
 }
 

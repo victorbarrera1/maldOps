@@ -76,7 +76,7 @@ Una vista por tarea:
 - [x] **C9.** Mover `js/` y `css/` a `src/`, `img/` a `public/img/`; actualizar
   rutas y `vite.config.js` (todas las páginas como input). `npm run build` debe
   pasar.
-- [ ] **C10.** Crear `.env.example` con `VITE_API_MODO=mock` y `VITE_API_URL=`;
+- [x] **C10.** Crear `.env.example` con `VITE_API_MODO=mock` y `VITE_API_URL=`;
   crear `js/api/http.js` (fetch) que devuelva el mismo formato, elegido por
   `VITE_API_MODO`.
 - [ ] **C11.** Reemplazar el CDN de Ionicons por el paquete npm.
