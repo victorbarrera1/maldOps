@@ -56,3 +56,16 @@ Verificación en `npm run dev`: 12 clientes, 15 ventas, ganancias
 `$1.825.000`, ticket `$121.667`, 8 ventas y 5 clientes en las listas; con la
 base vacía aparece el estado vacío; con `dashboard.html?fallar` aparece el
 error y «Reintentar»; consola sin errores. `npm run build` pasa.
+
+## B6.4 — Ayuda
+
+- `ayuda.html`: la tabla de preguntas frecuentes ahora usa `#ayuda-estado`,
+  `#ayuda-tabla`, `#ayuda-cuerpo` y el contador `#ayuda-total`. La sección de
+  contacto con soporte se mantiene.
+- `js/ayuda.js`: llama a `api.preguntas.listar()`, muestra esqueleto, estado
+  vacío, error con «Reintentar» y una fila por pregunta/respuesta. En 401 usa
+  `irAlLogin()`.
+
+Verificación en `npm run dev`: 8 preguntas y contador; con la base sin
+preguntas aparece el estado vacío; con `ayuda.html?fallar` aparece el error y
+«Reintentar»; consola sin errores. `npm run build` pasa.

@@ -19,45 +19,15 @@
             <!-- Preguntas Frecuentes -->
             <div class="ordenes-recientes">
                 <div class="header">
-                    <h2>Preguntas Frecuentes</h2>
+                    <h2>Preguntas Frecuentes <span id="ayuda-total" class="badge"></span></h2>
                 </div>
-                <table>
+                <div id="ayuda-estado"></div>
+                <table id="ayuda-tabla" hidden>
                     <thead>
                         <th>Pregunta</th>
                         <th>Respuesta</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>¿Cómo creo una campaña?</td>
-                            <td> Dirígete a la sección "Campaña" y sigue los pasos para crear una.</td>
-                        </tr>
-                        <tr>
-                            <td>¿Cuales son los medios de pago?</td>
-                            <td> Puede pagar con Tarjeta de Crédito, Débito, Transferencia Bancaria o PayPal.</td>
-                        </tr>
-                        <tr>
-                            <td>¿Cómo puedo contactar con soporte?</td>
-                            <td> Puede contactar con soporte a traves del chat en linea, correo electronico o numero de
-                                WhatsApp.</td>
-                        </tr>
-                        <tr>
-                            <td>¿Puedo cancelar una campaña?</td>
-                            <td>Si, puede cancelar una campaña en cualquier momento. Desde tu panel de Campañas.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>¿Cual es el tiempo de entrega?</td>
-                            <td>El tiempo de entrega varia segun el tipo de campaña. Puede tomar desde unas horas hasta
-                                varios dias.</td>
-                        </tr>
-                        <tr>
-                            <td>¿Puedo solicitar un reembolso?</td>
-                            <td>Depende de la campaña y la situacion. Contacta con soporte para mas informacion.</td>
-
-                        </tr>
-                        <tr>
-
-                    </tbody>
+                    <tbody id="ayuda-cuerpo"></tbody>
                 </table>
             </div>
             <!-- Fin Órdenes Recientes -->
@@ -113,6 +83,7 @@
     <script type="module" src="js/index.js"></script>
 
     <script type="module" src="/js/guard.js"></script>
+    <script type="module" src="/js/ayuda.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 

@@ -58,7 +58,7 @@ Una vista por tarea:
   «Reintentar», usando `api.js`.
 - [x] **B6.3.** `dashboard.html`: cargando, vacío y error con «Reintentar»,
   usando `api.js`.
-- [ ] **B6.4.** `ayuda.html`: cargando, vacío y error con «Reintentar», usando
+- [x] **B6.4.** `ayuda.html`: cargando, vacío y error con «Reintentar», usando
   `api.js`.
 - [ ] **B6.5.** `configuracion.html`: cargando, vacío y error con «Reintentar»,
   usando `api.js`.
