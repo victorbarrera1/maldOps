@@ -20,7 +20,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 
 | Bloque | Rama | PR | Estado |
 |---|---|---|---|
-| A — Capa de datos | `feat/bloque-a-capa-datos` | pendiente | En curso |
+| A — Capa de datos | `feat/bloque-a-capa-datos` | [#8](https://github.com/victorbarrera1/maldOps/pull/8) | Completado |
 | B — Estados de interfaz | pendiente | pendiente | Pendiente |
 | C — Estructura del repo | pendiente | pendiente | Pendiente |
 | D — README | pendiente | pendiente | Pendiente |

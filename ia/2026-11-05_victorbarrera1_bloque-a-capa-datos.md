@@ -3,6 +3,7 @@
 - **Fecha:** 2026-11-05
 - **Integrante:** @victorbarrera1
 - **Rama:** `feat/bloque-a-capa-datos`
+- **PR:** [#8](https://github.com/victorbarrera1/maldOps/pull/8)
 - **Prompt usado:** instrucción de la Entrega 2 (checklist A–E), con la regla de
   un PR por bloque y un commit por tarea. Para este bloque: crear los mocks en
   `public/mocks/`, la capa `js/api/`, la fachada `js/api.js`, la sesión con
