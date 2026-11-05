@@ -142,3 +142,32 @@ general. Registro con nombre corto, correo no permitido, contraseña corta y
 confirmación distinta muestra los cuatro mensajes a la vez; con un correo
 existente el 409 aparece bajo «Mail». Consola sin errores. `npm run build`
 pasa.
+
+## B8 — CRUD de clientes y ventas
+
+- `js/ui.js`: se agregaron `mostrarToast(mensaje, tipo)` para los avisos
+  flotantes y `confirmarAccion(mensaje, opciones)` para el diálogo compartido de
+  confirmación. Si el navegador no soporta `<dialog>`, se usa `window.confirm`.
+- `css/app.css`: estilos de `.btn-sm`, `.acciones-tabla`, `.campo-error`,
+  `dialog.modal`, `.modal-campo`, `.modal-acciones`, `.toasts` y `.toast`.
+- `clientes.html` y `js/clientes.js`: botón «Nuevo cliente», columna Acciones y
+  diálogos de formulario y confirmación. Crear y editar usan `api.clientes`;
+  los 422 y 409 se muestran bajo el campo correspondiente. El botón «Eliminar»
+  solo se renderiza con rol `admin`; un 409 por ventas asociadas se muestra como
+  toast de error y la fila se mantiene.
+- `ventas.html` y `js/ventas.js`: botón «Nueva venta», columna Acciones y
+  diálogos. El formulario llena el select con `api.clientes.listar()`, valida
+  precio entero mayor que 0 y usa `api.ventas` para crear, actualizar y
+  eliminar. Los 422 se muestran bajo cada campo; el 403 y los errores de red se
+  muestran como toast. «Eliminar» también queda solo para `admin`.
+
+Verificación en `npm run dev` como admin: crear «Cliente Prueba B8» (13 filas y
+toast «Cliente creado.»), editarlo a «Cliente B8 Editado»/Inactivo (toast
+«Cliente actualizado.»), intentar borrar «Carlos Leoui» y recibir el 409 como
+toast sin perder la fila, y borrar el cliente temporal (vuelve a 12). El
+formulario vacío y el nombre duplicado muestran el 422/409 bajo «Nombre». En
+ventas: crear una venta de Camila Rojas por `$12.345` (16 filas), editarla a
+`$54.321`/Confirmado, comprobar los 422 de cliente y precio, y borrarla (vuelve
+a 15). Con el vendedor Martin Maldonado no aparecen botones «Eliminar» y
+`api.clientes.eliminar('cli-001')` / `api.ventas.eliminar('ven-001')` devuelven
+403. Consola sin errores. `npm run build` pasa.

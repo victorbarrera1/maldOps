@@ -68,7 +68,7 @@ Una vista por tarea:
   «Reintentar» cuando corresponda.
 - [x] **B7.** Validación por campo en login y registro con mensajes en español
   (usa los 422 de la API).
-- [ ] **B8.** CRUD de clientes y ventas funcionando con modal de confirmación al
+- [x] **B8.** CRUD de clientes y ventas funcionando con modal de confirmación al
   eliminar y aviso (toast) de éxito/error.
 
 ### C. Estructura del repo

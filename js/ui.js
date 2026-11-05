@@ -122,3 +122,66 @@ export function formatearPrecio(precio) {
 export function mensajeDeError(respuesta, porDefecto = 'Ocurrió un error inesperado.') {
     return respuesta && respuesta.error ? respuesta.error : porDefecto
 }
+
+/**
+ * Muestra un aviso flotante durante unos segundos.
+ */
+export function mostrarToast(mensaje, tipo = 'exito') {
+    if (typeof document === 'undefined') {
+        return
+    }
+
+    let contenedor = document.querySelector('.toasts')
+
+    if (!contenedor) {
+        contenedor = document.createElement('div')
+        contenedor.className = 'toasts'
+        contenedor.setAttribute('aria-live', 'polite')
+        document.body.append(contenedor)
+    }
+
+    const toast = document.createElement('div')
+    toast.className = `toast toast-${tipo}`
+    toast.setAttribute('role', tipo === 'error' ? 'alert' : 'status')
+    toast.textContent = mensaje
+    contenedor.append(toast)
+
+    window.setTimeout(() => {
+        toast.remove()
+
+        if (contenedor && contenedor.childElementCount === 0) {
+            contenedor.remove()
+        }
+    }, 4500)
+}
+
+/**
+ * Pide confirmación con el <dialog> compartido de la página.
+ * Devuelve true solo si se pulsa el botón de confirmar.
+ */
+export function confirmarAccion(
+    mensaje,
+    { titulo = 'Confirmar eliminación', textoConfirmar = 'Eliminar' } = {},
+) {
+    const dialogo = document.querySelector('#confirmar-dialogo')
+
+    if (!dialogo || typeof dialogo.showModal !== 'function') {
+        return Promise.resolve(window.confirm(mensaje))
+    }
+
+    dialogo.querySelector('#confirmar-titulo').textContent = titulo
+    dialogo.querySelector('#confirmar-mensaje').textContent = mensaje
+
+    const boton = dialogo.querySelector('[value="confirmar"]')
+    boton.textContent = textoConfirmar
+    dialogo.returnValue = ''
+    dialogo.showModal()
+
+    return new Promise((resolver) => {
+        dialogo.addEventListener(
+            'close',
+            () => resolver(dialogo.returnValue === 'confirmar'),
+            { once: true },
+        )
+    })
+}

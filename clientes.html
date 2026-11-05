@@ -20,17 +20,58 @@
             <div class="ordenes-recientes">
                 <div class="header">
                     <h2>Clientes <span id="clientes-total" class="badge"></span></h2>
+                    <button type="button" class="btn btn-primary" id="nuevo-cliente">
+                        Nuevo cliente
+                    </button>
                 </div>
                 <div id="clientes-estado"></div>
                 <table id="clientes-tabla" hidden>
                     <thead>
                         <th>Nombre</th>
                         <th>Estatus</th>
+                        <th>Acciones</th>
                     </thead>
                     <tbody id="clientes-cuerpo"></tbody>
                 </table>
             </div>
             <!-- Fin Clientes activos -->
+
+            <dialog id="cliente-dialogo" class="modal" aria-labelledby="cliente-dialogo-titulo">
+                <form id="cliente-form" novalidate>
+                    <h2 id="cliente-dialogo-titulo">Nuevo cliente</h2>
+                    <div class="modal-campo">
+                        <label class="label" for="cliente-nombre">Nombre</label>
+                        <input class="input" type="text" id="cliente-nombre" name="nombre" autocomplete="off">
+                        <p class="campo-error" id="cliente-error-nombre" hidden></p>
+                    </div>
+                    <div class="modal-campo">
+                        <label class="label" for="cliente-estatus">Estatus</label>
+                        <select class="input" id="cliente-estatus" name="estatus">
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                        <p class="campo-error" id="cliente-error-estatus" hidden></p>
+                    </div>
+                    <p class="campo-error" id="cliente-error-general" hidden></p>
+                    <div class="modal-acciones">
+                        <button type="button" class="btn" id="cliente-cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="cliente-guardar">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </dialog>
+
+            <dialog id="confirmar-dialogo" class="modal" aria-labelledby="confirmar-titulo">
+                <form method="dialog">
+                    <h2 id="confirmar-titulo">Confirmar eliminación</h2>
+                    <p class="estado-detalle" id="confirmar-mensaje"></p>
+                    <div class="modal-acciones">
+                        <button type="submit" class="btn" value="cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" value="confirmar">Eliminar</button>
+                    </div>
+                </form>
+            </dialog>
 
 
             <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
