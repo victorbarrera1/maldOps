@@ -24,3 +24,18 @@
 Verificación en `npm run dev`: la vista muestra 12 clientes y el contador;
 con la base sin clientes aparece el estado vacío; con `clientes.html?fallar`
 aparece el error y «Reintentar»; consola sin errores. `npm run build` pasa.
+
+## B6.2 — Ventas
+
+- `ventas.html`: se reemplazaron las filas fijas por `#ventas-estado`,
+  `#ventas-tabla`, `#ventas-cuerpo` y el contador `#ventas-total`.
+- `js/ventas.js`: carga en paralelo `api.ventas.listar()` y
+  `api.clientes.listar()`, arma un mapa de `clienteId` a nombre y pinta una fila
+  por venta con precio formateado en CLP y badge de estatus. En 401 usa
+  `irAlLogin()`. Si falla cualquiera de las dos llamadas muestra el error con
+  «Reintentar».
+
+Verificación en `npm run dev`: 15 ventas y contador; primera fila «Daniel
+Ayala / $50.000 / META ADS / PENDIENTE»; con la base sin ventas aparece el
+estado vacío; con `ventas.html?fallar` aparece el error y «Reintentar»;
+consola sin errores. `npm run build` pasa.

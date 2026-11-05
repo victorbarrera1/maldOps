@@ -54,7 +54,7 @@ Una vista por tarea:
 
 - [x] **B6.1.** `clientes.html`: cargando (esqueleto), vacío y error con botón
   «Reintentar», usando `api.js`.
-- [ ] **B6.2.** `ventas.html`: cargando (esqueleto), vacío y error con botón
+- [x] **B6.2.** `ventas.html`: cargando (esqueleto), vacío y error con botón
   «Reintentar», usando `api.js`.
 - [ ] **B6.3.** `dashboard.html`: cargando, vacío y error con «Reintentar»,
   usando `api.js`.

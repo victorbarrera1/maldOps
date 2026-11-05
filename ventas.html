@@ -21,66 +21,17 @@
             <!-- Ultimas ventas -->
             <div class="ordenes-recientes">
                 <div class="header">
-                    <h2>Ultimas ventas de Campañas</h2>
-                    <a href="#" class="boton">Ver todos</a>
+                    <h2>Ultimas ventas de Campañas <span id="ventas-total" class="badge"></span></h2>
                 </div>
-                <table>
+                <div id="ventas-estado"></div>
+                <table id="ventas-tabla" hidden>
                     <thead>
                         <th>Cliente</th>
                         <th>Precio</th>
                         <th>Servicio</th>
                         <th>Estatus</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Daniel Ayala</td>
-                            <td>$50.000</td>
-                            <td>META ADS</td>
-                            <td><span class="estatus pendiente">Pendiente</span></td>
-                        </tr>
-                        <tr>
-                            <td>Benjamin Huerta</td>
-                            <td>$40.000</td>
-                            <td>TIKTOK ADS</td>
-                            <td><span class="estatus devuelto">Devuelto</span></td>
-                        </tr>
-                        <tr>
-                            <td>Benjamín Huerta</td>
-                            <td>$50.000</td>
-                            <td>WHATSAPP ADS</td>
-                            <td><span class="estatus en-progreso">En Progreso</span></td>
-                        </tr>
-                        <tr>
-                            <td>Roxana Navarro</td>
-                            <td>$100.000</td>
-                            <td>GOOGLE ADS</td>
-                            <td><span class="estatus pendiente">Pendiente</span></td>
-                        </tr>
-                        <tr>
-                            <td>Vicente Flores</td>
-                            <td>$75.000</td>
-                            <td>YOUTUBE ADS</td>
-                            <td><span class="estatus pendiente">Pendiente</span></td>
-                        </tr>
-                        <tr>
-                            <td>Julian Lesperguer</td>
-                            <td>$300.000</td>
-                            <td>LINKEDIN ADS</td>
-                            <td><span class="estatus en-progreso">En Progreso</span></td>
-                        </tr>
-                        <tr>
-                            <td>Claudio Echevarria</td>
-                            <td>$50.000</td>
-                            <td>REELS ADS</td>
-                            <td><span class="estatus entregado">CONFIRMADO</span></td>
-                        </tr>
-                        <tr>
-                            <td>Claudio Echevarria</td>
-                            <td>$350.000</td>
-                            <td>WHATSAPP ADS</td>
-                            <td><span class="estatus entregado">CONFIRMADO</span></td>
-                        </tr>
-                    </tbody>
+                    <tbody id="ventas-cuerpo"></tbody>
                 </table>
             </div>
             <!-- Fin Ultimas ventas -->
@@ -132,6 +83,7 @@
             <script type="module" src="js/index.js"></script>
 
     <script type="module" src="/js/guard.js"></script>
+    <script type="module" src="/js/ventas.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 
