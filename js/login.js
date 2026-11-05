@@ -1,3 +1,6 @@
+import api from './api.js'
+import { destinoSeguro } from './guard.js'
+
 const DOMINIOS_PERMITIDOS = ['gmail.com', 'mail.udp.cl']
 
 /**
@@ -62,8 +65,16 @@ function iniciarLogin() {
         campo.addEventListener('input', () => limpiarError(error, [correo, contrasena]))
     }
 
-    formulario.addEventListener('submit', (evento) => {
+    const boton = formulario.querySelector('input[type="submit"]')
+    let enviando = false
+
+    formulario.addEventListener('submit', async (evento) => {
         evento.preventDefault()
+
+        if (enviando) {
+            return
+        }
+
         limpiarError(error, [correo, contrasena])
 
         const resultado = validarCorreo(correo.value)
@@ -78,7 +89,33 @@ function iniciarLogin() {
             return
         }
 
-        window.location.assign('dashboard.html')
+        enviando = true
+        const textoBoton = boton.value
+        boton.disabled = true
+        boton.value = 'Ingresando…'
+
+        try {
+            const respuesta = await api.auth.iniciarSesion({
+                correo: resultado.correo,
+                contrasena: contrasena.value,
+            })
+
+            if (!respuesta.ok) {
+                const errores = respuesta.errores || {}
+                const campo = errores.contrasena && !errores.correo ? contrasena : correo
+                const mensaje = errores.correo || errores.contrasena || respuesta.error
+
+                mostrarError(error, campo, mensaje)
+                return
+            }
+
+            const parametros = new URLSearchParams(window.location.search)
+            window.location.assign(destinoSeguro(parametros.get('volver')))
+        } finally {
+            enviando = false
+            boton.disabled = false
+            boton.value = textoBoton
+        }
     })
 }
 

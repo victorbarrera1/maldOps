@@ -42,7 +42,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
   `clientes.listar/obtener/crear/actualizar/eliminar`,
   `ventas.listar/obtener/crear/actualizar/eliminar/deCliente` y
   `preguntas.listar`. Todas async y con el mismo formato de respuesta.
-- [ ] **A4.** Sesión simulada en `localStorage`; las vistas privadas redirigen
+- [x] **A4.** Sesión simulada en `localStorage`; las vistas privadas redirigen
   al login y vuelven a la vista pedida.
 - [ ] **A5.** Simulador de errores: `?fallar` en la URL y selector de
   latencia/probabilidad de error en `configuracion.html`. Botón

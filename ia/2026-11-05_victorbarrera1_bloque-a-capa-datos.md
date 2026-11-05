@@ -48,3 +48,22 @@ respuesta. Las vistas solo necesitan importar este archivo.
 Verificación: la fachada se importó en Node con los mocks servidos desde
 `public/`; login 200, 12 clientes, 15 ventas, 2 ventas de `cli-005`, 8 preguntas
 y perfil del usuario autenticado.
+
+## A4 — Sesión y redirecciones
+
+- Se creó `js/guard.js`: detecta las páginas con `data-privada="true"`, redirige
+  a `index.html?volver=<vista>` cuando no hay sesión y deja la sesión en
+  `window.__sesion` para que `nav.js` pinta nombre y rol.
+- `js/login.js` ahora llama a `api.auth.iniciarSesion`, muestra el error de la
+  API y vuelve a la vista pedida con `destinoSeguro()`.
+- `js/main.js` cierra la sesión con `api.auth.cerrarSesion()` antes de salir.
+- Se agregó el guard a `dashboard.html`, `clientes.html`, `ventas.html`,
+  `configuracion.html` y `ayuda.html`.
+- Se corrigió el error de consola de `js/index.js` cuando la página no tiene el
+  menú antiguo (`.toggle`).
+
+Verificación en `npm run dev`: sin sesión, `clientes.html` redirige a
+`index.html?volver=clientes.html`; al ingresar con `victor.barrera@mail.udp.cl`
+/ `demo1234` vuelve a `clientes.html` y el menú muestra «Victor Barrera» y
+«admin». «Cerrar sesión» borra `maldops.sesion.v1` y vuelve al login. Consola
+sin errores. `npm run build` pasa.
