@@ -53,11 +53,51 @@
             </div>
             <!-- Fin Clientes activos -->
 
+            <!-- Simulador de pruebas -->
+            <div class="nuevos-clientes">
+                <div class="header">
+                    <h2>Simulador de pruebas</h2>
+                </div>
+                <form id="form-simulador" class="mt-4 space-y-3" novalidate>
+                    <div>
+                        <label class="label" for="latencia">Latencia de la API</label>
+                        <select class="input" id="latencia" name="latencia">
+                            <option value="normal">Normal (300–800 ms)</option>
+                            <option value="rapida">Rápida (0–150 ms)</option>
+                            <option value="lenta">Lenta (1200–1800 ms)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="label" for="probabilidad-error">Probabilidad de error</label>
+                        <select class="input" id="probabilidad-error" name="probabilidadError">
+                            <option value="0">0 %</option>
+                            <option value="10">10 %</option>
+                            <option value="25">25 %</option>
+                            <option value="50">50 %</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="submit" class="btn btn-primary" id="guardar-simulador">
+                            Guardar configuración
+                        </button>
+                        <button type="button" class="btn" id="simular-fallo">
+                            Simular siguiente error
+                        </button>
+                        <button type="button" class="btn btn-danger" id="reiniciar-datos">
+                            Restablecer datos de prueba
+                        </button>
+                    </div>
+                    <p id="simulador-estado" class="text-sm" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+            <!-- Fin Simulador de pruebas -->
+
             <script type="module" src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@8.0.13/dist/ionicons/ionicons.js"></script>
             <script type="module" src="js/index.js"></script>
 
     <script type="module" src="/js/guard.js"></script>
+    <script type="module" src="/js/configuracion.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 

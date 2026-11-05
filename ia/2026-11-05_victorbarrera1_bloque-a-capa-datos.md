@@ -67,3 +67,18 @@ Verificación en `npm run dev`: sin sesión, `clientes.html` redirige a
 / `demo1234` vuelve a `clientes.html` y el menú muestra «Victor Barrera» y
 «admin». «Cerrar sesión» borra `maldops.sesion.v1` y vuelve al login. Consola
 sin errores. `npm run build` pasa.
+
+## A5 — Simulador de errores
+
+- El servidor simulado ya interpreta `?fallar` (500) y `?fallar=<código>`
+  (400/401/403/404/409/422/500).
+- `configuracion.html` incluye un panel con latencia (normal/rápida/lenta),
+  probabilidad de error (0/10/25/50 %), botón para guardar, botón para forzar
+  el siguiente error y botón para restablecer los datos de prueba.
+- `js/configuracion.js` usa solo `api.simulador.*`; no toca `localStorage`.
+
+Verificación en `npm run dev`: se guardó `{ latencia: "rapida",
+probabilidadError: 10 }`; «Simular siguiente error» hizo que
+`clientes.listar()` devolviera 500; `configuracion.html?fallar=404` hizo que
+`clientes.listar()` devolviera 404; «Restablecer datos de prueba» borró la
+sesión y volvió al login. `npm run build` pasa.
