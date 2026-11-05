@@ -15,14 +15,16 @@
         <form id="form-login" action="dashboard.html" novalidate>
             <div class="correo">
                 <input type="email" id="correo" name="correo" placeholder=" " autocomplete="email" required
-                    aria-describedby="login-error">
+                    aria-describedby="error-correo login-error">
                 <label for="correo">Correo electrónico</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-correo" hidden></p>
             <div class="password">
                 <input type="password" id="contrasena" name="contrasena" placeholder=" " autocomplete="current-password"
-                    required aria-describedby="login-error">
+                    required aria-describedby="error-contrasena login-error">
                 <label for="contrasena">Contraseña</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-contrasena" hidden></p>
             <p class="login-estado" id="login-estado" role="status" aria-live="polite"></p>
             <div class="campo-error" id="login-error" role="alert" hidden></div>
             <input type="submit" value="Iniciar sesión">

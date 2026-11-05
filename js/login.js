@@ -34,40 +34,6 @@ export function validarCorreo(valor) {
     return { valido: true, correo, error: '' }
 }
 
-function mostrarError(nodo, mensaje, { campo = null, alReintentar = null } = {}) {
-    nodo.replaceChildren()
-
-    const texto = document.createElement('p')
-    texto.className = 'login-error-texto'
-    texto.textContent = mensaje
-    nodo.append(texto)
-
-    if (typeof alReintentar === 'function') {
-        const boton = document.createElement('button')
-        boton.type = 'button'
-        boton.className = 'login-reintentar'
-        boton.textContent = 'Reintentar'
-        boton.addEventListener('click', alReintentar)
-        nodo.append(boton)
-    }
-
-    nodo.hidden = false
-
-    if (campo) {
-        campo.setAttribute('aria-invalid', 'true')
-        campo.focus()
-    }
-}
-
-function limpiarError(nodo, campos) {
-    nodo.replaceChildren()
-    nodo.hidden = true
-
-    for (const campo of campos) {
-        campo.removeAttribute('aria-invalid')
-    }
-}
-
 function iniciarLogin() {
     const formulario = document.querySelector('#form-login')
 
@@ -80,10 +46,98 @@ function iniciarLogin() {
     const error = formulario.querySelector('#login-error')
     const estado = formulario.querySelector('#login-estado')
     const boton = formulario.querySelector('input[type="submit"]')
+    const campos = {
+        correo: { campo: correo, nodo: formulario.querySelector('#error-correo') },
+        contrasena: { campo: contrasena, nodo: formulario.querySelector('#error-contrasena') },
+    }
     let enviando = false
 
-    for (const campo of [correo, contrasena]) {
-        campo.addEventListener('input', () => limpiarError(error, [correo, contrasena]))
+    function limpiarGeneral() {
+        error.replaceChildren()
+        error.hidden = true
+    }
+
+    function limpiarCampo(clave) {
+        const entrada = campos[clave]
+
+        if (!entrada) {
+            return
+        }
+
+        entrada.nodo.textContent = ''
+        entrada.nodo.hidden = true
+        entrada.campo.removeAttribute('aria-invalid')
+    }
+
+    function limpiarErrores() {
+        limpiarGeneral()
+
+        for (const clave of Object.keys(campos)) {
+            limpiarCampo(clave)
+        }
+    }
+
+    function mostrarErrorGeneral(mensaje, { alReintentar = null } = {}) {
+        error.replaceChildren()
+
+        const texto = document.createElement('p')
+        texto.className = 'login-error-texto'
+        texto.textContent = mensaje
+        error.append(texto)
+
+        if (typeof alReintentar === 'function') {
+            const botonReintentar = document.createElement('button')
+            botonReintentar.type = 'button'
+            botonReintentar.className = 'login-reintentar'
+            botonReintentar.textContent = 'Reintentar'
+            botonReintentar.addEventListener('click', alReintentar)
+            error.append(botonReintentar)
+        }
+
+        error.hidden = false
+    }
+
+    function mostrarErrorCampo(clave, mensaje) {
+        const entrada = campos[clave]
+
+        if (!entrada) {
+            return null
+        }
+
+        entrada.nodo.textContent = mensaje
+        entrada.nodo.hidden = false
+        entrada.campo.setAttribute('aria-invalid', 'true')
+
+        return entrada.campo
+    }
+
+    function mostrarErroresCampos(errores) {
+        let primero = null
+
+        for (const clave of Object.keys(campos)) {
+            if (errores[clave]) {
+                const campo = mostrarErrorCampo(clave, errores[clave])
+                primero = primero || campo
+            }
+        }
+
+        if (primero) {
+            primero.focus()
+        }
+
+        return Boolean(primero)
+    }
+
+    function reintentar() {
+        limpiarErrores()
+        enviar()
+    }
+
+    for (const [clave, entrada] of Object.entries(campos)) {
+        entrada.campo.addEventListener('input', () => {
+            limpiarCampo(clave)
+            limpiarGeneral()
+        })
     }
 
     async function enviar() {
@@ -91,17 +145,19 @@ function iniciarLogin() {
             return
         }
 
-        limpiarError(error, [correo, contrasena])
+        limpiarErrores()
 
         const resultado = validarCorreo(correo.value)
 
         if (!resultado.valido) {
-            mostrarError(error, resultado.error, { campo: correo })
+            const campo = mostrarErrorCampo('correo', resultado.error)
+            campo?.focus()
             return
         }
 
         if (!contrasena.value.trim()) {
-            mostrarError(error, 'Escribe tu contraseña.', { campo: contrasena })
+            const campo = mostrarErrorCampo('contrasena', 'Escribe tu contraseña.')
+            campo?.focus()
             return
         }
 
@@ -121,22 +177,23 @@ function iniciarLogin() {
             if (!respuesta.ok) {
                 if (respuesta.status === 422) {
                     const errores = respuesta.errores || {}
-                    const campo = errores.contrasena && !errores.correo ? contrasena : correo
-                    const mensaje = errores.correo || errores.contrasena || respuesta.error
 
-                    mostrarError(error, mensaje, { campo })
+                    if (mostrarErroresCampos(errores)) {
+                        return
+                    }
+
+                    mostrarErrorGeneral(respuesta.error)
                     return
                 }
 
                 if (respuesta.status === 401) {
-                    mostrarError(error, respuesta.error)
+                    mostrarErrorGeneral(respuesta.error)
                     return
                 }
 
-                mostrarError(
-                    error,
+                mostrarErrorGeneral(
                     respuesta.error || 'No se pudo iniciar sesión. Intenta de nuevo.',
-                    { alReintentar: enviar },
+                    { alReintentar: reintentar },
                 )
                 return
             }
@@ -144,10 +201,9 @@ function iniciarLogin() {
             const parametros = new URLSearchParams(window.location.search)
             window.location.assign(destinoSeguro(parametros.get('volver')))
         } catch {
-            mostrarError(
-                error,
+            mostrarErrorGeneral(
                 'No se pudo conectar con el servidor. Revisa tu conexión e intenta de nuevo.',
-                { alReintentar: enviar },
+                { alReintentar: reintentar },
             )
         } finally {
             enviando = false

@@ -15,24 +15,29 @@
         <form id="form-registro" novalidate>
             <div class="username">
                 <input type="text" id="nombre" name="nombre" placeholder=" " autocomplete="name" required
-                    aria-describedby="registro-error">
+                    aria-describedby="error-nombre registro-error">
                 <label for="nombre"> Nombre de usuario</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-nombre" hidden></p>
             <div class="correo">
                 <input type="email" id="correo" name="correo" placeholder=" " autocomplete="email" required
-                    aria-describedby="registro-error">
+                    aria-describedby="error-correo registro-error">
                 <label for="correo"> Mail</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-correo" hidden></p>
             <div class="password">
                 <input type="password" id="contrasena" name="contrasena" placeholder=" " autocomplete="new-password"
-                    required aria-describedby="registro-error">
+                    required aria-describedby="error-contrasena registro-error">
                 <label for="contrasena"> Contraseña</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-contrasena" hidden></p>
             <div class="password">
                 <input type="password" id="confirmar-contrasena" name="confirmarContrasena" placeholder=" "
-                    autocomplete="new-password" required aria-describedby="registro-error">
+                    autocomplete="new-password" required
+                    aria-describedby="error-confirmar registro-error">
                 <label for="confirmar-contrasena"> Confirmar Contraseña</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-confirmar" hidden></p>
             <p class="login-estado" id="registro-estado" role="status" aria-live="polite"></p>
             <div class="campo-error" id="registro-error" role="alert" hidden></div>
             <input type="submit" value="Registrarse">

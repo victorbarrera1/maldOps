@@ -122,3 +122,23 @@ formulario.»; con datos válidos se crea `u-005` (rol `vendedor`), el menú
 muestra «Prueba B6» y la vista va al dashboard; con `registro.html?fallar`
 aparece el 500 con «Reintentar». Después se restablecieron los mocks y se
 volvió a entrar como admin. Consola sin errores. `npm run build` pasa.
+
+## B7 — Validación por campo
+
+- `index.html` y `registro.html`: cada campo tiene su propio
+  `<p class="campo-error campo-error-campo">` con id y `aria-describedby`.
+- `css/login.css`: estilo compacto de los errores por campo.
+- `js/login.js`: la validación local y los 422 de la API escriben el mensaje
+  bajo el campo correspondiente, marcan `aria-invalid` y enfocan el primero.
+  Los 401 y los 500 se siguen mostrando en el error general.
+- `js/registro.js`: los 422 y el 409 de la API se reparten entre `nombre`,
+  `correo`, `contrasena` y `confirmarContrasena`; si la API no entrega errores
+  por campo se usa el mensaje general. Al escribir se limpia el error de ese
+  campo.
+
+Verificación en `npm run dev`: login sin correo, con dominio no permitido y sin
+contraseña muestra el mensaje bajo el campo correcto; el 401 sigue en el error
+general. Registro con nombre corto, correo no permitido, contraseña corta y
+confirmación distinta muestra los cuatro mensajes a la vez; con un correo
+existente el 409 aparece bajo «Mail». Consola sin errores. `npm run build`
+pasa.

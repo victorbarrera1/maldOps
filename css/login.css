@@ -109,6 +109,10 @@ body {
     display: none;
 }
 
+.campo-error-campo {
+    margin: -20px 0 18px;
+}
+
 .login-error-texto {
     margin: 0;
 }

@@ -1,8 +1,8 @@
 /**
  * Registro de cuenta contra la API simulada.
  *
- * Muestra un estado mientras espera y un error con «Reintentar» cuando el
- * problema no se puede resolver corrigiendo el formulario.
+ * Muestra un estado mientras espera, errores por campo con los 422/409 de la
+ * API y un error con «Reintentar» cuando el problema no se corrige editando.
  */
 
 import api from './api.js'
@@ -17,10 +17,43 @@ if (formulario) {
     const estado = formulario.querySelector('#registro-estado')
     const error = formulario.querySelector('#registro-error')
     const boton = formulario.querySelector('input[type="submit"]')
-    const campos = [nombre, correo, contrasena, confirmar]
+    const campos = {
+        nombre: { campo: nombre, nodo: formulario.querySelector('#error-nombre') },
+        correo: { campo: correo, nodo: formulario.querySelector('#error-correo') },
+        contrasena: { campo: contrasena, nodo: formulario.querySelector('#error-contrasena') },
+        confirmarContrasena: {
+            campo: confirmar,
+            nodo: formulario.querySelector('#error-confirmar'),
+        },
+    }
     let enviando = false
 
-    function mostrarError(mensaje, { alReintentar = null } = {}) {
+    function limpiarGeneral() {
+        error.replaceChildren()
+        error.hidden = true
+    }
+
+    function limpiarCampo(clave) {
+        const entrada = campos[clave]
+
+        if (!entrada) {
+            return
+        }
+
+        entrada.nodo.textContent = ''
+        entrada.nodo.hidden = true
+        entrada.campo.removeAttribute('aria-invalid')
+    }
+
+    function limpiarErrores() {
+        limpiarGeneral()
+
+        for (const clave of Object.keys(campos)) {
+            limpiarCampo(clave)
+        }
+    }
+
+    function mostrarErrorGeneral(mensaje, { alReintentar = null } = {}) {
         error.replaceChildren()
 
         const texto = document.createElement('p')
@@ -40,17 +73,37 @@ if (formulario) {
         error.hidden = false
     }
 
-    function limpiarError() {
-        error.replaceChildren()
-        error.hidden = true
+    function mostrarErroresCampos(errores) {
+        let primero = null
 
-        for (const campo of campos) {
-            campo.removeAttribute('aria-invalid')
+        for (const clave of Object.keys(campos)) {
+            const entrada = campos[clave]
+
+            if (errores[clave]) {
+                entrada.nodo.textContent = errores[clave]
+                entrada.nodo.hidden = false
+                entrada.campo.setAttribute('aria-invalid', 'true')
+                primero = primero || entrada.campo
+            }
         }
+
+        if (primero) {
+            primero.focus()
+        }
+
+        return Boolean(primero)
     }
 
-    for (const campo of campos) {
-        campo.addEventListener('input', limpiarError)
+    function reintentar() {
+        limpiarErrores()
+        enviar()
+    }
+
+    for (const [clave, entrada] of Object.entries(campos)) {
+        entrada.campo.addEventListener('input', () => {
+            limpiarCampo(clave)
+            limpiarGeneral()
+        })
     }
 
     async function enviar() {
@@ -58,7 +111,7 @@ if (formulario) {
             return
         }
 
-        limpiarError()
+        limpiarErrores()
         enviando = true
         const textoBoton = boton.value
         boton.disabled = true
@@ -76,22 +129,28 @@ if (formulario) {
 
             if (!respuesta.ok) {
                 if (respuesta.status === 422 || respuesta.status === 409) {
-                    mostrarError(respuesta.error)
+                    const errores = respuesta.errores || {}
+
+                    if (mostrarErroresCampos(errores)) {
+                        return
+                    }
+
+                    mostrarErrorGeneral(respuesta.error)
                     return
                 }
 
-                mostrarError(
+                mostrarErrorGeneral(
                     respuesta.error || 'No se pudo crear la cuenta. Intenta de nuevo.',
-                    { alReintentar: enviar },
+                    { alReintentar: reintentar },
                 )
                 return
             }
 
             window.location.assign('dashboard.html')
         } catch {
-            mostrarError(
+            mostrarErrorGeneral(
                 'No se pudo conectar con el servidor. Revisa tu conexión e intenta de nuevo.',
-                { alReintentar: enviar },
+                { alReintentar: reintentar },
             )
         } finally {
             enviando = false

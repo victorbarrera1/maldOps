@@ -66,7 +66,7 @@ Una vista por tarea:
   «Reintentar» cuando corresponda.
 - [x] **B6.7.** `registro.html`: estados de carga y error de la API, con
   «Reintentar» cuando corresponda.
-- [ ] **B7.** Validación por campo en login y registro con mensajes en español
+- [x] **B7.** Validación por campo en login y registro con mensajes en español
   (usa los 422 de la API).
 - [ ] **B8.** CRUD de clientes y ventas funcionando con modal de confirmación al
   eliminar y aviso (toast) de éxito/error.
