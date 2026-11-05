@@ -1,0 +1,17 @@
+[
+  { "id": "ven-001", "clienteId": "cli-005", "precio": 50000, "servicio": "META ADS", "estatus": "Pendiente" },
+  { "id": "ven-002", "clienteId": "cli-003", "precio": 40000, "servicio": "TIKTOK ADS", "estatus": "Devuelto" },
+  { "id": "ven-003", "clienteId": "cli-003", "precio": 50000, "servicio": "WHATSAPP ADS", "estatus": "En Progreso" },
+  { "id": "ven-004", "clienteId": "cli-004", "precio": 100000, "servicio": "GOOGLE ADS", "estatus": "Pendiente" },
+  { "id": "ven-005", "clienteId": "cli-006", "precio": 75000, "servicio": "YOUTUBE ADS", "estatus": "Pendiente" },
+  { "id": "ven-006", "clienteId": "cli-007", "precio": 300000, "servicio": "LINKEDIN ADS", "estatus": "En Progreso" },
+  { "id": "ven-007", "clienteId": "cli-008", "precio": 50000, "servicio": "REELS ADS", "estatus": "Confirmado" },
+  { "id": "ven-008", "clienteId": "cli-008", "precio": 350000, "servicio": "WHATSAPP ADS", "estatus": "Confirmado" },
+  { "id": "ven-009", "clienteId": "cli-001", "precio": 120000, "servicio": "META ADS", "estatus": "Confirmado" },
+  { "id": "ven-010", "clienteId": "cli-002", "precio": 90000, "servicio": "GOOGLE ADS", "estatus": "En Progreso" },
+  { "id": "ven-011", "clienteId": "cli-009", "precio": 60000, "servicio": "TIKTOK ADS", "estatus": "Pendiente" },
+  { "id": "ven-012", "clienteId": "cli-010", "precio": 80000, "servicio": "REELS ADS", "estatus": "Devuelto" },
+  { "id": "ven-013", "clienteId": "cli-011", "precio": 150000, "servicio": "YOUTUBE ADS", "estatus": "Confirmado" },
+  { "id": "ven-014", "clienteId": "cli-012", "precio": 110000, "servicio": "LINKEDIN ADS", "estatus": "En Progreso" },
+  { "id": "ven-015", "clienteId": "cli-005", "precio": 200000, "servicio": "WHATSAPP ADS", "estatus": "Confirmado" }
+]

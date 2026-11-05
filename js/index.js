@@ -16,9 +16,14 @@ var toggle = document.querySelector('.toggle');
 var nav = document.querySelector('.nav');
 var container = document.querySelector('.container');
 
-toggle.onclick = function () {
-    nav.classList.toggle('active');
-    container.classList.toggle('active');
+if (!toggle || !nav || !container) {
+    // Las páginas internas usan el menú de nav.js; este archivo solo aplica
+    // al menú antiguo.
+} else {
+    toggle.onclick = function () {
+        nav.classList.toggle('active');
+        container.classList.toggle('active');
+    }
 }
 
 
