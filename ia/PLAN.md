@@ -21,7 +21,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 | Bloque | Rama | PR | Estado |
 |---|---|---|---|
 | A — Capa de datos | `feat/bloque-a-capa-datos` | [#8](https://github.com/victorbarrera1/maldOps/pull/8) | Completado |
-| B — Estados de interfaz | pendiente | pendiente | Pendiente |
+| B — Estados de interfaz | `feat/bloque-b-estados` | [#9](https://github.com/victorbarrera1/maldOps/pull/9) | Completado |
 | C — Estructura del repo | pendiente | pendiente | Pendiente |
 | D — README | pendiente | pendiente | Pendiente |
 | E — Cierre | pendiente | pendiente | Pendiente |
@@ -52,23 +52,23 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 
 Una vista por tarea:
 
-- [ ] **B6.1.** `clientes.html`: cargando (esqueleto), vacío y error con botón
+- [x] **B6.1.** `clientes.html`: cargando (esqueleto), vacío y error con botón
   «Reintentar», usando `api.js`.
-- [ ] **B6.2.** `ventas.html`: cargando (esqueleto), vacío y error con botón
+- [x] **B6.2.** `ventas.html`: cargando (esqueleto), vacío y error con botón
   «Reintentar», usando `api.js`.
-- [ ] **B6.3.** `dashboard.html`: cargando, vacío y error con «Reintentar»,
+- [x] **B6.3.** `dashboard.html`: cargando, vacío y error con «Reintentar»,
   usando `api.js`.
-- [ ] **B6.4.** `ayuda.html`: cargando, vacío y error con «Reintentar», usando
+- [x] **B6.4.** `ayuda.html`: cargando, vacío y error con «Reintentar», usando
   `api.js`.
-- [ ] **B6.5.** `configuracion.html`: cargando, vacío y error con «Reintentar»,
+- [x] **B6.5.** `configuracion.html`: cargando, vacío y error con «Reintentar»,
   usando `api.js`.
-- [ ] **B6.6.** `index.html` (login): estados de carga y error de la API, con
+- [x] **B6.6.** `index.html` (login): estados de carga y error de la API, con
   «Reintentar» cuando corresponda.
-- [ ] **B6.7.** `registro.html`: estados de carga y error de la API, con
+- [x] **B6.7.** `registro.html`: estados de carga y error de la API, con
   «Reintentar» cuando corresponda.
-- [ ] **B7.** Validación por campo en login y registro con mensajes en español
+- [x] **B7.** Validación por campo en login y registro con mensajes en español
   (usa los 422 de la API).
-- [ ] **B8.** CRUD de clientes y ventas funcionando con modal de confirmación al
+- [x] **B8.** CRUD de clientes y ventas funcionando con modal de confirmación al
   eliminar y aviso (toast) de éxito/error.
 
 ### C. Estructura del repo

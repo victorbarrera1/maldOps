@@ -1,0 +1,173 @@
+# Bloque B — Estados de interfaz
+
+- **Fecha:** 2026-11-05
+- **Integrante:** @victorbarrera1
+- **Rama:** `feat/bloque-b-estados`
+- **PR:** pendiente
+- **Prompt usado:** instrucción de la Entrega 2 (checklist A–E), con la regla de
+  un PR por bloque y un commit por tarea. Para este bloque: agregar estados de
+  carga, vacío y error con «Reintentar» en cada vista, validación por campo en
+  login y registro, y el CRUD de clientes y ventas con modal y toasts.
+
+## B6.1 — Clientes
+
+- `js/ui.js`: helpers compartidos `crearCargando`, `crearVacio`, `crearError`,
+  `crearBadgeEstatus`, `formatearPrecio` y `mensajeDeError`. Solo construyen
+  nodos; no leen datos ni `localStorage`.
+- `css/app.css`: estilos de esqueleto, estado vacío y estado de error.
+- `clientes.html`: se reemplazaron las filas fijas por `#clientes-estado`,
+  `#clientes-tabla`, `#clientes-cuerpo` y el contador `#clientes-total`.
+- `js/clientes.js`: llama a `api.clientes.listar()`, muestra esqueleto mientras
+  carga, estado vacío sin registros, error con botón «Reintentar» y una fila por
+  cliente con su badge de estatus. En 401 usa `irAlLogin()`.
+
+Verificación en `npm run dev`: la vista muestra 12 clientes y el contador;
+con la base sin clientes aparece el estado vacío; con `clientes.html?fallar`
+aparece el error y «Reintentar»; consola sin errores. `npm run build` pasa.
+
+## B6.2 — Ventas
+
+- `ventas.html`: se reemplazaron las filas fijas por `#ventas-estado`,
+  `#ventas-tabla`, `#ventas-cuerpo` y el contador `#ventas-total`.
+- `js/ventas.js`: carga en paralelo `api.ventas.listar()` y
+  `api.clientes.listar()`, arma un mapa de `clienteId` a nombre y pinta una fila
+  por venta con precio formateado en CLP y badge de estatus. En 401 usa
+  `irAlLogin()`. Si falla cualquiera de las dos llamadas muestra el error con
+  «Reintentar».
+
+Verificación en `npm run dev`: 15 ventas y contador; primera fila «Daniel
+Ayala / $50.000 / META ADS / PENDIENTE»; con la base sin ventas aparece el
+estado vacío; con `ventas.html?fallar` aparece el error y «Reintentar»;
+consola sin errores. `npm run build` pasa.
+
+## B6.3 — Dashboard
+
+- `dashboard.html`: se reemplazaron las tarjetas y tablas fijas por
+  `#dashboard-estado` y `#dashboard-contenido` (oculto durante la carga).
+- Las tarjetas ahora muestran datos reales de la API: clientes, ventas,
+  ganancias y ticket promedio.
+- `js/dashboard.js`: carga `api.clientes.listar()` y `api.ventas.listar()` en
+  paralelo; pinta las últimas 8 ventas y los primeros 5 clientes con sus
+  badges. Estado vacío si no hay clientes ni ventas; error con «Reintentar» si
+  falla alguna llamada; en 401 usa `irAlLogin()`.
+- El enlace «Ver todas» apunta a `ventas.html`.
+
+Verificación en `npm run dev`: 12 clientes, 15 ventas, ganancias
+`$1.825.000`, ticket `$121.667`, 8 ventas y 5 clientes en las listas; con la
+base vacía aparece el estado vacío; con `dashboard.html?fallar` aparece el
+error y «Reintentar»; consola sin errores. `npm run build` pasa.
+
+## B6.4 — Ayuda
+
+- `ayuda.html`: la tabla de preguntas frecuentes ahora usa `#ayuda-estado`,
+  `#ayuda-tabla`, `#ayuda-cuerpo` y el contador `#ayuda-total`. La sección de
+  contacto con soporte se mantiene.
+- `js/ayuda.js`: llama a `api.preguntas.listar()`, muestra esqueleto, estado
+  vacío, error con «Reintentar» y una fila por pregunta/respuesta. En 401 usa
+  `irAlLogin()`.
+
+Verificación en `npm run dev`: 8 preguntas y contador; con la base sin
+preguntas aparece el estado vacío; con `ayuda.html?fallar` aparece el error y
+«Reintentar»; consola sin errores. `npm run build` pasa.
+
+## B6.5 — Configuración
+
+- `configuracion.html`: el simulador ahora usa `#simulador-estado` para los
+  estados y `#simulador-contenido` para el formulario. Los campos de nombre y
+  correo de la cuenta tienen ids para reflejar el perfil.
+- `js/configuracion.js`: carga en paralelo `api.simulador.obtenerConfiguracion()`
+  y `api.auth.perfil()`. Muestra esqueleto mientras espera, estado vacío si no
+  hay configuración guardada, error con «Reintentar» si falla alguna llamada y
+  en 401 usa `irAlLogin()`. Al cargar, completa nombre, correo, latencia y
+  probabilidad.
+- Se mantienen las acciones de guardar, simular el siguiente error y
+  restablecer los datos.
+
+Verificación en `npm run dev`: nombre «Victor Barrera», correo
+`victor.barrera@mail.udp.cl`, latencia y probabilidad guardadas; «Guardar
+configuración» actualiza `maldops.simulador.v1`; con
+`configuracion.html?fallar` aparece el error y «Reintentar»; consola sin
+errores. `npm run build` pasa.
+
+## B6.6 — Login
+
+- `index.html`: se agregó `#login-estado` (`role="status"`) para el texto
+  «Verificando credenciales…» y `#login-error` pasó de `<p>` a `<div>` para
+  poder incluir el botón «Reintentar».
+- `css/login.css`: estilos del estado de carga, del mensaje y del botón de
+  reintento.
+- `js/login.js`: el envío se centralizó en `enviar()`, que deshabilita el botón
+  y marca `aria-busy` mientras espera. Un 422 resalta el campo correspondiente,
+  un 401 muestra «Correo o contraseña incorrectos.» sin reintento y un 500 o un
+  error de red muestran «Reintentar». El reintento conserva los valores del
+  formulario y vuelve a llamar a la API.
+
+Verificación en `npm run dev`: contraseña incorrecta muestra el 401 sin botón;
+`index.html?fallar` muestra el 500 con «Reintentar»; al quitar `?fallar` y
+pulsar «Reintentar» inicia sesión y vuelve a `clientes.html`; consola sin
+errores. `npm run build` pasa.
+
+## B6.7 — Registro
+
+- `registro.html`: se reemplazó el formulario sin ids y el script inline por un
+  formulario con `#form-registro`, campos `nombre`, `correo`, `contrasena` y
+  `confirmar-contrasena`, más `#registro-estado` y `#registro-error`.
+- `js/registro.js`: llama a `api.auth.registrar()`, deshabilita el botón y
+  muestra «Creando tu cuenta…» mientras espera. Un 422 o 409 muestra el mensaje
+  de la API sin reintento; un 500 o un error de red muestran «Reintentar». Al
+  crear la cuenta, la API inicia sesión y la vista va a `dashboard.html`.
+
+Verificación en `npm run dev`: el envío vacío muestra «Revisa los datos del
+formulario.»; con datos válidos se crea `u-005` (rol `vendedor`), el menú
+muestra «Prueba B6» y la vista va al dashboard; con `registro.html?fallar`
+aparece el 500 con «Reintentar». Después se restablecieron los mocks y se
+volvió a entrar como admin. Consola sin errores. `npm run build` pasa.
+
+## B7 — Validación por campo
+
+- `index.html` y `registro.html`: cada campo tiene su propio
+  `<p class="campo-error campo-error-campo">` con id y `aria-describedby`.
+- `css/login.css`: estilo compacto de los errores por campo.
+- `js/login.js`: la validación local y los 422 de la API escriben el mensaje
+  bajo el campo correspondiente, marcan `aria-invalid` y enfocan el primero.
+  Los 401 y los 500 se siguen mostrando en el error general.
+- `js/registro.js`: los 422 y el 409 de la API se reparten entre `nombre`,
+  `correo`, `contrasena` y `confirmarContrasena`; si la API no entrega errores
+  por campo se usa el mensaje general. Al escribir se limpia el error de ese
+  campo.
+
+Verificación en `npm run dev`: login sin correo, con dominio no permitido y sin
+contraseña muestra el mensaje bajo el campo correcto; el 401 sigue en el error
+general. Registro con nombre corto, correo no permitido, contraseña corta y
+confirmación distinta muestra los cuatro mensajes a la vez; con un correo
+existente el 409 aparece bajo «Mail». Consola sin errores. `npm run build`
+pasa.
+
+## B8 — CRUD de clientes y ventas
+
+- `js/ui.js`: se agregaron `mostrarToast(mensaje, tipo)` para los avisos
+  flotantes y `confirmarAccion(mensaje, opciones)` para el diálogo compartido de
+  confirmación. Si el navegador no soporta `<dialog>`, se usa `window.confirm`.
+- `css/app.css`: estilos de `.btn-sm`, `.acciones-tabla`, `.campo-error`,
+  `dialog.modal`, `.modal-campo`, `.modal-acciones`, `.toasts` y `.toast`.
+- `clientes.html` y `js/clientes.js`: botón «Nuevo cliente», columna Acciones y
+  diálogos de formulario y confirmación. Crear y editar usan `api.clientes`;
+  los 422 y 409 se muestran bajo el campo correspondiente. El botón «Eliminar»
+  solo se renderiza con rol `admin`; un 409 por ventas asociadas se muestra como
+  toast de error y la fila se mantiene.
+- `ventas.html` y `js/ventas.js`: botón «Nueva venta», columna Acciones y
+  diálogos. El formulario llena el select con `api.clientes.listar()`, valida
+  precio entero mayor que 0 y usa `api.ventas` para crear, actualizar y
+  eliminar. Los 422 se muestran bajo cada campo; el 403 y los errores de red se
+  muestran como toast. «Eliminar» también queda solo para `admin`.
+
+Verificación en `npm run dev` como admin: crear «Cliente Prueba B8» (13 filas y
+toast «Cliente creado.»), editarlo a «Cliente B8 Editado»/Inactivo (toast
+«Cliente actualizado.»), intentar borrar «Carlos Leoui» y recibir el 409 como
+toast sin perder la fila, y borrar el cliente temporal (vuelve a 12). El
+formulario vacío y el nombre duplicado muestran el 422/409 bajo «Nombre». En
+ventas: crear una venta de Camila Rojas por `$12.345` (16 filas), editarla a
+`$54.321`/Confirmado, comprobar los 422 de cliente y precio, y borrarla (vuelve
+a 15). Con el vendedor Martin Maldonado no aparecen botones «Eliminar» y
+`api.clientes.eliminar('cli-001')` / `api.ventas.eliminar('ven-001')` devuelven
+403. Consola sin errores. `npm run build` pasa.

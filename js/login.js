@@ -34,22 +34,6 @@ export function validarCorreo(valor) {
     return { valido: true, correo, error: '' }
 }
 
-function mostrarError(nodo, campo, mensaje) {
-    nodo.textContent = mensaje
-    nodo.hidden = false
-    campo.setAttribute('aria-invalid', 'true')
-    campo.focus()
-}
-
-function limpiarError(nodo, campos) {
-    nodo.textContent = ''
-    nodo.hidden = true
-
-    for (const campo of campos) {
-        campo.removeAttribute('aria-invalid')
-    }
-}
-
 function iniciarLogin() {
     const formulario = document.querySelector('#form-login')
 
@@ -60,32 +44,120 @@ function iniciarLogin() {
     const correo = formulario.querySelector('#correo')
     const contrasena = formulario.querySelector('#contrasena')
     const error = formulario.querySelector('#login-error')
-
-    for (const campo of [correo, contrasena]) {
-        campo.addEventListener('input', () => limpiarError(error, [correo, contrasena]))
-    }
-
+    const estado = formulario.querySelector('#login-estado')
     const boton = formulario.querySelector('input[type="submit"]')
+    const campos = {
+        correo: { campo: correo, nodo: formulario.querySelector('#error-correo') },
+        contrasena: { campo: contrasena, nodo: formulario.querySelector('#error-contrasena') },
+    }
     let enviando = false
 
-    formulario.addEventListener('submit', async (evento) => {
-        evento.preventDefault()
+    function limpiarGeneral() {
+        error.replaceChildren()
+        error.hidden = true
+    }
 
+    function limpiarCampo(clave) {
+        const entrada = campos[clave]
+
+        if (!entrada) {
+            return
+        }
+
+        entrada.nodo.textContent = ''
+        entrada.nodo.hidden = true
+        entrada.campo.removeAttribute('aria-invalid')
+    }
+
+    function limpiarErrores() {
+        limpiarGeneral()
+
+        for (const clave of Object.keys(campos)) {
+            limpiarCampo(clave)
+        }
+    }
+
+    function mostrarErrorGeneral(mensaje, { alReintentar = null } = {}) {
+        error.replaceChildren()
+
+        const texto = document.createElement('p')
+        texto.className = 'login-error-texto'
+        texto.textContent = mensaje
+        error.append(texto)
+
+        if (typeof alReintentar === 'function') {
+            const botonReintentar = document.createElement('button')
+            botonReintentar.type = 'button'
+            botonReintentar.className = 'login-reintentar'
+            botonReintentar.textContent = 'Reintentar'
+            botonReintentar.addEventListener('click', alReintentar)
+            error.append(botonReintentar)
+        }
+
+        error.hidden = false
+    }
+
+    function mostrarErrorCampo(clave, mensaje) {
+        const entrada = campos[clave]
+
+        if (!entrada) {
+            return null
+        }
+
+        entrada.nodo.textContent = mensaje
+        entrada.nodo.hidden = false
+        entrada.campo.setAttribute('aria-invalid', 'true')
+
+        return entrada.campo
+    }
+
+    function mostrarErroresCampos(errores) {
+        let primero = null
+
+        for (const clave of Object.keys(campos)) {
+            if (errores[clave]) {
+                const campo = mostrarErrorCampo(clave, errores[clave])
+                primero = primero || campo
+            }
+        }
+
+        if (primero) {
+            primero.focus()
+        }
+
+        return Boolean(primero)
+    }
+
+    function reintentar() {
+        limpiarErrores()
+        enviar()
+    }
+
+    for (const [clave, entrada] of Object.entries(campos)) {
+        entrada.campo.addEventListener('input', () => {
+            limpiarCampo(clave)
+            limpiarGeneral()
+        })
+    }
+
+    async function enviar() {
         if (enviando) {
             return
         }
 
-        limpiarError(error, [correo, contrasena])
+        limpiarErrores()
 
         const resultado = validarCorreo(correo.value)
 
         if (!resultado.valido) {
-            mostrarError(error, correo, resultado.error)
+            const campo = mostrarErrorCampo('correo', resultado.error)
+            campo?.focus()
             return
         }
 
         if (!contrasena.value.trim()) {
-            mostrarError(error, contrasena, 'Escribe tu contraseña.')
+            const campo = mostrarErrorCampo('contrasena', 'Escribe tu contraseña.')
+            campo?.focus()
             return
         }
 
@@ -93,6 +165,8 @@ function iniciarLogin() {
         const textoBoton = boton.value
         boton.disabled = true
         boton.value = 'Ingresando…'
+        formulario.setAttribute('aria-busy', 'true')
+        estado.textContent = 'Verificando credenciales…'
 
         try {
             const respuesta = await api.auth.iniciarSesion({
@@ -101,21 +175,48 @@ function iniciarLogin() {
             })
 
             if (!respuesta.ok) {
-                const errores = respuesta.errores || {}
-                const campo = errores.contrasena && !errores.correo ? contrasena : correo
-                const mensaje = errores.correo || errores.contrasena || respuesta.error
+                if (respuesta.status === 422) {
+                    const errores = respuesta.errores || {}
 
-                mostrarError(error, campo, mensaje)
+                    if (mostrarErroresCampos(errores)) {
+                        return
+                    }
+
+                    mostrarErrorGeneral(respuesta.error)
+                    return
+                }
+
+                if (respuesta.status === 401) {
+                    mostrarErrorGeneral(respuesta.error)
+                    return
+                }
+
+                mostrarErrorGeneral(
+                    respuesta.error || 'No se pudo iniciar sesión. Intenta de nuevo.',
+                    { alReintentar: reintentar },
+                )
                 return
             }
 
             const parametros = new URLSearchParams(window.location.search)
             window.location.assign(destinoSeguro(parametros.get('volver')))
+        } catch {
+            mostrarErrorGeneral(
+                'No se pudo conectar con el servidor. Revisa tu conexión e intenta de nuevo.',
+                { alReintentar: reintentar },
+            )
         } finally {
             enviando = false
             boton.disabled = false
             boton.value = textoBoton
+            formulario.removeAttribute('aria-busy')
+            estado.textContent = ''
         }
+    }
+
+    formulario.addEventListener('submit', (evento) => {
+        evento.preventDefault()
+        enviar()
     })
 }
 

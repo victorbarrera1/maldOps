@@ -21,69 +21,81 @@
             <!-- Ultimas ventas -->
             <div class="ordenes-recientes">
                 <div class="header">
-                    <h2>Ultimas ventas de Campañas</h2>
-                    <a href="#" class="boton">Ver todos</a>
+                    <h2>Ultimas ventas de Campañas <span id="ventas-total" class="badge"></span></h2>
+                    <button type="button" class="btn btn-primary" id="nueva-venta">
+                        Nueva venta
+                    </button>
                 </div>
-                <table>
+                <div id="ventas-estado"></div>
+                <table id="ventas-tabla" hidden>
                     <thead>
                         <th>Cliente</th>
                         <th>Precio</th>
                         <th>Servicio</th>
                         <th>Estatus</th>
+                        <th>Acciones</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Daniel Ayala</td>
-                            <td>$50.000</td>
-                            <td>META ADS</td>
-                            <td><span class="estatus pendiente">Pendiente</span></td>
-                        </tr>
-                        <tr>
-                            <td>Benjamin Huerta</td>
-                            <td>$40.000</td>
-                            <td>TIKTOK ADS</td>
-                            <td><span class="estatus devuelto">Devuelto</span></td>
-                        </tr>
-                        <tr>
-                            <td>Benjamín Huerta</td>
-                            <td>$50.000</td>
-                            <td>WHATSAPP ADS</td>
-                            <td><span class="estatus en-progreso">En Progreso</span></td>
-                        </tr>
-                        <tr>
-                            <td>Roxana Navarro</td>
-                            <td>$100.000</td>
-                            <td>GOOGLE ADS</td>
-                            <td><span class="estatus pendiente">Pendiente</span></td>
-                        </tr>
-                        <tr>
-                            <td>Vicente Flores</td>
-                            <td>$75.000</td>
-                            <td>YOUTUBE ADS</td>
-                            <td><span class="estatus pendiente">Pendiente</span></td>
-                        </tr>
-                        <tr>
-                            <td>Julian Lesperguer</td>
-                            <td>$300.000</td>
-                            <td>LINKEDIN ADS</td>
-                            <td><span class="estatus en-progreso">En Progreso</span></td>
-                        </tr>
-                        <tr>
-                            <td>Claudio Echevarria</td>
-                            <td>$50.000</td>
-                            <td>REELS ADS</td>
-                            <td><span class="estatus entregado">CONFIRMADO</span></td>
-                        </tr>
-                        <tr>
-                            <td>Claudio Echevarria</td>
-                            <td>$350.000</td>
-                            <td>WHATSAPP ADS</td>
-                            <td><span class="estatus entregado">CONFIRMADO</span></td>
-                        </tr>
-                    </tbody>
+                    <tbody id="ventas-cuerpo"></tbody>
                 </table>
             </div>
             <!-- Fin Ultimas ventas -->
+
+            <dialog id="venta-dialogo" class="modal" aria-labelledby="venta-dialogo-titulo">
+                <form id="venta-form" novalidate>
+                    <h2 id="venta-dialogo-titulo">Nueva venta</h2>
+                    <div class="modal-campo">
+                        <label class="label" for="venta-cliente">Cliente</label>
+                        <select class="input" id="venta-cliente" name="clienteId"></select>
+                        <p class="campo-error" id="venta-error-cliente" hidden></p>
+                    </div>
+                    <div class="modal-campo">
+                        <label class="label" for="venta-precio">Precio (CLP)</label>
+                        <input class="input" type="number" id="venta-precio" name="precio" min="1" step="1">
+                        <p class="campo-error" id="venta-error-precio" hidden></p>
+                    </div>
+                    <div class="modal-campo">
+                        <label class="label" for="venta-servicio">Servicio</label>
+                        <select class="input" id="venta-servicio" name="servicio">
+                            <option value="META ADS">META ADS</option>
+                            <option value="TIKTOK ADS">TIKTOK ADS</option>
+                            <option value="WHATSAPP ADS">WHATSAPP ADS</option>
+                            <option value="GOOGLE ADS">GOOGLE ADS</option>
+                            <option value="YOUTUBE ADS">YOUTUBE ADS</option>
+                            <option value="LINKEDIN ADS">LINKEDIN ADS</option>
+                            <option value="REELS ADS">REELS ADS</option>
+                        </select>
+                        <p class="campo-error" id="venta-error-servicio" hidden></p>
+                    </div>
+                    <div class="modal-campo">
+                        <label class="label" for="venta-estatus">Estatus</label>
+                        <select class="input" id="venta-estatus" name="estatus">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="En Progreso">En Progreso</option>
+                            <option value="Devuelto">Devuelto</option>
+                            <option value="Confirmado">Confirmado</option>
+                        </select>
+                        <p class="campo-error" id="venta-error-estatus" hidden></p>
+                    </div>
+                    <p class="campo-error" id="venta-error-general" hidden></p>
+                    <div class="modal-acciones">
+                        <button type="button" class="btn" id="venta-cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="venta-guardar">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </dialog>
+
+            <dialog id="confirmar-dialogo" class="modal" aria-labelledby="confirmar-titulo">
+                <form method="dialog">
+                    <h2 id="confirmar-titulo">Confirmar eliminación</h2>
+                    <p class="estado-detalle" id="confirmar-mensaje"></p>
+                    <div class="modal-acciones">
+                        <button type="submit" class="btn" value="cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" value="confirmar">Eliminar</button>
+                    </div>
+                </form>
+            </dialog>
             <!-- Soporte -->
             <div class="nuevos-clientes">
                 <div class="header">
@@ -132,6 +144,7 @@
             <script type="module" src="js/index.js"></script>
 
     <script type="module" src="/js/guard.js"></script>
+    <script type="module" src="/js/ventas.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 

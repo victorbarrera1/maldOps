@@ -11,33 +11,43 @@
 
 <body>
     <div class="formulario">
-        <h1> Regístrarse</h1>
-        <form action="index.html">
+        <h1> Regístrate</h1>
+        <form id="form-registro" novalidate>
             <div class="username">
-                <input type="text" required>
-                <label> Nombre de usuario</label>
+                <input type="text" id="nombre" name="nombre" placeholder=" " autocomplete="name" required
+                    aria-describedby="error-nombre registro-error">
+                <label for="nombre"> Nombre de usuario</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-nombre" hidden></p>
             <div class="correo">
-                <input type="text" required>
-                <label> Mail</label>
+                <input type="email" id="correo" name="correo" placeholder=" " autocomplete="email" required
+                    aria-describedby="error-correo registro-error">
+                <label for="correo"> Mail</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-correo" hidden></p>
             <div class="password">
-                <input type="password" required>
-                <label> Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" placeholder=" " autocomplete="new-password"
+                    required aria-describedby="error-contrasena registro-error">
+                <label for="contrasena"> Contraseña</label>
             </div>
-            <div class="confirm password">
-                <input type="password" required>
-                <label> Confirmar Contraseña</label>
+            <p class="campo-error campo-error-campo" id="error-contrasena" hidden></p>
+            <div class="password">
+                <input type="password" id="confirmar-contrasena" name="confirmarContrasena" placeholder=" "
+                    autocomplete="new-password" required
+                    aria-describedby="error-confirmar registro-error">
+                <label for="confirmar-contrasena"> Confirmar Contraseña</label>
             </div>
+            <p class="campo-error campo-error-campo" id="error-confirmar" hidden></p>
+            <p class="login-estado" id="registro-estado" role="status" aria-live="polite"></p>
+            <div class="campo-error" id="registro-error" role="alert" hidden></div>
             <input type="submit" value="Registrarse">
         </form>
+        <div class="registro">
+            <p>¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a></p>
+        </div>
     </div>
-    <script>
-        document.querySelector('form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            window.location.href = 'index.html';
-        });
-    </script>
+
+    <script type="module" src="/js/registro.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 

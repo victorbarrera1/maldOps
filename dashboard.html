@@ -17,160 +17,87 @@
         <div class="container">
             <div id="nav-root"></div>
 
-            <!-- cards -->
-            <div class="cards">
-                <div class="card">
-                    <div>
-                        <span class="card-numeros">2.345</span>
-                        <span class="card-nombre">Visitas por AD</span>
+            <div id="dashboard-estado"></div>
+
+            <div id="dashboard-contenido" hidden>
+                <!-- cards -->
+                <div class="cards">
+                    <div class="card">
+                        <div>
+                            <span class="card-numeros" id="dashboard-clientes">—</span>
+                            <span class="card-nombre">Clientes</span>
+                        </div>
+                        <div class="card-icono">
+                            <ion-icon name="people"></ion-icon>
+                        </div>
                     </div>
-                    <div class="card-icono">
-                        <ion-icon name="eye"></ion-icon>
+                    <div class="card">
+                        <div>
+                            <span class="card-numeros" id="dashboard-ventas">—</span>
+                            <span class="card-nombre">Ventas obtenidas</span>
+                        </div>
+                        <div class="card-icono">
+                            <ion-icon name="trending-up"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <span class="card-numeros" id="dashboard-ganancias">—</span>
+                            <span class="card-nombre">Ganancias</span>
+                        </div>
+                        <div class="card-icono">
+                            <ion-icon name="cash"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <span class="card-numeros" id="dashboard-ticket">—</span>
+                            <span class="card-nombre">Ticket promedio</span>
+                        </div>
+                        <div class="card-icono">
+                            <ion-icon name="receipt"></ion-icon>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div>
-                        <span class="card-numeros">1.342</span>
-                        <span class="card-nombre">Ventas obtenidas</span>
+                <!-- fin cards -->
+
+                <!-- detalles -->
+                <div class="detalles">
+                    <!-- Órdenes Recientes -->
+                    <div class="ordenes-recientes">
+                        <div class="header">
+                            <h2>Ultimas ventas de Campañas</h2>
+                            <a href="ventas.html" class="boton">Ver todas</a>
+                        </div>
+                        <table id="dashboard-ventas-tabla" hidden>
+                            <thead>
+                                <th>Cliente</th>
+                                <th>Precio</th>
+                                <th>Servicio</th>
+                                <th>Estatus</th>
+                            </thead>
+                            <tbody id="dashboard-ventas-cuerpo"></tbody>
+                        </table>
                     </div>
-                    <div class="card-icono">
-                        <ion-icon name="trending-up"></ion-icon>
+                    <!-- Fin Órdenes Recientes -->
+
+                    <!-- Nuevos Clientes -->
+                    <div class="nuevos-clientes">
+                        <div class="header">
+                            <h2>Clientes</h2>
+                        </div>
+                        <table id="dashboard-clientes-tabla" hidden>
+                            <thead>
+                                <th>Nombre</th>
+                                <th>Estatus</th>
+                            </thead>
+                            <tbody id="dashboard-clientes-cuerpo"></tbody>
+                        </table>
                     </div>
+                    <!-- Fin Nuevos Clientes -->
                 </div>
-                <div class="card">
-                    <div>
-                        <span class="card-numeros">+999</span>
-                        <span class="card-nombre">Mensajes</span>
-                    </div>
-                    <div class="card-icono">
-                        <ion-icon name="mail"></ion-icon>
-                    </div>
-                </div>
-                <div class="card">
-                    <div>
-                        <span class="card-numeros">$6.879.350</span>
-                        <span class="card-nombre">Ganancias</span>
-                    </div>
-                    <div class="card-icono">
-                        <ion-icon name="cash"></ion-icon>
-                    </div>
-                </div>
+                <!-- Fin Detalles -->
             </div>
-            <!-- fin cards -->
-
-            <!-- detalles -->
-            <div class="detalles">
-                <!-- Órdenes Recientes -->
-                <div class="ordenes-recientes">
-                    <div class="header">
-                        <h2>Ultimas ventas de Campañas</h2>
-                        <a href="#" class="boton">Ver todos</a>
-                    </div>
-                    <table>
-                        <thead>
-                            <th>Cliente</th>
-                            <th>Precio</th>
-                            <th>Servicio</th>
-                            <th>Estatus</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Daniel Ayala</td>
-                                <td>$50.000</td>
-                                <td>META ADS</td>
-                                <td><span class="estatus pendiente">Pendiente</span></td>
-                            </tr>
-                            <tr>
-                                <td>Benjamin Huerta</td>
-                                <td>$40.000</td>
-                                <td>TIKTOK ADS</td>
-                                <td><span class="estatus devuelto">Devuelto</span></td>
-                            </tr>
-                            <tr>
-                                <td>Benjamín Huerta</td>
-                                <td>$50.000</td>
-                                <td>WHATSAPP ADS</td>
-                                <td><span class="estatus en-progreso">En Progreso</span></td>
-                            </tr>
-                            <tr>
-                                <td>Roxana Navarro</td>
-                                <td>$100.000</td>
-                                <td>GOOGLE ADS</td>
-                                <td><span class="estatus pendiente">Pendiente</span></td>
-                            </tr>
-                            <tr>
-                                <td>Vicente Flores</td>
-                                <td>$75.000</td>
-                                <td>YOUTUBE ADS</td>
-                                <td><span class="estatus pendiente">Pendiente</span></td>
-                            </tr>
-                            <tr>
-                                <td>Julian Lesperguer</td>
-                                <td>$300.000</td>
-                                <td>LINKEDIN ADS</td>
-                                <td><span class="estatus en-progreso">En Progreso</span></td>
-                            </tr>
-                            <tr>
-                                <td>Claudio Echevarria</td>
-                                <td>$50.000</td>
-                                <td>REELS ADS</td>
-                                <td><span class="estatus entregado">CONFIRMADO</span></td>
-                            </tr>
-                            <tr>
-                                <td>Claudio Echevarria</td>
-                                <td>$350.000</td>
-                                <td>WHATSAPP ADS</td>
-                                <td><span class="estatus entregado">CONFIRMADO</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Fin Órdenes Recientes -->
-
-                <!-- Nuevos Clientes -->
-                <div class="nuevos-clientes">
-                    <div class="header">
-                        <h2>Clientes</h2>
-                    </div>
-                    <table>
-                        <tr>
-
-                            <td>
-                                <h4>Josemanuel Rodriguez</h4>
-                            </td>
-                            <td>
-                                <a href="#"><ion-icon name="chatbubbles"></ion-icon></a>
-                                <a href="#"><ion-icon name="call"></ion-icon></a>
-                                <a href="#"><ion-icon name="mail"></ion-icon></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Martin Maldonado</h4>
-                            </td>
-                            <td>
-                                <a href="#"><ion-icon name="chatbubbles"></ion-icon></a>
-                                <a href="#"><ion-icon name="call"></ion-icon></a>
-                                <a href="#"><ion-icon name="mail"></ion-icon></a>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>
-                                <h4>Victor Barrera</h4>
-                            </td>
-                            <td>
-                                <a href="#"><ion-icon name="chatbubbles"></ion-icon></a>
-                                <a href="#"><ion-icon name="call"></ion-icon></a>
-                                <a href="#"><ion-icon name="mail"></ion-icon></a>
-                            </td>
-                        </tr>
-
-                    </table>
-                </div>
-                <!-- Fin Nuevos Clientes -->
-            </div>
-            <!-- Fin Detalles -->
         </div>
         <!-- Fin Dashboard -->
     </section>
@@ -182,6 +109,7 @@
     <script type="module" src="js/index.js"></script>
 
     <script type="module" src="/js/guard.js"></script>
+    <script type="module" src="/js/dashboard.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 
