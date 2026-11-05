@@ -33,7 +33,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 - [x] **A1.** Crear `public/mocks/{usuarios,clientes,ventas,preguntas}.json` con
   los ids ya definidos (`u-001`, `cli-001`…`cli-012`, `ven-001`…, `preg-001`…).
   Al menos 10 clientes y 15 ventas. Roles `admin`/`vendedor`.
-- [ ] **A2.** Crear `js/api/` con `respuesta.js` (formato
+- [x] **A2.** Crear `js/api/` con `respuesta.js` (formato
   `{ ok, status, data, error }`), `db.js` (copia `public/mocks` a
   `localStorage` la primera vez; lee y escribe ahí) y `servidor.js` (latencia
   aleatoria 300–800 ms, errores forzados, códigos 200/201/400/401/403/404/409/422/500).

@@ -21,3 +21,20 @@ crean acá y no en ramas separadas de Martin o Josemanuel.
 
 Verificación: los cuatro JSON parsean con `JSON.parse`; los conteos, ids,
 roles, servicios, estatus y relaciones `clienteId` son válidos.
+
+## A2 — Núcleo de la API simulada
+
+Se crearon `js/api/respuesta.js`, `js/api/db.js`, `js/api/sesion.js` y
+`js/api/servidor.js`.
+
+- `respuesta.js` centraliza `ok()` y `fallo()` con el formato
+  `{ ok, status, data, error, errores }`.
+- `db.js` copia los cuatro mocks a `localStorage` la primera vez, permite
+  reiniciar los datos y genera ids con `siguienteId()`.
+- `sesion.js` guarda solo los datos públicos del usuario.
+- `servidor.js` simula latencia de 300–800 ms, errores forzados con `?fallar`,
+  probabilidad de error configurable y los códigos 200/201/400/401/403/404/409/422/500.
+
+Verificación: prueba de humo en Node con `localStorage` y `fetch` simulados;
+login, listados, CRUD, validaciones 422, conflicto 409, permisos 403, sesión 401
+y fallo forzado 500 devolvieron el status esperado.
