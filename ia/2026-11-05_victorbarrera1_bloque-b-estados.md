@@ -39,3 +39,20 @@ Verificación en `npm run dev`: 15 ventas y contador; primera fila «Daniel
 Ayala / $50.000 / META ADS / PENDIENTE»; con la base sin ventas aparece el
 estado vacío; con `ventas.html?fallar` aparece el error y «Reintentar»;
 consola sin errores. `npm run build` pasa.
+
+## B6.3 — Dashboard
+
+- `dashboard.html`: se reemplazaron las tarjetas y tablas fijas por
+  `#dashboard-estado` y `#dashboard-contenido` (oculto durante la carga).
+- Las tarjetas ahora muestran datos reales de la API: clientes, ventas,
+  ganancias y ticket promedio.
+- `js/dashboard.js`: carga `api.clientes.listar()` y `api.ventas.listar()` en
+  paralelo; pinta las últimas 8 ventas y los primeros 5 clientes con sus
+  badges. Estado vacío si no hay clientes ni ventas; error con «Reintentar» si
+  falla alguna llamada; en 401 usa `irAlLogin()`.
+- El enlace «Ver todas» apunta a `ventas.html`.
+
+Verificación en `npm run dev`: 12 clientes, 15 ventas, ganancias
+`$1.825.000`, ticket `$121.667`, 8 ventas y 5 clientes en las listas; con la
+base vacía aparece el estado vacío; con `dashboard.html?fallar` aparece el
+error y «Reintentar»; consola sin errores. `npm run build` pasa.
