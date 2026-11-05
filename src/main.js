@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs'
-import '../css/app.css'
+import './css/app.css'
 import api from './api.js'
 import { montarNav } from './nav.js'
 import { registrarStores } from './store.js'

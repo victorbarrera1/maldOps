@@ -9,3 +9,4 @@
 | 2026-10-27 | @victorbarrera1 | Base Tailwind CSS v4 + Alpine.js | [ver](2026-10-27_victorbarrera1_base-tailwind-alpine.md) |
 | 2026-11-05 | @victorbarrera1 | Bloque A: capa de datos simulada | [ver](2026-11-05_victorbarrera1_bloque-a-capa-datos.md) |
 | 2026-11-05 | @victorbarrera1 | Bloque B: estados de interfaz | [ver](2026-11-05_victorbarrera1_bloque-b-estados.md) |
+| 2026-11-05 | @victorbarrera1 | Bloque C: estructura del repositorio | [ver](2026-11-05_victorbarrera1_bloque-c-estructura.md) |

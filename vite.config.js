@@ -5,7 +5,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 const root = import.meta.dirname
 
-// Solo los .html de la raíz; el nombre del archivo (sin extensión) es la clave.
+// Los .html siguen en la raíz; el código vive en src/ y los estáticos en public/.
+// El nombre del archivo (sin extensión) es la clave de cada página del build.
 const htmlFiles = readdirSync(root, { withFileTypes: true })
     .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))
     .map((entry) => entry.name)
@@ -21,6 +22,7 @@ const input = Object.fromEntries(
 
 export default defineConfig({
     plugins: [tailwindcss()],
+    publicDir: 'public',
     build: {
         // Vite 8 usa Rolldown: la opción vigente es rolldownOptions.
         rolldownOptions: {
