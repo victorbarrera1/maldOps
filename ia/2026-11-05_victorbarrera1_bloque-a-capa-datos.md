@@ -38,3 +38,13 @@ Se crearon `js/api/respuesta.js`, `js/api/db.js`, `js/api/sesion.js` y
 Verificación: prueba de humo en Node con `localStorage` y `fetch` simulados;
 login, listados, CRUD, validaciones 422, conflicto 409, permisos 403, sesión 401
 y fallo forzado 500 devolvieron el status esperado.
+
+## A3 — Fachada `js/api.js`
+
+Se creó `js/api.js` con `auth`, `clientes`, `ventas`, `preguntas` y
+`simulador`. Todos los métodos son `async` y devuelven el mismo formato de
+respuesta. Las vistas solo necesitan importar este archivo.
+
+Verificación: la fachada se importó en Node con los mocks servidos desde
+`public/`; login 200, 12 clientes, 15 ventas, 2 ventas de `cli-005`, 8 preguntas
+y perfil del usuario autenticado.

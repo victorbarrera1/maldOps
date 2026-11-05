@@ -37,7 +37,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
   `{ ok, status, data, error }`), `db.js` (copia `public/mocks` a
   `localStorage` la primera vez; lee y escribe ahí) y `servidor.js` (latencia
   aleatoria 300–800 ms, errores forzados, códigos 200/201/400/401/403/404/409/422/500).
-- [ ] **A3.** Crear `js/api.js` como única puerta con:
+- [x] **A3.** Crear `js/api.js` como única puerta con:
   `auth.iniciarSesion`, `auth.registrar`, `auth.cerrarSesion`,
   `clientes.listar/obtener/crear/actualizar/eliminar`,
   `ventas.listar/obtener/crear/actualizar/eliminar/deCliente` y
