@@ -62,7 +62,7 @@ Una vista por tarea:
   `api.js`.
 - [x] **B6.5.** `configuracion.html`: cargando, vacío y error con «Reintentar»,
   usando `api.js`.
-- [ ] **B6.6.** `index.html` (login): estados de carga y error de la API, con
+- [x] **B6.6.** `index.html` (login): estados de carga y error de la API, con
   «Reintentar» cuando corresponda.
 - [ ] **B6.7.** `registro.html`: estados de carga y error de la API, con
   «Reintentar» cuando corresponda.

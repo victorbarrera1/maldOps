@@ -88,3 +88,21 @@ Verificación en `npm run dev`: nombre «Victor Barrera», correo
 configuración» actualiza `maldops.simulador.v1`; con
 `configuracion.html?fallar` aparece el error y «Reintentar»; consola sin
 errores. `npm run build` pasa.
+
+## B6.6 — Login
+
+- `index.html`: se agregó `#login-estado` (`role="status"`) para el texto
+  «Verificando credenciales…» y `#login-error` pasó de `<p>` a `<div>` para
+  poder incluir el botón «Reintentar».
+- `css/login.css`: estilos del estado de carga, del mensaje y del botón de
+  reintento.
+- `js/login.js`: el envío se centralizó en `enviar()`, que deshabilita el botón
+  y marca `aria-busy` mientras espera. Un 422 resalta el campo correspondiente,
+  un 401 muestra «Correo o contraseña incorrectos.» sin reintento y un 500 o un
+  error de red muestran «Reintentar». El reintento conserva los valores del
+  formulario y vuelve a llamar a la API.
+
+Verificación en `npm run dev`: contraseña incorrecta muestra el 401 sin botón;
+`index.html?fallar` muestra el 500 con «Reintentar»; al quitar `?fallar` y
+pulsar «Reintentar» inicia sesión y vuelve a `clientes.html`; consola sin
+errores. `npm run build` pasa.
