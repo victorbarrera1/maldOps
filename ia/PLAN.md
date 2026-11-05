@@ -64,7 +64,7 @@ Una vista por tarea:
   usando `api.js`.
 - [x] **B6.6.** `index.html` (login): estados de carga y error de la API, con
   «Reintentar» cuando corresponda.
-- [ ] **B6.7.** `registro.html`: estados de carga y error de la API, con
+- [x] **B6.7.** `registro.html`: estados de carga y error de la API, con
   «Reintentar» cuando corresponda.
 - [ ] **B7.** Validación por campo en login y registro con mensajes en español
   (usa los 422 de la API).

@@ -106,3 +106,19 @@ Verificación en `npm run dev`: contraseña incorrecta muestra el 401 sin botón
 `index.html?fallar` muestra el 500 con «Reintentar»; al quitar `?fallar` y
 pulsar «Reintentar» inicia sesión y vuelve a `clientes.html`; consola sin
 errores. `npm run build` pasa.
+
+## B6.7 — Registro
+
+- `registro.html`: se reemplazó el formulario sin ids y el script inline por un
+  formulario con `#form-registro`, campos `nombre`, `correo`, `contrasena` y
+  `confirmar-contrasena`, más `#registro-estado` y `#registro-error`.
+- `js/registro.js`: llama a `api.auth.registrar()`, deshabilita el botón y
+  muestra «Creando tu cuenta…» mientras espera. Un 422 o 409 muestra el mensaje
+  de la API sin reintento; un 500 o un error de red muestran «Reintentar». Al
+  crear la cuenta, la API inicia sesión y la vista va a `dashboard.html`.
+
+Verificación en `npm run dev`: el envío vacío muestra «Revisa los datos del
+formulario.»; con datos válidos se crea `u-005` (rol `vendedor`), el menú
+muestra «Prueba B6» y la vista va al dashboard; con `registro.html?fallar`
+aparece el 500 con «Reintentar». Después se restablecieron los mocks y se
+volvió a entrar como admin. Consola sin errores. `npm run build` pasa.
