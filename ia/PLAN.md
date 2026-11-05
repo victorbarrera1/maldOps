@@ -21,7 +21,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 | Bloque | Rama | PR | Estado |
 |---|---|---|---|
 | A — Capa de datos | `feat/bloque-a-capa-datos` | [#8](https://github.com/victorbarrera1/maldOps/pull/8) | Completado |
-| B — Estados de interfaz | pendiente | pendiente | Pendiente |
+| B — Estados de interfaz | `feat/bloque-b-estados` | pendiente | En curso |
 | C — Estructura del repo | pendiente | pendiente | Pendiente |
 | D — README | pendiente | pendiente | Pendiente |
 | E — Cierre | pendiente | pendiente | Pendiente |
@@ -52,7 +52,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 
 Una vista por tarea:
 
-- [ ] **B6.1.** `clientes.html`: cargando (esqueleto), vacío y error con botón
+- [x] **B6.1.** `clientes.html`: cargando (esqueleto), vacío y error con botón
   «Reintentar», usando `api.js`.
 - [ ] **B6.2.** `ventas.html`: cargando (esqueleto), vacío y error con botón
   «Reintentar», usando `api.js`.

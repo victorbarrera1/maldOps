@@ -19,48 +19,15 @@
             <!-- Clientes activos -->
             <div class="ordenes-recientes">
                 <div class="header">
-                    <h2>Clientes activos</h2>
-                    <a href="#" class="boton">Ver todos</a>
+                    <h2>Clientes <span id="clientes-total" class="badge"></span></h2>
                 </div>
-                <table>
+                <div id="clientes-estado"></div>
+                <table id="clientes-tabla" hidden>
                     <thead>
                         <th>Nombre</th>
                         <th>Estatus</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Carlos Leoui</td>
-                            <td><span class="estatus entregado">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td>Matias Sepulveda</td>
-                            <td><span class="estatus entregado">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td>Benjamin Huerta</td>
-                            <td><span class="estatus devuelto">Inactivo</span></td>
-                        </tr>
-                        <tr>
-                            <td>Roxana Navarro</td>
-                            <td><span class="estatus devuelto">Inactivo</span></td>
-                        </tr>
-                        <tr>
-                            <td>Daniel Ayala</td>
-                            <td><span class="estatus entregado">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td>Vicente Flores</td>
-                            <td><span class="estatus devuelto">Inactivo</span></td>
-                        </tr>
-                        <tr>
-                            <td>Julian Lesperguer</td>
-                            <td><span class="estatus entregado">Activo</span></td>
-                        </tr>
-                        <tr>
-                            <td>Claudio Echevarria</td>
-                            <td><span class="estatus devuelto">Inactivo</span></td>
-                        </tr>
-                    </tbody>
+                    <tbody id="clientes-cuerpo"></tbody>
                 </table>
             </div>
             <!-- Fin Clientes activos -->
@@ -71,6 +38,7 @@
             <script type="module" src="js/index.js"></script>
 
     <script type="module" src="/js/guard.js"></script>
+    <script type="module" src="/js/clientes.js"></script>
     <script type="module" src="/js/main.js"></script>
 </body>
 
