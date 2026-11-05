@@ -1,0 +1,14 @@
+[
+  { "id": "cli-001", "nombre": "Carlos Leoui", "estatus": "Activo" },
+  { "id": "cli-002", "nombre": "Matias Sepulveda", "estatus": "Activo" },
+  { "id": "cli-003", "nombre": "Benjamin Huerta", "estatus": "Inactivo" },
+  { "id": "cli-004", "nombre": "Roxana Navarro", "estatus": "Inactivo" },
+  { "id": "cli-005", "nombre": "Daniel Ayala", "estatus": "Activo" },
+  { "id": "cli-006", "nombre": "Vicente Flores", "estatus": "Inactivo" },
+  { "id": "cli-007", "nombre": "Julian Lesperguer", "estatus": "Activo" },
+  { "id": "cli-008", "nombre": "Claudio Echevarria", "estatus": "Inactivo" },
+  { "id": "cli-009", "nombre": "Ignacio Torres", "estatus": "Activo" },
+  { "id": "cli-010", "nombre": "Fernanda Soto", "estatus": "Inactivo" },
+  { "id": "cli-011", "nombre": "Pablo Herrera", "estatus": "Activo" },
+  { "id": "cli-012", "nombre": "Camila Rojas", "estatus": "Activo" }
+]

@@ -30,7 +30,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 
 ### A. Capa de datos
 
-- [ ] **A1.** Crear `public/mocks/{usuarios,clientes,ventas,preguntas}.json` con
+- [x] **A1.** Crear `public/mocks/{usuarios,clientes,ventas,preguntas}.json` con
   los ids ya definidos (`u-001`, `cli-001`…`cli-012`, `ven-001`…, `preg-001`…).
   Al menos 10 clientes y 15 ventas. Roles `admin`/`vendedor`.
 - [ ] **A2.** Crear `js/api/` con `respuesta.js` (formato

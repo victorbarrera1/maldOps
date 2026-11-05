@@ -1,0 +1,30 @@
+[
+  {
+    "id": "u-001",
+    "nombre": "Victor Barrera",
+    "correo": "victor.barrera@mail.udp.cl",
+    "contrasena": "demo1234",
+    "rol": "admin"
+  },
+  {
+    "id": "u-002",
+    "nombre": "Josemanuel Rodríguez",
+    "correo": "josemanuel.rodriguez@mail.udp.cl",
+    "contrasena": "demo1234",
+    "rol": "vendedor"
+  },
+  {
+    "id": "u-003",
+    "nombre": "Martin Maldonado",
+    "correo": "martin.maldonado@mail.udp.cl",
+    "contrasena": "demo1234",
+    "rol": "vendedor"
+  },
+  {
+    "id": "u-004",
+    "nombre": "Camila Rojas",
+    "correo": "camila.rojas@gmail.com",
+    "contrasena": "demo1234",
+    "rol": "vendedor"
+  }
+]

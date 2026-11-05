@@ -1,0 +1,42 @@
+[
+  {
+    "id": "preg-001",
+    "pregunta": "¿Cómo creo una campaña?",
+    "respuesta": "Dirígete a la sección \"Campañas\" y sigue los pasos para crear una."
+  },
+  {
+    "id": "preg-002",
+    "pregunta": "¿Cuáles son los medios de pago?",
+    "respuesta": "Puedes pagar con tarjeta de crédito, débito, transferencia bancaria o PayPal."
+  },
+  {
+    "id": "preg-003",
+    "pregunta": "¿Cómo puedo contactar con soporte?",
+    "respuesta": "Puedes contactar con soporte a través del chat en línea, correo electrónico o número de WhatsApp."
+  },
+  {
+    "id": "preg-004",
+    "pregunta": "¿Puedo cancelar una campaña?",
+    "respuesta": "Sí, puedes cancelar una campaña en cualquier momento desde tu panel de Campañas."
+  },
+  {
+    "id": "preg-005",
+    "pregunta": "¿Cuál es el tiempo de entrega?",
+    "respuesta": "El tiempo de entrega varía según el tipo de campaña. Puede tomar desde unas horas hasta varios días."
+  },
+  {
+    "id": "preg-006",
+    "pregunta": "¿Puedo solicitar un reembolso?",
+    "respuesta": "Depende de la campaña y la situación. Contacta con soporte para más información."
+  },
+  {
+    "id": "preg-007",
+    "pregunta": "¿Qué métricas puedo revisar en el dashboard?",
+    "respuesta": "Visitas por anuncio, ventas obtenidas, mensajes y ganancias de las campañas activas."
+  },
+  {
+    "id": "preg-008",
+    "pregunta": "¿Cómo actualizo los datos de mi cuenta?",
+    "respuesta": "Ingresa a Configuración y edita tu nombre, correo o contraseña."
+  }
+]
