@@ -69,3 +69,22 @@ error y «Reintentar»; consola sin errores. `npm run build` pasa.
 Verificación en `npm run dev`: 8 preguntas y contador; con la base sin
 preguntas aparece el estado vacío; con `ayuda.html?fallar` aparece el error y
 «Reintentar»; consola sin errores. `npm run build` pasa.
+
+## B6.5 — Configuración
+
+- `configuracion.html`: el simulador ahora usa `#simulador-estado` para los
+  estados y `#simulador-contenido` para el formulario. Los campos de nombre y
+  correo de la cuenta tienen ids para reflejar el perfil.
+- `js/configuracion.js`: carga en paralelo `api.simulador.obtenerConfiguracion()`
+  y `api.auth.perfil()`. Muestra esqueleto mientras espera, estado vacío si no
+  hay configuración guardada, error con «Reintentar» si falla alguna llamada y
+  en 401 usa `irAlLogin()`. Al cargar, completa nombre, correo, latencia y
+  probabilidad.
+- Se mantienen las acciones de guardar, simular el siguiente error y
+  restablecer los datos.
+
+Verificación en `npm run dev`: nombre «Victor Barrera», correo
+`victor.barrera@mail.udp.cl`, latencia y probabilidad guardadas; «Guardar
+configuración» actualiza `maldops.simulador.v1`; con
+`configuracion.html?fallar` aparece el error y «Reintentar»; consola sin
+errores. `npm run build` pasa.

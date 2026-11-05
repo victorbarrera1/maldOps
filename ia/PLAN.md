@@ -60,7 +60,7 @@ Una vista por tarea:
   usando `api.js`.
 - [x] **B6.4.** `ayuda.html`: cargando, vacío y error con «Reintentar», usando
   `api.js`.
-- [ ] **B6.5.** `configuracion.html`: cargando, vacío y error con «Reintentar»,
+- [x] **B6.5.** `configuracion.html`: cargando, vacío y error con «Reintentar»,
   usando `api.js`.
 - [ ] **B6.6.** `index.html` (login): estados de carga y error de la API, con
   «Reintentar» cuando corresponda.
