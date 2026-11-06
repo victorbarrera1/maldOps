@@ -1,6 +1,11 @@
 import Alpine from 'alpinejs'
 import './css/app.css'
 import './iconos.js'
+// La guardia se importa antes del menú para que `window.__sesion` exista
+// cuando `montarNav()` lea el nombre y el rol. En el build, los módulos de una
+// página se agrupan en un solo chunk y el orden de los <script> del HTML no
+// garantiza que guard.js se ejecute primero.
+import './guard.js'
 import api from './api.js'
 import { montarNav } from './nav.js'
 import { registrarStores } from './store.js'
