@@ -4,7 +4,10 @@
  * Se activa con `VITE_API_MODO=http`. Habla con el backend definido en
  * `VITE_API_URL` y normaliza todas las respuestas al mismo formato que la capa
  * simulada:
- * { ok, status, data, error, errores }
+ * { ok, status, data, error, errores, meta }
+ *
+ * Acepta el formato del backend real ({ data, meta } / { error, errores }) y
+ * también respuestas que ya vengan normalizadas con `ok`.
  *
  * Las vistas nunca importan este archivo: siempre pasan por `src/api.js`.
  */
@@ -20,12 +23,12 @@ function url(ruta) {
     return `${BASE_URL}${ruta}`
 }
 
-function ok(data, status = 200) {
-    return { ok: true, status, data, error: null, errores: null }
+function ok(data, status = 200, meta = null) {
+    return { ok: true, status, data, error: null, errores: null, meta }
 }
 
 function fallo(error, status = 500, errores = null) {
-    return { ok: false, status, data: null, error, errores }
+    return { ok: false, status, data: null, error, errores, meta: null }
 }
 
 function normalizar(respuesta, cuerpo) {
@@ -36,10 +39,15 @@ function normalizar(respuesta, cuerpo) {
             data: cuerpo.data ?? null,
             error: cuerpo.error ?? null,
             errores: cuerpo.errores ?? null,
+            meta: cuerpo.meta ?? null,
         }
     }
 
     if (respuesta.ok) {
+        if (cuerpo && typeof cuerpo === 'object' && 'data' in cuerpo) {
+            return ok(cuerpo.data ?? null, respuesta.status, cuerpo.meta ?? null)
+        }
+
         return ok(cuerpo, respuesta.status)
     }
 
