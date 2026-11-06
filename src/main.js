@@ -8,11 +8,8 @@ import './iconos.js'
 import './guard.js'
 import api from './api.js'
 import { montarNav } from './nav.js'
-import { registrarStores } from './store.js'
 
 window.Alpine = Alpine
-
-registrarStores(Alpine)
 
 // El menú se monta antes de Alpine.start() para que Alpine lo inicialice.
 montarNav()

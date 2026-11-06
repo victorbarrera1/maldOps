@@ -1,3 +1,13 @@
+/**
+ * Ruta a un archivo de `public/` respetando la base de Vite, para que las
+ * imágenes carguen también si la app se publica en una subcarpeta.
+ */
+function rutaPublica(ruta) {
+    const base = (import.meta.env && import.meta.env.BASE_URL) || '/'
+
+    return `${base.endsWith('/') ? base : `${base}/`}${ruta}`
+}
+
 const ENLACES = [
     { texto: 'Dashboard', href: 'dashboard.html', icono: 'home-outline' },
     { texto: 'Clientes', href: 'clientes.html', icono: 'person-outline' },
@@ -109,7 +119,7 @@ function crearBarra(sesion) {
 
     const avatar = document.createElement('img')
     avatar.className = 'nav-avatar'
-    avatar.src = '/img/profile.png'
+    avatar.src = rutaPublica('img/profile.png')
     avatar.alt = ''
 
     const datos = document.createElement('div')
@@ -145,7 +155,7 @@ function crearMenu(activo) {
     marca.setAttribute('aria-label', 'MaldOps')
 
     const logo = document.createElement('img')
-    logo.src = '/img/logo-maldops.png'
+    logo.src = rutaPublica('img/logo-maldops.png')
     logo.alt = ''
     marca.append(logo)
     menu.append(marca)

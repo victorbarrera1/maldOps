@@ -240,15 +240,13 @@ maldOps/
 │   ├── guard.js               # Protección de vistas privadas
 │   ├── iconos.js              # Ionicons desde npm (solo los iconos usados)
 │   ├── ui.js                  # Estados, badges, toasts y confirmaciones
-│   ├── index.js               # Compatibilidad con el menú antiguo
 │   ├── login.js               # Login con validación por campo
 │   ├── registro.js            # Registro con validación por campo
 │   ├── dashboard.js           # Métricas y listados del dashboard
 │   ├── clientes.js            # Vista de clientes
 │   ├── ventas.js              # Vista de ventas
 │   ├── ayuda.js               # Vista de ayuda
-│   ├── configuracion.js       # Vista de configuración
-│   └── store.js               # Store de sesión de Alpine
+│   └── configuracion.js       # Vista de configuración
 └── ia/
     ├── README.md              # Índice de uso de IA
     └── PLAN.md                # Checklist y estado de la entrega

@@ -1,4 +1,8 @@
 node_modules
 dist
 .DS_Store
-por hacer
+
+# Variables de entorno locales (la plantilla .env.example sí se versiona)
+.env
+.env.*
+!.env.example
