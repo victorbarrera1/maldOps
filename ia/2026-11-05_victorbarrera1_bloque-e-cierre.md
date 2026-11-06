@@ -3,7 +3,7 @@
 - **Fecha:** 2026-11-05
 - **Integrante:** @victorbarrera1
 - **Rama:** `feat/bloque-e-cierre`
-- **PR:** pendiente
+- **PR:** [#12](https://github.com/victorbarrera1/maldOps/pull/12)
 - **Prompt usado:** checklist de la Entrega 2, tarea E14 («Probar en
   `npm run build && npm run preview` todas las vistas, con y sin `?fallar`.
   Anotar en este archivo lo que falle»).

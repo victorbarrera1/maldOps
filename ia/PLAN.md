@@ -24,7 +24,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 | B — Estados de interfaz | `feat/bloque-b-estados` | [#9](https://github.com/victorbarrera1/maldOps/pull/9) | Completado |
 | C — Estructura del repo | `feat/bloque-c-estructura` | [#10](https://github.com/victorbarrera1/maldOps/pull/10) | Completado |
 | D — README | `feat/bloque-d-readme` | [#11](https://github.com/victorbarrera1/maldOps/pull/11) | Completado |
-| E — Cierre | `feat/bloque-e-cierre` | pendiente | En curso |
+| E — Cierre | `feat/bloque-e-cierre` | [#12](https://github.com/victorbarrera1/maldOps/pull/12) | Completado |
 
 ## Checklist
 
