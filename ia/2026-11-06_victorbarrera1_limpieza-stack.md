@@ -3,7 +3,7 @@
 - **Fecha:** 2026-11-06
 - **Integrante:** @victorbarrera1
 - **Rama:** `victorbarrera1/maldops-pr-review`
-- **PR:** pendiente
+- **PR:** [#13](https://github.com/victorbarrera1/maldOps/pull/13)
 - **Prompt usado:** revisión de los PR #8–#12 contra el checklist de la Entrega 2
   y luego «arréglalo», sobre los puntos flojos que dejó la revisión.
 
