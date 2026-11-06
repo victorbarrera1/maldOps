@@ -24,7 +24,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 | B — Estados de interfaz | `feat/bloque-b-estados` | [#9](https://github.com/victorbarrera1/maldOps/pull/9) | Completado |
 | C — Estructura del repo | `feat/bloque-c-estructura` | [#10](https://github.com/victorbarrera1/maldOps/pull/10) | Completado |
 | D — README | `feat/bloque-d-readme` | [#11](https://github.com/victorbarrera1/maldOps/pull/11) | Completado |
-| E — Cierre | pendiente | pendiente | Pendiente |
+| E — Cierre | `feat/bloque-e-cierre` | pendiente | En curso |
 
 ## Checklist
 
@@ -95,8 +95,35 @@ Una vista por tarea:
 
 ### E. Cierre
 
-- [ ] **E14.** Probar en `npm run build && npm run preview` todas las vistas,
+- [x] **E14.** Probar en `npm run build && npm run preview` todas las vistas,
   con y sin `?fallar`. Anotar en este archivo lo que falle.
+
+#### Resultado de E14
+
+Pruebas sobre `npm run build && npm run preview` (`http://localhost:4173`), con
+sesión `admin` (`victor.barrera@mail.udp.cl` / `demo1234`), con `vendedor`
+(`Prueba Nav`) y con una cuenta recién creada desde el registro.
+
+| Vista | Sin `?fallar` | `?fallar` (500) | `?fallar=404` |
+|---|---|---|---|
+| Dashboard | 12 clientes, 15 ventas, `$1.825.000` de ganancias, `$121.667` de ticket, 8 ventas recientes y 5 clientes | Error con «Reintentar» | Error 404 con «Reintentar» |
+| Clientes | 12 filas; 12 «Editar»; 12 «Eliminar» como admin y 0 como vendedor | Error con «Reintentar» | Error 404 con «Reintentar» |
+| Ventas | 15 filas; 15 «Editar»; 15 «Eliminar» como admin y 0 como vendedor | Error con «Reintentar» | Error 404 con «Reintentar» |
+| Ayuda | 8 preguntas | Error con «Reintentar» | Error 404 con «Reintentar» |
+| Configuración | Nombre y correo de la sesión, latencia `normal`, probabilidad `0` y simulador visible | Error con «Reintentar» | Error 404 con «Reintentar» |
+| Login | Entra al dashboard y el menú muestra el nombre y el rol | Error con «Reintentar»; al reintentar sin el parámetro entra al dashboard | — |
+| Registro | Crea una cuenta `vendedor` y entra al dashboard con el nombre en el menú | Error con «Reintentar»; al reintentar crea la cuenta y entra | — |
+
+- El guard sigue redirigiendo: sin sesión, `clientes.html` va a
+  `index.html?volver=clientes.html`.
+- Los 12 iconos del dashboard se resolvieron sin advertencias de Ionicons.
+- Consola del navegador sin errores en las vistas sin `?fallar`.
+
+**Fallo detectado y corregido:** en el build, el menú podía montarse antes de
+que `guard.js` estableciera `window.__sesion`, así que después del registro el
+nav mostraba «Usuario» / «Sin rol» aunque la sesión estuviera guardada.
+`main.js` ahora importa `./guard.js` antes de llamar a `montarNav()`. Se
+verificó con admin, con vendedor y con una cuenta nueva.
 
 ## Registro de bloqueos
 

@@ -11,3 +11,4 @@
 | 2026-11-05 | @victorbarrera1 | Bloque B: estados de interfaz | [ver](2026-11-05_victorbarrera1_bloque-b-estados.md) |
 | 2026-11-05 | @victorbarrera1 | Bloque C: estructura del repositorio | [ver](2026-11-05_victorbarrera1_bloque-c-estructura.md) |
 | 2026-11-05 | @victorbarrera1 | Bloque D: README de la entrega | [ver](2026-11-05_victorbarrera1_bloque-d-readme.md) |
+| 2026-11-05 | @victorbarrera1 | Bloque E: cierre y pruebas del build | [ver](2026-11-05_victorbarrera1_bloque-e-cierre.md) |
