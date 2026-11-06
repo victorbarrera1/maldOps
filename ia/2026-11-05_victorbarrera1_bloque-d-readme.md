@@ -3,7 +3,7 @@
 - **Fecha:** 2026-11-05
 - **Integrante:** @victorbarrera1
 - **Rama:** `feat/bloque-d-readme`
-- **PR:** pendiente
+- **PR:** [#11](https://github.com/victorbarrera1/maldOps/pull/11)
 - **Prompt usado:** checklist de la Entrega 2, tarea D13 («Reescribir `README.md`
   con descripción, integrantes, tecnologías, requisitos, instalación,
   credenciales, vistas, funcionalidades, capa de datos, formato del backend
