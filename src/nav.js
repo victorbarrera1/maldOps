@@ -109,7 +109,7 @@ function crearBarra(sesion) {
 
     const avatar = document.createElement('img')
     avatar.className = 'nav-avatar'
-    avatar.src = 'img/profile.png'
+    avatar.src = '/img/profile.png'
     avatar.alt = ''
 
     const datos = document.createElement('div')
@@ -145,7 +145,7 @@ function crearMenu(activo) {
     marca.setAttribute('aria-label', 'MaldOps')
 
     const logo = document.createElement('img')
-    logo.src = 'img/logo-maldops.png'
+    logo.src = '/img/logo-maldops.png'
     logo.alt = ''
     marca.append(logo)
     menu.append(marca)

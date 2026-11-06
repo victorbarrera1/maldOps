@@ -8,7 +8,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 - Se trabaja una tarea a la vez y cada tarea lleva su propio commit.
 - Se abre **un PR por bloque** (A, B, C, D y E), con la rama del bloque y los
   commits de sus tareas. No se acumulan bloques en una misma rama.
-- Las vistas solo llaman a `js/api.js` (o `src/api.js` después de C9). Nunca usan
+- Las vistas solo llaman a `src/api.js` (antes `js/api.js`). Nunca usan
   `fetch`, leen JSON o tocan `localStorage` directamente.
 - No se agregan frameworks nuevos. Solo Vite, módulos ES, Alpine y Tailwind.
 - Si una tarea exige editar archivos asignados a otro integrante y no hay
@@ -22,7 +22,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 |---|---|---|---|
 | A — Capa de datos | `feat/bloque-a-capa-datos` | [#8](https://github.com/victorbarrera1/maldOps/pull/8) | Completado |
 | B — Estados de interfaz | `feat/bloque-b-estados` | [#9](https://github.com/victorbarrera1/maldOps/pull/9) | Completado |
-| C — Estructura del repo | pendiente | pendiente | Pendiente |
+| C — Estructura del repo | `feat/bloque-c-estructura` | [#10](https://github.com/victorbarrera1/maldOps/pull/10) | Completado |
 | D — README | pendiente | pendiente | Pendiente |
 | E — Cierre | pendiente | pendiente | Pendiente |
 
@@ -73,14 +73,14 @@ Una vista por tarea:
 
 ### C. Estructura del repo
 
-- [ ] **C9.** Mover `js/` y `css/` a `src/`, `img/` a `public/img/`; actualizar
+- [x] **C9.** Mover `js/` y `css/` a `src/`, `img/` a `public/img/`; actualizar
   rutas y `vite.config.js` (todas las páginas como input). `npm run build` debe
   pasar.
-- [ ] **C10.** Crear `.env.example` con `VITE_API_MODO=mock` y `VITE_API_URL=`;
+- [x] **C10.** Crear `.env.example` con `VITE_API_MODO=mock` y `VITE_API_URL=`;
   crear `js/api/http.js` (fetch) que devuelva el mismo formato, elegido por
   `VITE_API_MODO`.
-- [ ] **C11.** Reemplazar el CDN de Ionicons por el paquete npm.
-- [ ] **C12.** Crear `ia/README.md` como índice de uso de IA.
+- [x] **C11.** Reemplazar el CDN de Ionicons por el paquete npm.
+- [x] **C12.** Crear `ia/README.md` como índice de uso de IA.
 
 ### D. README
 
