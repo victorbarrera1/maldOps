@@ -23,8 +23,6 @@ import {
     trendingUp,
 } from 'ionicons/icons'
 
-defineCustomElement()
-
 addIcons({
     'card-outline': cardOutline,
     cash,
@@ -39,3 +37,5 @@ addIcons({
     'settings-outline': settingsOutline,
     'trending-up': trendingUp,
 })
+
+defineCustomElement()
