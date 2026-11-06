@@ -48,3 +48,32 @@ un backend inexistente: el login mostró el error de conexión con «Reintentar�
 no guardó sesión. Los errores de CORS en consola son esperables al no existir el
 backend.
 
+## C11 — Ionicons desde npm
+
+- Se instaló `ionicons@8.1.0` y se quitó el CDN de `clientes.html`,
+  `ventas.html`, `dashboard.html`, `ayuda.html` y `configuracion.html`.
+- `src/iconos.js` registra el componente `<ion-icon>` con
+  `defineCustomElement` de `ionicons/components/ion-icon.js` (modo no perezoso,
+  sin cargas dinámicas) y registra con `addIcons` solo los 12 iconos que usa la
+  app: menú, búsqueda, los cinco del menú lateral, «cerrar sesión» y las cuatro
+  métricas del dashboard.
+- Los SVG se importan desde `ionicons/icons` y viajan dentro del bundle, así que
+  el build no depende de la red ni copia carpetas de assets.
+- `src/main.js` importa `./iconos.js`, por lo que todas las vistas comparten el
+  mismo registro.
+
+Verificación en `npm run dev`: los iconos del menú y del buscador se dibujan en
+las vistas privadas (`conSvg` completo en el shadow DOM) y no hay peticiones a
+`unpkg.com`; consola sin errores. `npm run build` pasa y el bundle contiene los
+12 SVG. En `npm run preview` el dashboard carga los 12 iconos registrados y
+tampoco hace peticiones externas.
+
+## C12 — Índice de IA
+
+- `ia/README.md` queda como índice: explica el propósito del registro y enlaza
+  cada archivo con fecha, integrante y tema.
+- Se agregaron las filas de los bloques A, B y C.
+
+Verificación: todos los enlaces del índice apuntan a archivos existentes en
+`ia/`.
+

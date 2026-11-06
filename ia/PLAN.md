@@ -79,8 +79,8 @@ Una vista por tarea:
 - [x] **C10.** Crear `.env.example` con `VITE_API_MODO=mock` y `VITE_API_URL=`;
   crear `js/api/http.js` (fetch) que devuelva el mismo formato, elegido por
   `VITE_API_MODO`.
-- [ ] **C11.** Reemplazar el CDN de Ionicons por el paquete npm.
-- [ ] **C12.** Crear `ia/README.md` como índice de uso de IA.
+- [x] **C11.** Reemplazar el CDN de Ionicons por el paquete npm.
+- [x] **C12.** Crear `ia/README.md` como índice de uso de IA.
 
 ### D. README
 
