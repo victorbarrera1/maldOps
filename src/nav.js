@@ -7,6 +7,17 @@ const ENLACES = [
 ]
 
 /**
+ * Arma la URL de un archivo de `public/` respetando el `base` de Vite.
+ * Así las imágenes siguen funcionando si la app se publica en una subcarpeta.
+ */
+export function rutaPublica(ruta) {
+    const base = (import.meta.env && import.meta.env.BASE_URL) || '/'
+    const prefijo = base.endsWith('/') ? base : `${base}/`
+
+    return `${prefijo}${String(ruta || '').replace(/^\/+/, '')}`
+}
+
+/**
  * Normaliza una ruta para comparar la página actual con los enlaces del menú.
  * Quita query/hash, barras finales y la extensión .html.
  */
@@ -109,7 +120,7 @@ function crearBarra(sesion) {
 
     const avatar = document.createElement('img')
     avatar.className = 'nav-avatar'
-    avatar.src = '/img/profile.png'
+    avatar.src = rutaPublica('img/profile.png')
     avatar.alt = ''
 
     const datos = document.createElement('div')
@@ -145,7 +156,7 @@ function crearMenu(activo) {
     marca.setAttribute('aria-label', 'MaldOps')
 
     const logo = document.createElement('img')
-    logo.src = '/img/logo-maldops.png'
+    logo.src = rutaPublica('img/logo-maldops.png')
     logo.alt = ''
     marca.append(logo)
     menu.append(marca)
