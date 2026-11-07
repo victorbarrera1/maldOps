@@ -4,8 +4,7 @@ dist
 
 # Variables de entorno locales (nunca subir URL o credenciales reales).
 .env
-.env.local
-.env.*.local
+.env.*
 
 # La plantilla sí se versiona.
 !.env.example

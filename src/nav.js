@@ -1,11 +1,3 @@
-const ENLACES = [
-    { texto: 'Dashboard', href: 'dashboard.html', icono: 'home-outline' },
-    { texto: 'Clientes', href: 'clientes.html', icono: 'person-outline' },
-    { texto: 'Ventas', href: 'ventas.html', icono: 'card-outline' },
-    { texto: 'Ayuda', href: 'ayuda.html', icono: 'information-circle-outline' },
-    { texto: 'Configuracion', href: 'configuracion.html', icono: 'settings-outline' },
-]
-
 /**
  * Arma la URL de un archivo de `public/` respetando el `base` de Vite.
  * Así las imágenes siguen funcionando si la app se publica en una subcarpeta.
@@ -16,6 +8,14 @@ export function rutaPublica(ruta) {
 
     return `${prefijo}${String(ruta || '').replace(/^\/+/, '')}`
 }
+
+const ENLACES = [
+    { texto: 'Dashboard', href: 'dashboard.html', icono: 'home-outline' },
+    { texto: 'Clientes', href: 'clientes.html', icono: 'person-outline' },
+    { texto: 'Ventas', href: 'ventas.html', icono: 'card-outline' },
+    { texto: 'Ayuda', href: 'ayuda.html', icono: 'information-circle-outline' },
+    { texto: 'Configuracion', href: 'configuracion.html', icono: 'settings-outline' },
+]
 
 /**
  * Normaliza una ruta para comparar la página actual con los enlaces del menú.

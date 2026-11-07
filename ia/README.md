@@ -15,4 +15,5 @@
 | 2026-11-05 | @victorbarrera1 | Bloque C: estructura del repositorio | [ver](2026-11-05_victorbarrera1_bloque-c-estructura.md) |
 | 2026-11-05 | @victorbarrera1 | Bloque D: README de la entrega | [ver](2026-11-05_victorbarrera1_bloque-d-readme.md) |
 | 2026-11-05 | @victorbarrera1 | Bloque E: cierre y pruebas del build | [ver](2026-11-05_victorbarrera1_bloque-e-cierre.md) |
+| 2026-11-06 | @victorbarrera1 | Limpieza del stack tras la revisión de los bloques A–E | [ver](2026-11-06_victorbarrera1_limpieza-stack.md) |
 | 2026-11-07 | @victorbarrera1 | Limpieza de entrega: arranque, assets y estilos | [ver](2026-11-07_victorbarrera1_limpieza-entrega.md) |
