@@ -1,11 +1,12 @@
 /**
- * Ruta a un archivo de `public/` respetando la base de Vite, para que las
- * imágenes carguen también si la app se publica en una subcarpeta.
+ * Arma la URL de un archivo de `public/` respetando el `base` de Vite.
+ * Así las imágenes siguen funcionando si la app se publica en una subcarpeta.
  */
-function rutaPublica(ruta) {
+export function rutaPublica(ruta) {
     const base = (import.meta.env && import.meta.env.BASE_URL) || '/'
+    const prefijo = base.endsWith('/') ? base : `${base}/`
 
-    return `${base.endsWith('/') ? base : `${base}/`}${ruta}`
+    return `${prefijo}${String(ruta || '').replace(/^\/+/, '')}`
 }
 
 const ENLACES = [

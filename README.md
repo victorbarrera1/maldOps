@@ -53,7 +53,7 @@ npm run preview   # sirve dist/ para probar el build
 
 ### Variables de entorno
 
-Copiar `.env.example` como `.env` solo si se quiere cambiar la fuente de datos:
+Copiar `.env.example` como `.env` solo si se quiere cambiar la fuente de datos. El archivo `.env` está en `.gitignore` y no se versiona:
 
 ```bash
 cp .env.example .env
@@ -234,7 +234,7 @@ maldOps/
 │   │   ├── respuesta.js       # Formato { ok, status, data, error, errores }
 │   │   ├── sesion.js          # Sesión pública en localStorage
 │   │   └── http.js            # Transporte fetch para el backend real
-│   ├── css/                   # app.css, dashboard.css y login.css
+│   ├── css/                   # app.css (tema, reset y componentes), dashboard.css y login.css
 │   ├── main.js                # Alpine, iconos, menú y cierre de sesión
 │   ├── nav.js                 # Menú lateral y barra superior compartidos
 │   ├── guard.js               # Protección de vistas privadas

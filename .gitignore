@@ -2,7 +2,9 @@ node_modules
 dist
 .DS_Store
 
-# Variables de entorno locales (la plantilla .env.example sí se versiona)
+# Variables de entorno locales (nunca subir URL o credenciales reales).
 .env
 .env.*
+
+# La plantilla sí se versiona.
 !.env.example
