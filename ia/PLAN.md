@@ -25,6 +25,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 | C — Estructura del repo | `feat/bloque-c-estructura` | [#10](https://github.com/victorbarrera1/maldOps/pull/10) | Completado |
 | D — README | `feat/bloque-d-readme` | [#11](https://github.com/victorbarrera1/maldOps/pull/11) | Completado |
 | E — Cierre | `feat/bloque-e-cierre` | [#12](https://github.com/victorbarrera1/maldOps/pull/12) | Completado |
+| F — Limpieza | `fix/limpieza-entrega` | [#14](https://github.com/victorbarrera1/maldOps/pull/14) | Completado |
 
 ## Checklist
 
@@ -124,6 +125,28 @@ que `guard.js` estableciera `window.__sesion`, así que después del registro el
 nav mostraba «Usuario» / «Sin rol» aunque la sesión estuviera guardada.
 `main.js` ahora importa `./guard.js` antes de llamar a `montarNav()`. Se
 verificó con admin, con vendedor y con una cuenta nueva.
+
+## F. Limpieza de entrega
+
+- [x] **F15.** Retirar `src/index.js` y `src/store.js`, y quitar sus referencias
+  de las vistas y de `main.js`.
+- [x] **F16.** Activar el preflight de Tailwind, eliminar el reset duplicado de
+  `dashboard.css` y unificar botones, inputs y el modal.
+- [x] **F17.** Respetar `BASE_URL` en imágenes y favicons; adaptar login y
+  registro a móvil.
+- [x] **F18.** Ignorar `.env*` y actualizar el README (variables de entorno y
+  estructura del proyecto).
+- [x] **F19.** Indexar los registros de IA pendientes y documentar la limpieza y
+  el PR.
+
+#### Verificación F
+
+- `npm run build` pasa.
+- `npx vite build --base=/maldops/` pasa.
+- Revisión visual de las siete vistas en 1280 px y de login, registro y modal en
+  390 px.
+- Consola sin errores; solo queda el aviso verbose de Chrome por el campo de
+  contraseña de Configuración, que se resolverá al cablear esa sección.
 
 ## Registro de bloqueos
 
