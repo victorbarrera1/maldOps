@@ -14,33 +14,35 @@ import {
 } from './ui.js'
 
 const estado = document.querySelector('#ayuda-estado')
-const tabla = document.querySelector('#ayuda-tabla')
-const cuerpo = document.querySelector('#ayuda-cuerpo')
+const lista = document.querySelector('#ayuda-lista')
 const total = document.querySelector('#ayuda-total')
 
 function pintarPreguntas(preguntas) {
     const fragmento = document.createDocumentFragment()
 
     for (const pregunta of preguntas) {
-        const fila = document.createElement('tr')
-
-        const titulo = document.createElement('td')
+        const item = document.createElement('div')
+        item.setAttribute('x-data', '{ abierto: false }')
+        
+        const titulo = document.createElement('button')
         titulo.textContent = pregunta.pregunta
-
-        const respuesta = document.createElement('td')
+        titulo.setAttribute('x-on:click', 'abierto = !abierto')
+        
+        const respuesta = document.createElement('p')
         respuesta.textContent = pregunta.respuesta
-
-        fila.append(titulo, respuesta)
-        fragmento.append(fila)
+        respuesta.setAttribute('x-show', 'abierto')
+        titulo.setAttribute('x-bind:aria-expanded', 'abierto')
+        item.append(titulo, respuesta)
+        fragmento.append(item)
     }
 
-    cuerpo.replaceChildren(fragmento)
-    tabla.hidden = preguntas.length === 0
+    lista.replaceChildren(fragmento)
+    lista.hidden = preguntas.length === 0
 }
 
 function mostrarCargando() {
-    estado.replaceChildren(crearCargando({ filas: 5, columnas: 2 }))
-    tabla.hidden = true
+    estado.replaceChildren(crearCargando({ filas: 5, columnas: 1 }))
+    lista.hidden = false
     total.textContent = ''
 }
 
@@ -52,7 +54,7 @@ function mostrarError(mensaje) {
             alReintentar: cargarPreguntas,
         }),
     )
-    tabla.hidden = true
+    lista.hidden = true
     total.textContent = ''
 }
 
@@ -63,7 +65,7 @@ function mostrarVacio() {
             mensaje: 'Cuando se publiquen aparecerán en esta sección.',
         }),
     )
-    tabla.hidden = true
+    lista.hidden = true
     total.textContent = '0'
 }
 
@@ -102,6 +104,6 @@ async function cargarPreguntas() {
     }
 }
 
-if (estado && tabla && cuerpo && total) {
+if (estado && lista && total) {
     cargarPreguntas()
 }
