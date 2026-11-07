@@ -55,6 +55,21 @@ abierto y completa el registro de IA.
 - No se encontraron otros rastros de IA sin documentar en el código: fuera de
   `ia/` solo queda la sección «Uso de IA» del README, que enlaza al índice.
 
+### Integración con `main`
+
+Mientras el PR estaba abierto se mergeó el PR #13, que ya incluía la eliminación
+de `src/index.js`/`src/store.js` y el manejo de `BASE_URL` en `nav.js`. Se
+integró `main` en la rama y se resolvieron los conflictos:
+
+- `.gitignore` quedó con `.env` y `.env.*`, conservando `.env.example`.
+- `ia/README.md` conserva los registros del 2026-11-06 (PR #13) y del
+  2026-11-07 (este PR).
+- `nav.js` quedó con una sola `rutaPublica()` exportada, con normalización de
+  barras, en lugar de las dos funciones que dejó el merge automático.
+
+El diff final del PR es incremental: preflight, CSS heredado, favicons, clases
+de formulario y documentación.
+
 ## Commits
 
 - `refactor(limpieza): retira el arranque antiguo`
@@ -63,6 +78,7 @@ abierto y completa el registro de IA.
 - `chore(git): ignora variables de entorno locales`
 - `docs(readme): actualiza la estructura tras la limpieza`
 - `docs(ia): registra la limpieza de entrega`
+- `merge: integra main y resuelve la limpieza duplicada`
 
 ## Verificación
 
