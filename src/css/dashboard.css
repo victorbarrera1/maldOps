@@ -1,20 +1,13 @@
-/* google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
-
 /* variables css */
 :root {
     --white: #ffffff;
     --grey: #565454;
     --black: #000000;
-    --font: "Roboto Slab", serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--font);
-}
+/* El reset global lo aporta el preflight de Tailwind (src/css/app.css).
+   No repetir `* { margin: 0; padding: 0 }` aquí: al ser una hoja sin capa,
+   pisaba el padding de los componentes `.btn` y `.input`. */
 
 /*  body */
 body {

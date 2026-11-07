@@ -1,22 +1,26 @@
+:root {
+    --font: "Roboto Slab", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
 body {
     margin: 0;
-    padding: 0;
+    padding: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #c5c4c4;
-    height: 100vh;
     font-family: var(--font);
 }
 
 .formulario {
-    position: absolute;
+    position: relative;
+    box-sizing: border-box;
+    width: min(380px, 100%);
     padding: 40px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
 }
 
 .formulario h1 {
@@ -74,6 +78,9 @@ body {
 }
 
 .formulario input[type="submit"] {
+    width: 100%;
+    padding: 10px 16px;
+    border: 0;
     background-color: #6d6d6d;
     transform: translateY(-3px);
     background: #333;
@@ -82,7 +89,15 @@ body {
     color: white;
     cursor: pointer;
     outline: none;
+}
 
+.registro {
+    margin-top: 16px;
+}
+
+.registro a {
+    color: #2691d9;
+    text-decoration: underline;
 }
 
 .login-estado {
