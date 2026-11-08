@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs'
 import './css/app.css'
+import './css/tema.css'
 import './iconos.js'
 // La guardia se importa antes del menú para que `window.__sesion` exista
 // cuando `montarNav()` lea el nombre y el rol. En el build, los módulos de una
