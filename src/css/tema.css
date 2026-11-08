@@ -1,3 +1,7 @@
-   body:has(.formulario) {
-       background: radial-gradient(circle at 50% 0%, #12395c 0%, #0b1120 60%);
-   }
+/* [IA] inicio · ia/2026-11-08_manolodeus_tema-visual.md */
+
+body:has(.formulario) {
+    background: radial-gradient(circle at 50% 0%, #12395c 0%, #0b1120 60%);
+}
+
+/* [IA] fin */
