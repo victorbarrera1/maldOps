@@ -20,3 +20,25 @@ body:has(.formulario) {
    body .saludo p::first-letter {
     text-transform: uppercase;
 }
+
+html.dark {
+    color-scheme: dark;
+    --white: #111827;
+    --grey: #cbd5e1;
+    --black: #e5e7eb;
+}
+
+html.dark body {
+    background: #0b1120;
+    color: #e5e7eb;
+}
+
+html.dark .saludo h1 { color: #f1f5f9; }
+html.dark .saludo p { color: #94a3b8; }
+
+html.dark .detalles .ordenes-recientes,
+html.dark .detalles .nuevos-clientes,
+html.dark .cards .card {
+    border: 1px solid #1f2937;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
