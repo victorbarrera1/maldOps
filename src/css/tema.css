@@ -42,3 +42,21 @@ html.dark .cards .card {
     border: 1px solid #1f2937;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
+
+
+html.dark .formulario {
+    background: #111827;
+    border: 1px solid #1f2937;
+    color: #cbd5e1;
+}
+html.dark .formulario h1 { color: #f8fafc; }
+html.dark .formulario input:not([type="submit"]) {
+    color: #f1f5f9;
+    border-bottom-color: #475569;
+}
+html.dark .formulario label { color: #94a3b8; }
+html.dark .formulario input:focus + label,
+html.dark .formulario input:valid + label,
+html.dark #form-login input:not(:placeholder-shown) + label { color: #38bdf8; }
+html.dark .formulario .registro a { color: #38bdf8; }
+html.dark .formulario .campo-error { color: #fca5a5; }
