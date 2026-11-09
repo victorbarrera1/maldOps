@@ -4,4 +4,16 @@ body:has(.formulario) {
     background: radial-gradient(circle at 50% 0%, #12395c 0%, #0b1120 60%);
 }
 
-/* [IA] fin */
+   body .saludo {
+       padding: 20px 20px 0;
+   }
+   body .saludo h1 {
+       font-size: 1.75rem;
+       font-weight: 700;
+       color: #0f172a;
+   }
+   body .saludo p {
+       margin-top: 4px;
+       color: #64748b;
+       text-transform: capitalize;
+   }
