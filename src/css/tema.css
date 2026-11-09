@@ -15,5 +15,8 @@ body:has(.formulario) {
    body .saludo p {
        margin-top: 4px;
        color: #64748b;
-       text-transform: capitalize;
+       
    }
+   body .saludo p::first-letter {
+    text-transform: uppercase;
+}
