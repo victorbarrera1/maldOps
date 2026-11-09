@@ -162,3 +162,28 @@ async function cargarDashboard() {
 if (estado && contenido && cuerpoVentas && cuerpoClientes) {
     cargarDashboard()
 }
+
+   // [IA] inicio · ia/2026-11-09_ManoloDeus_saludo-dashboard.md
+   function pintarSaludo() {
+       const titulo = document.querySelector('#saludo-titulo')
+       const fecha = document.querySelector('#saludo-fecha')
+
+       if (!titulo || !fecha) {
+           return
+       }
+
+       const hora = new Date().getHours()
+       const momento = hora < 12 ? 'Buenos días' : hora < 20 ? 'Buenas tardes' : 'Buenas noches'
+       const nombre = (window.__sesion?.nombre || 'Usuario').split(' ')[0]
+
+       titulo.textContent = `${momento}, ${nombre}`
+       fecha.textContent = new Date().toLocaleDateString('es-CL', {
+           weekday: 'long',
+           day: 'numeric',
+           month: 'long',
+           year: 'numeric',
+       })
+   }
+
+   pintarSaludo()
+   // [IA] fin
