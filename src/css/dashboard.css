@@ -482,3 +482,47 @@ section {
         margin-right: 5px;
     }
 }
+    .detalles .ordenes-recientes #ayuda-lista > div{
+        border: 1px solid #e5e5e5;
+        border-radius: 10px;
+        background-color: var(--white);
+        margin-bottom: 8px;
+    }
+
+    .detalles .ordenes-recientes #ayuda-lista button{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 14px 16px;
+        border: none;
+        background: transparent;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--black);
+        cursor: pointer;
+        transition: 0.2s;
+    } 
+    .detalles .ordenes-recientes #ayuda-lista button:hover{
+        background-color: #f7f7f7;
+    }
+    .detalles .ordenes-recientes #ayuda-lista button:focus-visible{
+        outline: 2px solid black;
+        outline-offset: 2px;
+    }
+    .detalles .ordenes-recientes #ayuda-lista button::after{
+        content: '>';
+        transition: 0.2s;
+        display: inline-block
+    }
+    .detalles .ordenes-recientes #ayuda-lista button[aria-expanded="true"]::after{
+    transform: rotate(90deg);
+    }
+    .detalles .ordenes-recientes #ayuda-lista p[x-show]{
+    padding: 0 16px 16px;
+    color: var(--grey); 
+    line-height: 1.6; 
+    font-size: 14px;
+    }
+
