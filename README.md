@@ -10,7 +10,7 @@ Es el proyecto de la **Entrega 2** de Desarrollo Web y Móvil (CIT2008, UDP): un
 |---|---|
 | Victor Barrera | [@victorbarrera1](https://github.com/victorbarrera1) |
 | Josemanuel Rodríguez | [@ManoloDeus](https://github.com/ManoloDeus) |
-| Martin Maldonado | [@martinmldndr-wq](https://github.com/martinmldndr-wq) |
+| Martin Maldonado | [@maldonou](https://github.com/maldonou) |
 
 ## Tecnologías
 

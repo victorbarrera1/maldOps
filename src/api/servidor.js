@@ -25,6 +25,18 @@ const SIMULADOR_DEFECTO = {
 
 const DOMINIOS_PERMITIDOS = ['gmail.com', 'mail.udp.cl']
 const ESTATUS_CLIENTE = ['Activo', 'Inactivo']
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+const MAX_NOTA = 300
+
+// Los clientes antiguos no tienen estos campos: se completan al leerlos.
+function conExtras(cliente) {
+    return {
+        ...cliente,
+        favorito: cliente.favorito === true,
+        nota: typeof cliente.nota === 'string' ? cliente.nota : '',
+    }
+}
+// [IA] fin
 const SERVICIOS = [
     'META ADS',
     'TIKTOK ADS',
@@ -61,7 +73,14 @@ function almacen() {
 function normalizarTexto(valor) {
     return String(valor ?? '').trim()
 }
-
+//[IA] inicio · ia/2026-11-09_maldonou_busqueda-filtros-clientes-api.md
+function normalizarSinTildes(valor) {
+    return normalizarTexto(valor)
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+}
+//[IA] fin
 function normalizarCorreo(valor) {
     return normalizarTexto(valor).toLowerCase()
 }
@@ -306,7 +325,19 @@ function validarCliente(datos, { parcial = false } = {}) {
             errores.estatus = 'Selecciona Activo o Inactivo.'
         }
     }
+    // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+    if (Object.prototype.hasOwnProperty.call(datos, 'favorito')) {
+        if (typeof datos.favorito !== 'boolean') {
+            errores.favorito = 'El favorito debe ser verdadero o falso.'
+        }
+    }
 
+    if (Object.prototype.hasOwnProperty.call(datos, 'nota')) {
+        if (normalizarTexto(datos.nota).length > MAX_NOTA) {
+            errores.nota = `La nota no puede superar los ${MAX_NOTA} caracteres.`
+        }
+    }
+    // [IA] fin
     return errores
 }
 
@@ -435,12 +466,42 @@ export async function perfil() {
 // Clientes
 // ---------------------------------------------------------------------------
 
-export async function listarClientes() {
-    return conSesion(async () => {
-        const db = await inicializarDb()
+export async function listarClientes(opciones = {}) {
+   return conSesion(async () => {
+    const { busqueda = '', estatus = '', orden = 'nombre-asc' } = opciones
+    const ordenesValidos = ['nombre-asc', 'nombre-desc']
+   
+    if(estatus && !ESTATUS_CLIENTE.includes(estatus)) {
+        return fallo('Estatus inválido.', 400)
+    }
+    if(orden && !ordenesValidos.includes(orden)) {
+        return fallo('Orden inválido.', 400)
+    }
 
-        return ok(clonar(db.clientes))
-    })
+    const db = await inicializarDb()
+    let clientes = clonar(db.clientes).map(conExtras) 
+
+    const busquedaNormalizada = normalizarSinTildes(busqueda)
+    if (busquedaNormalizada) {
+        clientes = clientes.filter((cliente) => {
+            const nombreValido = normalizarSinTildes(cliente.nombre)
+            const notaValida = normalizarSinTildes(cliente.nota)
+            return nombreValido.includes(busquedaNormalizada) || notaValida.includes(busquedaNormalizada)
+        })
+    }
+    if (estatus) {
+        clientes = clientes.filter((cliente) => mismoTexto(cliente.estatus, estatus))
+    }
+    //[IA] inicio · ia/2026-11-09_maldonou_busqueda-filtros-clientes-api.md
+    if (orden === 'nombre-asc') {
+    clientes.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+    }
+    else if (orden === 'nombre-desc') {
+    clientes.sort((a, b) => b.nombre.localeCompare(a.nombre, 'es'))
+    }
+    //[IA] fin
+    return ok(clientes)
+   })
 }
 
 export async function obtenerCliente(id) {
@@ -452,7 +513,9 @@ export async function obtenerCliente(id) {
             return fallo('No existe un cliente con ese id.', 404)
         }
 
-        return ok(clonar(cliente))
+           // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+   return ok(conExtras(clonar(cliente)))
+   // [IA] fin
     })
 }
 
@@ -477,6 +540,8 @@ export async function crearCliente(datos = {}) {
             id: siguienteId(db.clientes, 'cli'),
             nombre,
             estatus: normalizarEstatusCliente(datos.estatus),
+            favorito: datos.favorito === true, // [IA]
+            nota: normalizarTexto(datos.nota), // [IA]
         }
 
         db.clientes.push(cliente)
@@ -516,9 +581,21 @@ export async function actualizarCliente(id, datos = {}) {
 
         cliente.nombre = nombre
         cliente.estatus = estatus
+         // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+        if (Object.prototype.hasOwnProperty.call(datos, 'favorito')) {
+            cliente.favorito = datos.favorito
+        }
+
+        if (Object.prototype.hasOwnProperty.call(datos, 'nota')) {
+            cliente.nota = normalizarTexto(datos.nota)
+        }
+        // [IA] fin
+
         guardarDb(db)
 
-        return ok(clonar(cliente))
+        return ok(conExtras(clonar(cliente))) // [IA]
+
+        
     })
 }
 

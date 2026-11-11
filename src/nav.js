@@ -113,6 +113,16 @@ function crearBarra(sesion) {
     entrada.placeholder = 'Buscar...'
     entrada.setAttribute('aria-label', 'Buscar')
 
+    // Al escribir se filtra en vivo la página que sepa buscar (clientes y ventas).
+    // Con Enter, si la página no sabe buscar, se va a Clientes con el texto.
+    entrada.addEventListener('input', () => enviarBusqueda(entrada.value, false))
+    entrada.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Enter') {
+            evento.preventDefault()
+            enviarBusqueda(entrada.value, true)
+        }
+    })
+
     buscador.append(entrada, crearIcono('search'))
 
     const usuario = document.createElement('div')
@@ -142,6 +152,24 @@ function crearBarra(sesion) {
     return barra
 }
 
+/**
+ * Avisa a la página del texto buscado con el evento `maldops:buscar`.
+ * Una página que sepa buscar llama a `preventDefault()` para indicar que lo
+ * maneja ella. Si nadie lo maneja y se pulsó Enter, se abre Clientes con `?q=`.
+ */
+function enviarBusqueda(texto, navegar) {
+    const evento = new CustomEvent('maldops:buscar', {
+        detail: { texto: String(texto || '') },
+        cancelable: true,
+    })
+    const nadieLoManeja = document.dispatchEvent(evento)
+    const limpio = String(texto || '').trim()
+
+    if (nadieLoManeja && navegar && limpio) {
+        window.location.href = `clientes.html?q=${encodeURIComponent(limpio)}`
+    }
+}
+
 function crearMenu(activo) {
     const menu = document.createElement('nav')
     menu.id = 'nav-principal'
@@ -151,7 +179,7 @@ function crearMenu(activo) {
     menu.setAttribute('x-cloak', '')
 
     const marca = document.createElement('a')
-    marca.href = '#'
+    marca.href = 'dashboard.html'
     marca.className = 'nav-logo'
     marca.setAttribute('aria-label', 'MaldOps')
 

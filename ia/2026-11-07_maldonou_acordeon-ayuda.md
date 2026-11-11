@@ -4,6 +4,11 @@
 - Integrante Martin Maldonado (@maldonou)
 - Herramienta y modelo Claude (Sonnet 5.5)
 - Archivos afectados `ayuda.html`, `srcayuda.js`, `srccssdashboard.css`
+- **Fecha:** 2026-11-07
+- **Integrante:** Martin Maldonado (@maldonou)
+- **Herramienta y modelo:** Claude (<confirmar el modelo usado>)
+- **Enlace a la conversación:** <opcional, si la herramienta permite compartirla>
+- **Archivos afectados:** `ayuda.html`, `src/ayuda.js`, `src/css/dashboard.css`
 
 ## Objetivo
 
@@ -17,6 +22,12 @@ PEGAR AQUÍ, sin editar, todos los prompts y respuestas de esta consulta, con el
 
 ```
 Continuamos con la entrega, como veras esta permitido el uso de IA, pero para consultas, tambien necesito que me ayudes a agregar los prompts q te entregue, pero vamos desde el principio, aun tienes acceso al repo?
+<PEGAR AQUÍ, sin editar, todos los prompts y respuestas de esta consulta, con el formato de abajo. Copiar desde el chat o desde el enlace compartido; no resumir ni corregir.>
+
+### Prompt 1
+
+```text
+<texto exacto del prompt>
 ```
 
 ### Respuesta 1
@@ -447,6 +458,18 @@ Si prefieres, pégame tal cual esa regla desde tu archivo y la reviso.
 - Contenedor en `ayuda.html` se reemplazó la tabla por un contenedor con id `ayuda-lista`, y se actualizaron las referencias en `ayuda.js`.
 - Estilos (`srccssdashboard.css`) la IA sugirió una tabla de valores (borde claro, bordes redondeados, relleno del botón, hover, foco visible, flecha con `after` que gira según `aria-expanded`). Los escribí yo y los ajusté selectores con `#ayuda-lista`, corrección de `border` y `outline`, y `display inline-block` en la flecha para que el giro se aplique.
 - Descartado `details``summary` nativos y JavaScript puro (se eligió Alpine por consistencia). 
+```text
+<texto exacto de la respuesta, incluido el código>
+```
+
+<repetir Prompt / Respuesta para cada intercambio>
+
+## Qué se incorporó al proyecto
+
+- **Estructura del acordeón** (`src/ayuda.js`, función `pintarPreguntas`): cada pregunta es un contenedor con `x-data`, un botón con `x-on:click` y `x-bind:aria-expanded`, y un panel con `x-show`. La IA explicó qué atributos de Alpine corresponden a cada parte y que desde JavaScript se deben usar los nombres largos (`x-on:`, `x-bind:`); el código lo escribí yo, y el nombre del estado (`abierto`) es mío.
+- **Contenedor en `ayuda.html`**: se reemplazó la tabla por un contenedor con id `ayuda-lista`, y se actualizaron las referencias en `ayuda.js`.
+- **Estilos** (`src/css/dashboard.css`): la IA sugirió una tabla de valores (borde claro, bordes redondeados, relleno del botón, hover, foco visible, flecha con `::after` que gira según `aria-expanded`). Los escribí yo y los ajusté: selectores con `#ayuda-lista`, corrección de `border` y `outline`, y `display: inline-block` en la flecha para que el giro se aplique.
+- **Descartado:** `<details>`/`<summary>` nativos y JavaScript puro (se eligió Alpine por consistencia). <completar: indicar si se usó o no `x-transition`, `x-cloak` o `:has()`, que también se sugirieron>
 
 ## Verificación
 

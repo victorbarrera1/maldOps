@@ -60,3 +60,26 @@ html.dark .formulario input:valid + label,
 html.dark #form-login input:not(:placeholder-shown) + label { color: #38bdf8; }
 html.dark .formulario .registro a { color: #38bdf8; }
 html.dark .formulario .campo-error { color: #fca5a5; }
+
+/* Estrella de favorito */
+.btn-favorito {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font-size: 1.25rem;
+    margin-right: 8px;
+    color: #b45309;
+}
+html.dark .btn-favorito {
+    color: #fbbf24;
+}
+.btn-favorito:focus-visible {
+    outline: 2px solid #1b74b3;
+    outline-offset: 2px;
+}
+.btn-favorito:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
