@@ -47,6 +47,52 @@ function crearBotonAccion(texto, clase, etiqueta, alPulsar) {
     return boton
 }
 
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+function crearBotonFavorito(cliente) {
+    const boton = document.createElement('button')
+    boton.type = 'button'
+    boton.className = 'btn-favorito'
+    boton.textContent = cliente.favorito ? '★' : '☆'
+    boton.setAttribute('aria-pressed', String(cliente.favorito))
+    boton.setAttribute(
+        'aria-label',
+        cliente.favorito
+            ? `Quitar a ${cliente.nombre} de favoritos`
+            : `Marcar a ${cliente.nombre} como favorito`,
+    )
+    boton.addEventListener('click', () => alternarFavorito(cliente, boton))
+
+    return boton
+}
+
+async function alternarFavorito(cliente, boton) {
+    boton.disabled = true
+
+    try {
+        const respuesta = await api.clientes.actualizar(cliente.id, {
+            favorito: !cliente.favorito,
+        })
+
+        if (esNoAutorizado(respuesta)) {
+            irAlLogin()
+            return
+        }
+
+        if (!respuesta.ok) {
+            mostrarToast(mensajeDeError(respuesta, 'No se pudo actualizar el favorito.'), 'error')
+            boton.disabled = false
+            return
+        }
+
+        cliente.favorito = respuesta.data.favorito
+        pintarFilas(clientesActuales)
+    } catch {
+        mostrarToast('No se pudo actualizar el favorito. Revisa tu conexión.', 'error')
+        boton.disabled = false
+    }
+}
+// [IA] fin
+
 function pintarFilas(clientes) {
     const fragmento = document.createDocumentFragment()
 
@@ -54,7 +100,9 @@ function pintarFilas(clientes) {
         const fila = document.createElement('tr')
 
         const nombre = document.createElement('td')
-        nombre.textContent = cliente.nombre
+        // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+        nombre.append(crearBotonFavorito(cliente), cliente.nombre)
+        // [IA] fin
 
         const estatus = document.createElement('td')
         estatus.append(crearBadgeEstatus(cliente.estatus))
