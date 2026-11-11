@@ -83,12 +83,3 @@ html.dark .btn-favorito {
 }
 
 
-.nota-cliente {
-    display: block;
-    margin-top: 2px;
-    font-size: 0.8rem;
-    color: #64748b;
-}
-html.dark .nota-cliente {
-    color: #94a3b8;
-}

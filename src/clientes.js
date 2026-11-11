@@ -21,6 +21,7 @@ const tabla = document.querySelector('#clientes-tabla')
 const cuerpo = document.querySelector('#clientes-cuerpo')
 const total = document.querySelector('#clientes-total')
 const filtroFavoritos = document.querySelector('#clientes-solo-favoritos')
+const campoBusqueda = document.querySelector('#clientes-busqueda')
 const botonNuevo = document.querySelector('#nuevo-cliente')
 const dialogo = document.querySelector('#cliente-dialogo')
 const formulario = document.querySelector('#cliente-form')
@@ -50,16 +51,25 @@ function crearBotonAccion(texto, clase, etiqueta, alPulsar) {
     return boton
 }
 
+
 // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
 function crearBotonFavorito(cliente) {
     const boton = document.createElement('button')
+    const esFavorito = cliente.favorito === true
+
     boton.type = 'button'
-    boton.className = 'btn-favorito'
-    boton.textContent = cliente.favorito ? '★' : '☆'
-    boton.setAttribute('aria-pressed', String(cliente.favorito))
+    boton.className = [
+        'inline-flex size-10 shrink-0 items-center justify-center rounded-full text-2xl leading-none',
+        'transition hover:scale-125 hover:bg-amber-500/15',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500',
+        'disabled:cursor-wait disabled:opacity-50',
+        esFavorito ? 'text-amber-500' : 'text-slate-400 hover:text-amber-500',
+    ].join(' ')
+    boton.textContent = esFavorito ? '★' : '☆'
+    boton.setAttribute('aria-pressed', String(esFavorito))
     boton.setAttribute(
         'aria-label',
-        cliente.favorito
+        esFavorito
             ? `Quitar a ${cliente.nombre} de favoritos`
             : `Marcar a ${cliente.nombre} como favorito`,
     )
@@ -67,6 +77,7 @@ function crearBotonFavorito(cliente) {
 
     return boton
 }
+// [IA] fin
 
 async function alternarFavorito(cliente, boton) {
     boton.disabled = true
@@ -87,8 +98,13 @@ async function alternarFavorito(cliente, boton) {
             return
         }
 
-        cliente.favorito = respuesta.data.favorito
-        pintarFilas(clientesActuales)
+        cliente.favorito = respuesta.data.favorito      
+        mostrarToast(
+            cliente.favorito
+                ? `${cliente.nombre} se agregó a favoritos.`
+                : `${cliente.nombre} se quitó de favoritos.`,
+        )
+        aplicarVista()
     } catch {
         mostrarToast('No se pudo actualizar el favorito. Revisa tu conexión.', 'error')
         boton.disabled = false
@@ -125,19 +141,33 @@ function pintarFilas(clientes) {
 
     for (const cliente of clientes) {
         const fila = document.createElement('tr')
+        fila.className = 'transition-colors duration-150 hover:bg-slate-500/10 [&>td]:py-3'
 
         const nombre = document.createElement('td')
-        // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
-        nombre.append(crearBotonFavorito(cliente), cliente.nombre)
-        // [IA] fin
-        
-        if (cliente.nota) {
-        const nota = document.createElement('small')
-        nota.className = 'nota-cliente'
-        nota.textContent = cliente.nota
-        nombre.append(nota)
-    }
 
+        // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+        const envoltorio = document.createElement('div')
+        envoltorio.className = 'flex items-center gap-2'
+
+        const textos = document.createElement('div')
+        textos.className = 'min-w-0'
+
+        const titulo = document.createElement('span')
+        titulo.className = 'block font-medium'
+        titulo.textContent = cliente.nombre
+        textos.append(titulo)
+
+        if (cliente.nota) {
+            const nota = document.createElement('small')
+            nota.className = 'mt-0.5 block max-w-xs break-words text-xs italic opacity-70 line-clamp-2'
+            nota.textContent = cliente.nota
+            nota.title = cliente.nota
+            textos.append(nota)
+        }
+
+        envoltorio.append(crearBotonFavorito(cliente), textos)
+        nombre.append(envoltorio)
+        // [IA] fin
 
         const estatus = document.createElement('td')
         estatus.append(crearBadgeEstatus(cliente.estatus))
@@ -147,7 +177,7 @@ function pintarFilas(clientes) {
         acciones.append(
             crearBotonAccion(
                 'Editar',
-                '',
+                'rounded-lg border border-slate-500/40 transition hover:bg-sky-600! hover:text-white!',
                 `Editar a ${cliente.nombre}`,
                 () => abrirFormulario(cliente),
             ),
@@ -171,6 +201,7 @@ function pintarFilas(clientes) {
     cuerpo.replaceChildren(fragmento)
     tabla.hidden = clientes.length === 0
 }
+
 
 function mostrarCargando() {
     estado.replaceChildren(crearCargando({ filas: 6, columnas: 3 }))
@@ -213,10 +244,97 @@ function mostrarVacio() {
     }
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
+const campoOrden = document.querySelector('#clientes-orden')
+
+/** Ordena una copia de la lista según la opción del menú «Ordenar clientes». */
+function ordenarClientes(lista, criterio = 'nombre-asc') {
+    const porNombre = (a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
+    const copia = [...lista]
+
+    if (criterio === 'nombre-desc') {
+        return copia.sort((a, b) => porNombre(b, a))
+    }
+
+    if (criterio === 'favoritos') {
+        return copia.sort(
+            (a, b) => Number(b.favorito === true) - Number(a.favorito === true) || porNombre(a, b),
+        )
+    }
+
+    return copia.sort(porNombre)
+}
+// [IA] fin
+
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+function aplicarVista() {
+    const texto = (campoBusqueda?.value || '').trim().toLowerCase()
+    const soloFavoritos = Boolean(filtroFavoritos?.checked)
+
+    const filtrados = clientesActuales.filter((cliente) => {
+        if (soloFavoritos && cliente.favorito !== true) {
+            return false
+        }
+
+        return (
+            !texto ||
+            cliente.nombre.toLowerCase().includes(texto) ||
+            (cliente.nota || '').toLowerCase().includes(texto)
+        )
+    })
+
+    const visibles = ordenarClientes(filtrados, campoOrden?.value)
+
+    total.textContent = String(visibles.length)
+
+    if (visibles.length === 0) {
+        pintarFilas([])
+        estado.replaceChildren(
+            crearVacio({
+                titulo: 'Sin resultados',
+                mensaje: 'Prueba con otra búsqueda o desactiva el filtro de favoritos.',
+            }),
+        )
+        return
+    }
+
+    estado.replaceChildren()
+    pintarFilas(visibles)
+}
+
+campoBusqueda?.addEventListener('input', aplicarVista)
+
+// [IA] inicio · ia/2026-11-11_victorbarrera1_exportar-buscador-contactos.md
+// Búsqueda de la barra superior: llega con `?q=` o con el evento `maldops:buscar`.
+const consultaInicial = new URLSearchParams(window.location.search).get('q')
+
+if (consultaInicial && campoBusqueda) {
+    campoBusqueda.value = consultaInicial
+}
+
+document.addEventListener('maldops:buscar', (evento) => {
+    if (!campoBusqueda) {
+        return
+    }
+
+    evento.preventDefault()
+    campoBusqueda.value = evento.detail.texto
+
+    if (clientesActuales.length > 0) {
+        aplicarVista()
+    }
+})
+// [IA] fin
+filtroFavoritos?.addEventListener('change', aplicarVista)
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
+campoOrden?.addEventListener('change', aplicarVista)
+// [IA] fin
+// [IA] fin
+
 async function cargarClientes() {
     mostrarCargando()
 
-    try {
+        try {
         const respuesta = await api.clientes.listar()
 
         if (esNoAutorizado(respuesta)) {
@@ -236,9 +354,7 @@ async function cargarClientes() {
             return
         }
 
-        estado.replaceChildren()
-        total.textContent = String(clientesActuales.length)
-        pintarFilas(clientesActuales)
+        aplicarVista()
         botonNuevo.disabled = false
     } catch {
         mostrarError('No se pudieron cargar los clientes. Revisa tu conexión e intenta de nuevo.')

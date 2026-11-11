@@ -11,6 +11,8 @@ import {
     crearVacio,
     crearError,
     mensajeDeError,
+    mostrarToast,
+    confirmarAccion,
 } from './ui.js'
 
 const formulario = document.querySelector('#form-simulador')
@@ -175,9 +177,12 @@ if (formulario) {
     })
 
     botonReiniciar.addEventListener('click', async () => {
-        const confirmado = window.confirm(
+        // [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
+        const confirmado = await confirmarAccion(
             '¿Restablecer los datos de prueba? Se borrarán los cambios y la sesión actual.',
+            { titulo: 'Restablecer datos de prueba', textoConfirmar: 'Restablecer' },
         )
+        // [IA] fin
 
         if (!confirmado) {
             return
@@ -205,3 +210,147 @@ if (formulario) {
 
     cargarConfiguracion()
 }
+
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
+/* ------------------------------------------------------------------------- */
+/* Cuenta: guardar cambios y eliminar                                         */
+/* ------------------------------------------------------------------------- */
+
+const botonGuardarCuenta = document.querySelector('#guardar-cuenta')
+const botonEliminarCuenta = document.querySelector('#eliminar-cuenta')
+
+if (botonGuardarCuenta && botonEliminarCuenta) {
+    const avisoCuenta = document.querySelector('#cuenta-aviso')
+    const campos = {
+        nombre: document.querySelector('#cuenta-nombre'),
+        correo: document.querySelector('#cuenta-correo'),
+        contrasenaActual: document.querySelector('#cuenta-contrasena-actual'),
+        contrasenaNueva: document.querySelector('#cuenta-contrasena-nueva'),
+    }
+
+    function mostrarAvisoCuenta(mensaje, tipo = 'info') {
+        avisoCuenta.textContent = mensaje
+        avisoCuenta.style.color =
+            tipo === 'error'
+                ? 'var(--color-peligro, #b91c1c)'
+                : tipo === 'exito'
+                  ? 'var(--color-exito, #166534)'
+                  : 'var(--color-texto-suave, #475569)'
+    }
+
+    function limpiarErroresCuenta() {
+        for (const campo of Object.values(campos)) {
+            campo?.removeAttribute('aria-invalid')
+        }
+    }
+
+    function marcarErroresCuenta(errores) {
+        const mensajes = []
+
+        for (const [clave, mensaje] of Object.entries(errores || {})) {
+            campos[clave]?.setAttribute('aria-invalid', 'true')
+            mensajes.push(mensaje)
+        }
+
+        return mensajes
+    }
+
+    botonGuardarCuenta.addEventListener('click', async () => {
+        limpiarErroresCuenta()
+
+        const datos = {
+            nombre: campos.nombre.value,
+            correo: campos.correo.value,
+        }
+
+        if (campos.contrasenaActual.value || campos.contrasenaNueva.value) {
+            if (!campos.contrasenaNueva.value) {
+                campos.contrasenaNueva.setAttribute('aria-invalid', 'true')
+                mostrarAvisoCuenta('Escribe la contraseña nueva.', 'error')
+                return
+            }
+
+            datos.contrasenaActual = campos.contrasenaActual.value
+            datos.contrasenaNueva = campos.contrasenaNueva.value
+        }
+
+        botonGuardarCuenta.disabled = true
+        mostrarAvisoCuenta('Guardando cambios…')
+
+        try {
+            const respuesta = await api.auth.actualizarPerfil(datos)
+
+            if (esNoAutorizado(respuesta)) {
+                irAlLogin()
+                return
+            }
+
+            if (!respuesta.ok) {
+                const mensajes = marcarErroresCuenta(respuesta.errores)
+
+                mostrarAvisoCuenta(
+                    mensajes.length > 0
+                        ? mensajes.join(' ')
+                        : mensajeDeError(respuesta, 'No se pudieron guardar los cambios.'),
+                    'error',
+                )
+                return
+            }
+
+            const perfil = respuesta.data
+
+            campos.nombre.value = perfil.nombre || ''
+            campos.correo.value = perfil.correo || ''
+            campos.contrasenaActual.value = ''
+            campos.contrasenaNueva.value = ''
+
+            const nombreEnMenu = document.querySelector('.nav-usuario-nombre')
+
+            if (nombreEnMenu) {
+                nombreEnMenu.textContent = perfil.nombre || ''
+            }
+
+            mostrarAvisoCuenta('Cambios guardados.', 'exito')
+            mostrarToast('Los datos de tu cuenta se guardaron.')
+        } catch {
+            mostrarAvisoCuenta('No se pudieron guardar los cambios. Revisa tu conexión.', 'error')
+        } finally {
+            botonGuardarCuenta.disabled = false
+        }
+    })
+
+    botonEliminarCuenta.addEventListener('click', async () => {
+        const confirmado = await confirmarAccion(
+            '¿Eliminar tu cuenta? Se cerrará tu sesión y no podrás volver a entrar con este correo. Esta acción no se puede deshacer.',
+            { titulo: 'Eliminar cuenta', textoConfirmar: 'Eliminar cuenta' },
+        )
+
+        if (!confirmado) {
+            return
+        }
+
+        botonEliminarCuenta.disabled = true
+
+        try {
+            const respuesta = await api.auth.eliminarCuenta()
+
+            if (esNoAutorizado(respuesta)) {
+                irAlLogin()
+                return
+            }
+
+            if (!respuesta.ok) {
+                mostrarToast(mensajeDeError(respuesta, 'No se pudo eliminar la cuenta.'), 'error')
+                return
+            }
+
+            mostrarToast('Cuenta eliminada.')
+            window.setTimeout(() => window.location.assign('index.html'), 700)
+        } catch {
+            mostrarToast('No se pudo eliminar la cuenta. Revisa tu conexión.', 'error')
+        } finally {
+            botonEliminarCuenta.disabled = false
+        }
+    })
+}
+// [IA] fin

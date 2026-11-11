@@ -27,11 +27,11 @@ function pintarPreguntas(preguntas) {
         const titulo = document.createElement('button')
         titulo.textContent = pregunta.pregunta
         titulo.setAttribute('x-on:click', 'abierto = !abierto')
-        
+        titulo.setAttribute('x-bind:aria-expanded', 'abierto')
         const respuesta = document.createElement('p')
         respuesta.textContent = pregunta.respuesta
         respuesta.setAttribute('x-show', 'abierto')
-        titulo.setAttribute('x-bind:aria-expanded', 'abierto')
+        
         item.append(titulo, respuesta)
         fragmento.append(item)
     }
