@@ -133,7 +133,7 @@ function pintarFilas(clientes) {
         
         if (cliente.nota) {
         const nota = document.createElement('small')
-        nota.className = 'nota-cliente'
+        nota.className = 'block mt-0.5 text-xs text-slate-500 dark:text-slate-400'
         nota.textContent = cliente.nota
         nombre.append(nota)
     }
