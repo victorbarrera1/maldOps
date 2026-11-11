@@ -130,6 +130,14 @@ function pintarFilas(clientes) {
         // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
         nombre.append(crearBotonFavorito(cliente), cliente.nombre)
         // [IA] fin
+        
+        if (cliente.nota) {
+        const nota = document.createElement('small')
+        nota.className = 'nota-cliente'
+        nota.textContent = cliente.nota
+        nombre.append(nota)
+    }
+
 
         const estatus = document.createElement('td')
         estatus.append(crearBadgeEstatus(cliente.estatus))
