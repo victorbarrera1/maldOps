@@ -279,6 +279,26 @@ function aplicarVista() {
 }
 
 campoBusqueda?.addEventListener('input', aplicarVista)
+
+// Búsqueda de la barra superior: llega con `?q=` o con el evento `maldops:buscar`.
+const consultaInicial = new URLSearchParams(window.location.search).get('q')
+
+if (consultaInicial && campoBusqueda) {
+    campoBusqueda.value = consultaInicial
+}
+
+document.addEventListener('maldops:buscar', (evento) => {
+    if (!campoBusqueda) {
+        return
+    }
+
+    evento.preventDefault()
+    campoBusqueda.value = evento.detail.texto
+
+    if (clientesActuales.length > 0) {
+        aplicarVista()
+    }
+})
 filtroFavoritos?.addEventListener('change', aplicarVista)
 // [IA] fin
 

@@ -17,6 +17,7 @@ import {
     mostrarToast,
     confirmarAccion,
 } from './ui.js'
+import { descargarCsv, fechaParaArchivo } from './exportar.js'
 
 const estado = document.querySelector('#ventas-estado')
 const tabla = document.querySelector('#ventas-tabla')
@@ -43,6 +44,7 @@ let ventasActuales = []
 let clientesActuales = []
 let nombresPorId = new Map()
 let ventaEnEdicion = null
+let consultaVentas = ''
 
 function crearBotonAccion(texto, clase, etiqueta, alPulsar) {
     const boton = document.createElement('button')
@@ -145,6 +147,50 @@ function mostrarVacio() {
     }
 }
 
+/** Muestra las ventas que coinciden con el texto de la barra superior. */
+function aplicarFiltroVentas() {
+    const texto = consultaVentas.trim().toLowerCase()
+    const visibles = ventasActuales.filter((venta) => {
+        const nombre = nombresPorId.get(venta.clienteId) || ''
+
+        return (
+            !texto ||
+            `${nombre} ${venta.servicio} ${venta.estatus} ${venta.id}`
+                .toLowerCase()
+                .includes(texto)
+        )
+    })
+
+    total.textContent = String(visibles.length)
+
+    if (visibles.length === 0) {
+        pintarFilas([])
+        estado.replaceChildren(
+            crearVacio({
+                titulo: 'Sin resultados',
+                mensaje: 'Prueba con otra búsqueda.',
+            }),
+        )
+        return
+    }
+
+    estado.replaceChildren()
+    pintarFilas(visibles)
+}
+
+document.addEventListener('maldops:buscar', (evento) => {
+    if (!cuerpo) {
+        return
+    }
+
+    evento.preventDefault()
+    consultaVentas = evento.detail.texto
+
+    if (ventasActuales.length > 0) {
+        aplicarFiltroVentas()
+    }
+})
+
 async function cargarVentas() {
     mostrarCargando()
 
@@ -182,9 +228,7 @@ async function cargarVentas() {
             return
         }
 
-        estado.replaceChildren()
-        total.textContent = String(ventasActuales.length)
-        pintarFilas(ventasActuales)
+        aplicarFiltroVentas()
         botonNuevo.disabled = false
     } catch {
         mostrarError('No se pudieron cargar las ventas. Revisa tu conexión e intenta de nuevo.')
@@ -352,6 +396,97 @@ async function eliminarVenta(venta) {
         mostrarToast('No se pudo eliminar la venta. Revisa tu conexión.', 'error')
     }
 }
+
+/**
+ * Reportes exportables. Las ventas no tienen fecha, así que el historial se
+ * ordena por cliente y luego por el orden de registro (id). Igual que el
+ * dashboard, todos los reportes cuentan todas las ventas, incluidas las
+ * devueltas; el estatus va como columna para poder filtrar en Excel.
+ */
+function filasDeVentas() {
+    return ventasActuales.map((venta) => ({
+        id: venta.id,
+        cliente: nombresPorId.get(venta.clienteId) || 'Cliente desconocido',
+        servicio: venta.servicio,
+        precio: Number(venta.precio) || 0,
+        estatus: venta.estatus,
+    }))
+}
+
+const REPORTES = {
+    ventas: {
+        archivo: 'reporte-de-ventas',
+        columnas: ['ID', 'Cliente', 'Servicio', 'Precio (CLP)', 'Estatus'],
+        construir: () =>
+            filasDeVentas().map((v) => [v.id, v.cliente, v.servicio, v.precio, v.estatus]),
+    },
+    campanas: {
+        archivo: 'campanas-mas-vendidas',
+        columnas: ['Posición', 'Servicio', 'Cantidad de ventas', 'Total vendido (CLP)'],
+        construir: () => {
+            const porServicio = new Map()
+
+            for (const venta of filasDeVentas()) {
+                const acumulado = porServicio.get(venta.servicio) || { cantidad: 0, total: 0 }
+                acumulado.cantidad += 1
+                acumulado.total += venta.precio
+                porServicio.set(venta.servicio, acumulado)
+            }
+
+            return [...porServicio.entries()]
+                .sort(
+                    ([, a], [, b]) => b.cantidad - a.cantidad || b.total - a.total,
+                )
+                .map(([servicio, datos], indice) => [
+                    indice + 1,
+                    servicio,
+                    datos.cantidad,
+                    datos.total,
+                ])
+        },
+    },
+    historial: {
+        archivo: 'historial-de-ventas',
+        columnas: ['Cliente', 'ID de venta', 'Servicio', 'Precio (CLP)', 'Estatus'],
+        construir: () =>
+            filasDeVentas()
+                .sort(
+                    (a, b) =>
+                        a.cliente.localeCompare(b.cliente, 'es') || a.id.localeCompare(b.id),
+                )
+                .map((v) => [v.cliente, v.id, v.servicio, v.precio, v.estatus]),
+    },
+}
+
+function exportarReporte(tipo, boton) {
+    const reporte = REPORTES[tipo]
+
+    if (!reporte) {
+        return
+    }
+
+    if (ventasActuales.length === 0) {
+        mostrarToast('No hay ventas para exportar todavía.', 'error')
+        return
+    }
+
+    try {
+        descargarCsv(
+            `${reporte.archivo}-${fechaParaArchivo()}.csv`,
+            reporte.columnas,
+            reporte.construir(),
+        )
+        mostrarToast('Reporte descargado. Se abre con Excel.')
+    } catch {
+        mostrarToast('No se pudo generar el archivo. Intenta de nuevo.', 'error')
+    } finally {
+        boton.blur()
+    }
+}
+
+document.querySelectorAll('[data-exportar]').forEach((boton) => {
+    boton.addEventListener('click', () => exportarReporte(boton.dataset.exportar, boton))
+})
 
 if (estado && tabla && cuerpo && total) {
     cargarVentas()
