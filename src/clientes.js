@@ -30,6 +30,8 @@ const campoEstatus = document.querySelector('#cliente-estatus')
 const errorNombre = document.querySelector('#cliente-error-nombre')
 const errorEstatus = document.querySelector('#cliente-error-estatus')
 const errorGeneral = document.querySelector('#cliente-error-general')
+const campoNota = document.querySelector('#cliente-nota')
+const errorNota = document.querySelector('#cliente-error-nota')
 const botonCancelar = document.querySelector('#cliente-cancelar')
 const botonGuardar = document.querySelector('#cliente-guardar')
 const esAdmin = window.__sesion?.rol === 'admin'
@@ -236,7 +238,7 @@ async function cargarClientes() {
 }
 
 function limpiarErroresFormulario() {
-    for (const nodo of [errorNombre, errorEstatus, errorGeneral]) {
+    for (const nodo of [errorNombre, errorEstatus, errorNota, errorGeneral]) {
         if (nodo) {
             nodo.textContent = ''
             nodo.hidden = true
@@ -251,6 +253,7 @@ function mostrarErrorCampo(clave, mensaje) {
     const mapa = {
         nombre: { nodo: errorNombre, campo: campoNombre },
         estatus: { nodo: errorEstatus, campo: campoEstatus },
+        nota: { nodo: errorNota, campo: campoNota },
     }
     const entrada = mapa[clave]
 
@@ -268,7 +271,7 @@ function mostrarErrorCampo(clave, mensaje) {
 function mostrarErroresFormulario(errores) {
     let primero = null
 
-    for (const clave of ['nombre', 'estatus']) {
+    for (const clave of ['nombre', 'estatus', 'nota']) {
         if (errores[clave]) {
             const campo = mostrarErrorCampo(clave, errores[clave])
             primero = primero || campo
@@ -285,6 +288,9 @@ function abrirFormulario(cliente = null) {
     tituloDialogo.textContent = cliente ? 'Editar cliente' : 'Nuevo cliente'
     campoNombre.value = cliente ? cliente.nombre : ''
     campoEstatus.value = cliente ? cliente.estatus : 'Activo'
+    // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+    campoNota.value = cliente ? (cliente.nota ?? '') : ''
+    // [IA] fin
     limpiarErroresFormulario()
     dialogo.showModal()
     campoNombre.focus()
@@ -302,6 +308,7 @@ async function guardarCliente(evento) {
         const datos = {
             nombre: campoNombre.value,
             estatus: campoEstatus.value,
+            nota: campoNota.value,
         }
         const respuesta = clienteEnEdicion
             ? await api.clientes.actualizar(clienteEnEdicion, datos)
