@@ -81,3 +81,14 @@ html.dark .btn-favorito {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+
+.nota-cliente {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+html.dark .nota-cliente {
+    color: #94a3b8;
+}
