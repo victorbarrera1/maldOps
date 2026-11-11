@@ -51,16 +51,25 @@ function crearBotonAccion(texto, clase, etiqueta, alPulsar) {
     return boton
 }
 
+
 // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
 function crearBotonFavorito(cliente) {
     const boton = document.createElement('button')
+    const esFavorito = cliente.favorito === true
+
     boton.type = 'button'
-    boton.className = 'btn-favorito'
-    boton.textContent = cliente.favorito ? '★' : '☆'
-    boton.setAttribute('aria-pressed', String(cliente.favorito))
+    boton.className = [
+        'inline-flex size-10 shrink-0 items-center justify-center rounded-full text-2xl leading-none',
+        'transition hover:scale-125 hover:bg-amber-500/15',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500',
+        'disabled:cursor-wait disabled:opacity-50',
+        esFavorito ? 'text-amber-500' : 'text-slate-400 hover:text-amber-500',
+    ].join(' ')
+    boton.textContent = esFavorito ? '★' : '☆'
+    boton.setAttribute('aria-pressed', String(esFavorito))
     boton.setAttribute(
         'aria-label',
-        cliente.favorito
+        esFavorito
             ? `Quitar a ${cliente.nombre} de favoritos`
             : `Marcar a ${cliente.nombre} como favorito`,
     )
@@ -68,6 +77,7 @@ function crearBotonFavorito(cliente) {
 
     return boton
 }
+// [IA] fin
 
 async function alternarFavorito(cliente, boton) {
     boton.disabled = true
@@ -131,19 +141,33 @@ function pintarFilas(clientes) {
 
     for (const cliente of clientes) {
         const fila = document.createElement('tr')
+        fila.className = 'transition-colors duration-150 hover:bg-slate-500/10 [&>td]:py-3'
 
         const nombre = document.createElement('td')
-        // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
-        nombre.append(crearBotonFavorito(cliente), cliente.nombre)
-        // [IA] fin
-        
-        if (cliente.nota) {
-        const nota = document.createElement('small')
-        nota.className = 'block mt-0.5 text-xs text-slate-500 dark:text-slate-400'
-        nota.textContent = cliente.nota
-        nombre.append(nota)
-    }
 
+        // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+        const envoltorio = document.createElement('div')
+        envoltorio.className = 'flex items-center gap-2'
+
+        const textos = document.createElement('div')
+        textos.className = 'min-w-0'
+
+        const titulo = document.createElement('span')
+        titulo.className = 'block font-medium'
+        titulo.textContent = cliente.nombre
+        textos.append(titulo)
+
+        if (cliente.nota) {
+            const nota = document.createElement('small')
+            nota.className = 'mt-0.5 block max-w-xs break-words text-xs italic opacity-70 line-clamp-2'
+            nota.textContent = cliente.nota
+            nota.title = cliente.nota
+            textos.append(nota)
+        }
+
+        envoltorio.append(crearBotonFavorito(cliente), textos)
+        nombre.append(envoltorio)
+        // [IA] fin
 
         const estatus = document.createElement('td')
         estatus.append(crearBadgeEstatus(cliente.estatus))
@@ -153,7 +177,7 @@ function pintarFilas(clientes) {
         acciones.append(
             crearBotonAccion(
                 'Editar',
-                '',
+                'rounded-lg border border-slate-500/40 transition hover:bg-sky-600! hover:text-white!',
                 `Editar a ${cliente.nombre}`,
                 () => abrirFormulario(cliente),
             ),
@@ -177,6 +201,7 @@ function pintarFilas(clientes) {
     cuerpo.replaceChildren(fragmento)
     tabla.hidden = clientes.length === 0
 }
+
 
 function mostrarCargando() {
     estado.replaceChildren(crearCargando({ filas: 6, columnas: 3 }))
