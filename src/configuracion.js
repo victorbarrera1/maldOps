@@ -177,10 +177,12 @@ if (formulario) {
     })
 
     botonReiniciar.addEventListener('click', async () => {
+        // [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
         const confirmado = await confirmarAccion(
             '¿Restablecer los datos de prueba? Se borrarán los cambios y la sesión actual.',
             { titulo: 'Restablecer datos de prueba', textoConfirmar: 'Restablecer' },
         )
+        // [IA] fin
 
         if (!confirmado) {
             return
@@ -209,6 +211,7 @@ if (formulario) {
     cargarConfiguracion()
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
 /* ------------------------------------------------------------------------- */
 /* Cuenta: guardar cambios y eliminar                                         */
 /* ------------------------------------------------------------------------- */
@@ -350,3 +353,4 @@ if (botonGuardarCuenta && botonEliminarCuenta) {
         }
     })
 }
+// [IA] fin

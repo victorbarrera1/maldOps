@@ -1,3 +1,4 @@
+// [IA] inicio · ia/2026-11-11_victorbarrera1_exportar-buscador-contactos.md
 /**
  * Exportación de reportes a archivos que abre Excel.
  *
@@ -62,3 +63,4 @@ export function fechaParaArchivo(fecha = new Date()) {
 
     return `${fecha.getFullYear()}-${dos(fecha.getMonth() + 1)}-${dos(fecha.getDate())}`
 }
+// [IA] fin

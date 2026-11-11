@@ -52,6 +52,7 @@ export const auth = {
         return llamar('perfil')
     },
 
+    // [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
     async actualizarPerfil(datos) {
         return llamar('actualizarPerfil', datos)
     },
@@ -59,6 +60,7 @@ export const auth = {
     async eliminarCuenta() {
         return llamar('eliminarCuenta')
     },
+    // [IA] fin
 }
 
 export const clientes = {

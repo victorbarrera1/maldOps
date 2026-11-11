@@ -154,6 +154,7 @@ export async function perfil() {
     return respuesta
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
 export async function actualizarPerfil(datos = {}) {
     const respuesta = await solicitar('/auth/perfil', {
         metodo: 'PATCH',
@@ -177,6 +178,7 @@ export async function eliminarCuenta() {
 
     return respuesta
 }
+// [IA] fin
 
 export async function listarClientes() {
     return solicitar('/clientes')

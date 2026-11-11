@@ -244,6 +244,7 @@ function mostrarVacio() {
     }
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
 const campoOrden = document.querySelector('#clientes-orden')
 
 /** Ordena una copia de la lista según la opción del menú «Ordenar clientes». */
@@ -263,6 +264,7 @@ function ordenarClientes(lista, criterio = 'nombre-asc') {
 
     return copia.sort(porNombre)
 }
+// [IA] fin
 
 // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
 function aplicarVista() {
@@ -302,6 +304,7 @@ function aplicarVista() {
 
 campoBusqueda?.addEventListener('input', aplicarVista)
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_exportar-buscador-contactos.md
 // Búsqueda de la barra superior: llega con `?q=` o con el evento `maldops:buscar`.
 const consultaInicial = new URLSearchParams(window.location.search).get('q')
 
@@ -321,8 +324,11 @@ document.addEventListener('maldops:buscar', (evento) => {
         aplicarVista()
     }
 })
+// [IA] fin
 filtroFavoritos?.addEventListener('change', aplicarVista)
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
 campoOrden?.addEventListener('change', aplicarVista)
+// [IA] fin
 // [IA] fin
 
 async function cargarClientes() {

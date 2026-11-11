@@ -455,6 +455,7 @@ export async function perfil() {
     })
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
 /**
  * Actualiza nombre, correo y/o contraseña de la cuenta con sesión.
  * Para cambiar la contraseña hay que enviar `contrasenaActual` y `contrasenaNueva`.
@@ -566,6 +567,7 @@ export async function eliminarCuenta() {
         return ok({ mensaje: 'Cuenta eliminada.' })
     })
 }
+// [IA] fin
 
 // ---------------------------------------------------------------------------
 // Clientes
