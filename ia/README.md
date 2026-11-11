@@ -20,5 +20,6 @@
 | 2026-11-07 | @maldonou | Reemplaza tabla de Ayuda por acodeón con Alpine | [ver](2026-11-07_maldonou_acordeon-ayuda.md) |
 | 2026-11-07 | @maldonou |  Reemplaza tabla por acordéon en ayuda| [ver](2026-11-07_maldonou_Acordeon-ayuda.md) |
 | 2026-11-09 | @manolodeus | Clientes favoritos y notas | [ver](2026-11-09_manolodeus_favoritos-notas.md) |
+| 2026-11-11 | @maldonou | Búsqueda, filtros y orden en ventas.listar | [ver](2026-11-11_maldonou_busqueda-filtros-ventas-api.md) |
 | 2026-11-11 | @victorbarrera1 | Asistente de IA | Exportar reportes a Excel, buscador de la barra superior, contactos y logo | [ver](2026-11-11_victorbarrera1_exportar-buscador-contactos.md) |
 | 2026-11-11 | @victorbarrera1 | Asistente de IA | Edición y eliminación de cuenta, orden de clientes y README | [ver](2026-11-11_victorbarrera1_cuenta-orden-readme.md) |
