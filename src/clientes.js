@@ -20,6 +20,7 @@ const estado = document.querySelector('#clientes-estado')
 const tabla = document.querySelector('#clientes-tabla')
 const cuerpo = document.querySelector('#clientes-cuerpo')
 const total = document.querySelector('#clientes-total')
+const filtroFavoritos = document.querySelector('#clientes-solo-favoritos')
 const botonNuevo = document.querySelector('#nuevo-cliente')
 const dialogo = document.querySelector('#cliente-dialogo')
 const formulario = document.querySelector('#cliente-form')
@@ -92,6 +93,30 @@ async function alternarFavorito(cliente, boton) {
     }
 }
 // [IA] fin
+
+
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+function aplicarFiltro() {
+    const soloFavoritos = filtroFavoritos.checked
+    const lista = soloFavoritos
+        ? clientesActuales.filter((cliente) => cliente.favorito)
+        : clientesActuales
+
+    if (soloFavoritos && lista.length === 0) {
+        estado.replaceChildren(
+            crearVacio({
+                titulo: 'Aún no tienes favoritos',
+                mensaje: 'Marca una estrella para verlos aquí.',
+            }),
+        )
+    } else {
+        estado.replaceChildren()
+    }
+
+    pintarFilas(lista)
+}
+// [IA] fin
+
 
 function pintarFilas(clientes) {
     const fragmento = document.createDocumentFragment()
@@ -352,3 +377,7 @@ if (botonNuevo && dialogo && formulario) {
     botonCancelar.addEventListener('click', () => dialogo.close())
     formulario.addEventListener('submit', guardarCliente)
 }
+
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+filtroFavoritos?.addEventListener('change', aplicarFiltro)
+// [IA] fin
