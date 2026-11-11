@@ -154,6 +154,30 @@ export async function perfil() {
     return respuesta
 }
 
+export async function actualizarPerfil(datos = {}) {
+    const respuesta = await solicitar('/auth/perfil', {
+        metodo: 'PATCH',
+        cuerpo: {
+            nombre: datos.nombre,
+            correo: datos.correo,
+            contrasenaActual: datos.contrasenaActual,
+            contrasenaNueva: datos.contrasenaNueva,
+        },
+    })
+
+    return guardarSesionSiCorresponde(respuesta)
+}
+
+export async function eliminarCuenta() {
+    const respuesta = await solicitar('/auth/perfil', { metodo: 'DELETE' })
+
+    if (respuesta.ok) {
+        borrarSesion()
+    }
+
+    return respuesta
+}
+
 export async function listarClientes() {
     return solicitar('/clientes')
 }

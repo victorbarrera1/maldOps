@@ -51,6 +51,14 @@ export const auth = {
     async perfil() {
         return llamar('perfil')
     },
+
+    async actualizarPerfil(datos) {
+        return llamar('actualizarPerfil', datos)
+    },
+
+    async eliminarCuenta() {
+        return llamar('eliminarCuenta')
+    },
 }
 
 export const clientes = {
