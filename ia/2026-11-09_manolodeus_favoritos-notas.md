@@ -4,7 +4,7 @@
 - **Integrante:** Josemanuel Rodríguez (@ManoloDeus)
 - **Herramienta y modelo:** Claude (Sonnet 5.5)
 - **Enlace a la conversación:** (opcional, si el chat permite compartirla)
-- **Archivos afectados:** `src/api/servidor.js` (constante `MAX_NOTA`, `conExtras`, `validarCliente`, `crearCliente`, `actualizarCliente`, `listarClientes`, `obtenerCliente`), `src/clientes.js` (`crearBotonFavorito`, `alternarFavorito`, `pintarFilas`), `src/css/tema.css` (estilo de la estrella)
+- - **Archivos afectados:** `src/api/servidor.js` (constante `MAX_NOTA`, `conExtras`, `validarCliente`, `crearCliente`, `actualizarCliente`, `listarClientes`, `obtenerCliente`), `clientes.html` (checkbox de favoritos y campo de nota), `src/clientes.js` (`crearBotonFavorito`, `alternarFavorito`, `aplicarFiltro`, `pintarFilas`, diálogo de edición), `src/css/tema.css` (estilo de la estrella y de la nota), `README.md` (documentación de `favorito` y `nota`)
 
 ## Objetivo
 
@@ -917,6 +917,417 @@ pintarFilas pone tabla.hidden = clientes.length === 0 al final, así que ya ocul
 
 Escribe tu versión y pégame el HTML del checkbox y las funciones que tocaste. Marca con // [IA] inicio ... y // [IA] fin lo que escribas con mi ayuda. Si te trabas en alguno de los cuatro puntos, dime cuál y te lo escribo explicando cada línea.
 ```
+
+### Prompt 19
+
+```text
+  yaya continuemos con lo que nos falta de mi idea de los favoritos, quedamos en lo de ir a clientes html
+```
+
+### Respuesta 19
+
+```text
+Seguimos con el filtro “Solo favoritos”. Son 3 pasos, cada uno con su explicación.
+
+Paso 1: el checkbox en clientes.html
+Ctrl + P → clientes.html.
+Busca la línea <div id="clientes-estado"></div>.
+Pega justo encima de esa línea:
+html
+<!-- [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md -->
+<div class="barra-filtros">
+    <input type="checkbox" id="clientes-solo-favoritos">
+    <label for="clientes-solo-favoritos">Solo favoritos</label>
+</div>
+<!-- [IA] fin -->
+
+Qué hace: el id del checkbox permite encontrarlo desde JavaScript. El for del label lo conecta con ese id, así que al hacer clic en el texto también se marca (y los lectores de pantalla lo leen bien).
+
+Ctrl + S. Recarga y debe aparecer el checkbox sobre la tabla, sin hacer nada todavía.
+
+Commit:
+
+git add clientes.html
+git commit -m "feat(clientes): checkbox de solo favoritos [IA]"
+Paso 2: la lógica en src/clientes.js
+
+2a. Encontrar el checkbox. Arriba, junto a los otros querySelector (por ejemplo debajo de const total = ...), agrega:
+
+js
+const filtroFavoritos = document.querySelector('#clientes-solo-favoritos')
+
+2b. La función del filtro. Pégala encima de function pintarFilas:
+
+js
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+function aplicarFiltro() {
+    const soloFavoritos = filtroFavoritos.checked
+    const lista = soloFavoritos
+        ? clientesActuales.filter((cliente) => cliente.favorito)
+        : clientesActuales
+
+    if (soloFavoritos && lista.length === 0) {
+        estado.replaceChildren(
+            crearVacio({
+                titulo: 'Aún no tienes favoritos',
+                mensaje: 'Marca una estrella para verlos aquí.',
+            }),
+        )
+    } else {
+        estado.replaceChildren()
+    }
+
+    pintarFilas(lista)
+}
+// [IA] fin
+
+Qué hace, línea por línea:
+
+filtroFavoritos.checked es true si el checkbox está marcado.
+clientesActuales.filter(...) crea una lista nueva solo con los clientes cuyo favorito es true. No modifica clientesActuales, así que al desmarcar vuelven todos.
+Si el filtro está activo y no hay ninguno, muestra un mensaje en #clientes-estado (el mismo lugar donde ya salen “cargando” y “vacío”). Si no, lo deja limpio.
+pintarFilas(lista) dibuja la lista elegida. Ya oculta la tabla cuando la lista viene vacía.
+
+2c. Conectar el checkbox. Al final del archivo, junto a los otros addEventListener, agrega:
+
+js
+filtroFavoritos?.addEventListener('change', aplicarFiltro)
+
+El ?. evita un error si el checkbox no existiera en la página.
+
+Paso 3: dos lugares que deben usar el filtro
+
+Hoy dos funciones dibujan la tabla directamente y se saltarían el filtro. Cambia una línea en cada una:
+
+En cargarClientes, reemplaza pintarFilas(clientesActuales) por aplicarFiltro().
+En alternarFavorito, reemplaza pintarFilas(clientesActuales) por aplicarFiltro().
+
+Así, si con el filtro activo quitas una estrella, ese cliente desaparece de la lista y se ve el mensaje si era el último.
+
+Probar
+Marca un par de estrellas y activa “Solo favoritos”: solo deben verse esos.
+Con el filtro activo, quita una estrella: ese cliente desaparece.
+Quita todas: aparece “Aún no tienes favoritos”.
+Desmarca el filtro: vuelven todos.
+Recarga con F5: los favoritos siguen marcados.
+
+Commit:
+
+git add src/clientes.js
+git commit -m "feat(clientes): filtro de solo favoritos [IA]"
+
+Cuéntame cómo se ve y qué pasa en las pruebas. Después sigue la nota por cliente en el diálogo de editar.
+```
+
+### Prompt 20
+
+```text
+no se donde conectar el checkbox en cual es
+```
+
+### Respuesta 20
+
+```text
+Va en src/clientes.js, al final del archivo, debajo del último bloque. Hasta el fondo tienes esto:
+
+js
+if (estado && tabla && cuerpo && total) {
+    cargarClientes()
+}
+
+if (botonNuevo && dialogo && formulario) {
+    botonNuevo.addEventListener('click', () => abrirFormulario())
+    botonCancelar.addEventListener('click', () => dialogo.close())
+    formulario.addEventListener('submit', guardarCliente)
+}
+
+Después de ese último }, deja una línea en blanco y pega:
+
+js
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+filtroFavoritos?.addEventListener('change', aplicarFiltro)
+// [IA] fin
+
+Debe quedar así:
+
+js
+if (botonNuevo && dialogo && formulario) {
+    botonNuevo.addEventListener('click', () => abrirFormulario())
+    botonCancelar.addEventListener('click', () => dialogo.close())
+    formulario.addEventListener('submit', guardarCliente)
+}
+
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+filtroFavoritos?.addEventListener('change', aplicarFiltro)
+// [IA] fin
+
+Cómo llegar rápido: abre clientes.js y presiona Ctrl + End para saltar al final del archivo.
+
+Qué hace esa línea
+
+Le dice al navegador: “cuando el checkbox cambie (se marque o se desmarque), ejecuta aplicarFiltro”. Sin esa línea el checkbox se ve, pero no hace nada.
+
+Revisa que tengas las otras tres piezas
+
+Para que funcione, el archivo necesita las tres cosas del paso 2:
+
+const filtroFavoritos = document.querySelector('#clientes-solo-favoritos') arriba, con los otros querySelector.
+La función aplicarFiltro encima de pintarFilas.
+Esta línea del final.
+
+Y en cargarClientes y alternarFavorito, pintarFilas(clientesActuales) cambiado por aplicarFiltro().
+
+Guarda con Ctrl + S, marca “Solo favoritos” en el navegador y dime qué pasa.
+```
+
+### Prompt 21
+
+```text
+yaya hagamos las notas paso a paso
+```
+
+### Respuesta 21
+
+```text
+Vamos de a uno. Este es el paso 1: el campo de nota en clientes.html.
+
+Dónde
+Ctrl + P, escribe clientes.html y Enter.
+Presiona Ctrl + F y busca cliente-error-general. Vas a ver esta línea, dentro del formulario del diálogo:
+html
+   <p class="campo-error" id="cliente-error-general" hidden></p>
+Qué pegar
+
+Pega esto justo encima de esa línea (el <p> queda debajo de lo que pegues):
+
+html
+<!-- [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md -->
+<div class="modal-campo">
+    <label class="label" for="cliente-nota">Nota (opcional)</label>
+    <textarea class="input" id="cliente-nota" name="nota" rows="3" maxlength="300"></textarea>
+    <p class="campo-error" id="cliente-error-nota" hidden></p>
+</div>
+<!-- [IA] fin -->
+
+Guarda con Ctrl + S.
+
+Qué hace cada parte
+<textarea>: campo de texto de varias líneas, para notas más largas que un nombre.
+id="cliente-nota": el nombre con el que clientes.js lo va a encontrar en el próximo paso.
+<label for="cliente-nota">: conecta el texto “Nota (opcional)” con el campo, para que se pueda hacer clic en el texto y para los lectores de pantalla.
+maxlength="300": impide escribir más de 300 caracteres, el mismo límite que ya validas en servidor.js con MAX_NOTA.
+<p ... id="cliente-error-nota" hidden>: lugar reservado para mostrar un error de la nota si el servidor la rechaza. Queda oculto hasta que haga falta.
+Cómo comprobar
+En el navegador, entra a Clientes y haz clic en Editar de cualquier cliente.
+Debe aparecer el campo Nota (opcional) entre el estatus y los botones.
+Todavía no guarda nada, eso viene en el paso 2. Si sale algún error rojo en la consola (Ctrl + Shift + I → Console), mándame una captura.
+Commit
+
+En la terminal de ...\Documents\maldOps> (no la de node):
+
+git add clientes.html
+git commit -m "feat(clientes): campo de nota en el diálogo [IA]"
+
+Dime cuando lo veas en el diálogo y pasamos al paso 2: conectar el campo en clientes.js.
+```
+
+### Prompt 22
+
+```text
+listo si sale el cuadro esta perfecto
+```
+
+### Respuesta 22
+
+```text
+Perfecto. Paso 2: conectar el campo en src/clientes.js. Son 5 cambios chicos, hechos en este orden. Abre el archivo con Ctrl + P → clientes.js.
+
+2a. Encontrar los elementos
+
+Arriba, junto a los otros querySelector (busca const errorGeneral = ...), agrega debajo:
+
+js
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+const campoNota = document.querySelector('#cliente-nota')
+const errorNota = document.querySelector('#cliente-error-nota')
+// [IA] fin
+
+Esto le da a JavaScript acceso al campo y a su mensaje de error, igual que hace con el nombre y el estatus.
+
+2b. Limpiar el error al abrir el diálogo
+
+Busca la función limpiarErroresFormulario. Tiene esta lista:
+
+js
+for (const nodo of [errorNombre, errorEstatus, errorGeneral]) {
+
+Agrégale errorNota:
+
+js
+for (const nodo of [errorNombre, errorEstatus, errorNota, errorGeneral]) {
+
+Así, si un error quedó visible, se borra cada vez que abres el diálogo. Esta línea no necesita marca, porque es un ajuste mínimo.
+
+2c. Poder mostrar el error de la nota
+
+Busca la función mostrarErrorCampo. Tiene un objeto mapa:
+
+js
+const mapa = {
+    nombre: { nodo: errorNombre, campo: campoNombre },
+    estatus: { nodo: errorEstatus, campo: campoEstatus },
+}
+
+Agrega una línea igual para la nota:
+
+js
+    nota: { nodo: errorNota, campo: campoNota },
+
+Después, en mostrarErroresFormulario, busca:
+
+js
+for (const clave of ['nombre', 'estatus']) {
+
+y cámbiala por:
+
+js
+for (const clave of ['nombre', 'estatus', 'nota']) {
+
+Con esto, si el servidor responde con un 422 por la nota, el mensaje aparece bajo el campo correcto.
+
+2d. Cargar la nota al abrir el diálogo
+
+En abrirFormulario, debajo de la línea campoEstatus.value = ..., agrega:
+
+js
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+campoNota.value = cliente ? (cliente.nota ?? '') : ''
+// [IA] fin
+
+Si editas un cliente, muestra su nota (o vacío si no tiene). Si creas uno nuevo, el campo empieza vacío. El ?? '' evita que aparezca la palabra undefined en clientes antiguos.
+
+2e. Enviar la nota al guardar
+
+En guardarCliente, busca:
+
+js
+const datos = {
+    nombre: campoNombre.value,
+    estatus: campoEstatus.value,
+}
+
+y agrégale la nota:
+
+js
+const datos = {
+    nombre: campoNombre.value,
+    estatus: campoEstatus.value,
+    // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+    nota: campoNota.value,
+    // [IA] fin
+}
+
+Por qué no enviamos favorito aquí: el servidor solo cambia los campos que vienen en los datos. Como el diálogo no lo manda, editar el nombre o la nota no le quita la estrella a nadie.
+
+Guarda con Ctrl + S.
+
+Probar
+Haz clic en Editar de un cliente, escribe una nota y presiona Guardar.
+Vuelve a abrir Editar de ese cliente: la nota debe aparecer.
+Recarga con F5 y abre Editar otra vez: debe seguir ahí.
+Si salió un error rojo en la consola (Ctrl + Shift + I → Console), mándame una captura.
+
+Todavía no se ve la nota en la tabla; eso es el paso 3.
+
+Commit
+git add src/clientes.js
+git commit -m "feat(clientes): editar nota de cada cliente [IA]"
+
+Dime si la nota se guarda y sigue después de recargar.
+```
+
+### Prompt 23
+
+```text
+si se guarda
+```
+
+### Respuesta 23
+
+```text
+Perfecto, ya funciona el guardado. Paso 3: mostrar la nota en la tabla, para que se vea sin abrir el diálogo.
+
+3a. El código en src/clientes.js
+Busca la función pintarFilas.
+Encuentra esta línea (la de la estrella):
+js
+   nombre.append(crearBotonFavorito(cliente), cliente.nombre)
+Pega justo debajo de ella:
+js
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+if (cliente.nota) {
+    const nota = document.createElement('small')
+    nota.className = 'nota-cliente'
+    nota.textContent = cliente.nota
+    nombre.append(nota)
+}
+// [IA] fin
+
+Qué hace:
+
+if (cliente.nota) solo se ejecuta si el cliente tiene nota; si está vacía (''), no dibuja nada.
+createElement('small') crea un texto pequeño, que se agrega dentro de la celda del nombre, debajo de él.
+textContent inserta la nota como texto, no como HTML. Si alguien escribe <script> en la nota, se muestra tal cual y no se ejecuta. Por eso nunca se usa innerHTML con datos del usuario.
+
+Guarda con Ctrl + S.
+
+3b. El estilo en src/css/tema.css
+
+Pega al final del archivo (antes de /* [IA] fin */ si lo tienes):
+
+css
+/* Nota de cada cliente */
+.nota-cliente {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+html.dark .nota-cliente {
+    color: #94a3b8;
+}
+display: block hace que la nota quede en su propia línea, debajo del nombre.
+La regla de html.dark aclara el gris en modo oscuro, porque 
+#64748b se vería apagado sobre fondo oscuro.
+
+Guarda con Ctrl + S.
+
+Probar
+En Clientes, debe verse la nota en gris pequeño debajo del nombre de los que la tengan.
+Revisa en modo claro y en modo oscuro.
+Borra la nota de un cliente desde Editar y guarda: debe desaparecer de la tabla.
+Si sale un error rojo en la consola (Ctrl + Shift + I → Console), mándame una captura.
+Commit
+
+Un commit por cada parte. En la terminal de ...\Documents\maldOps>:
+
+git add src/clientes.js
+git commit -m "feat(clientes): muestra la nota bajo el nombre [IA]"
+git add src/css/tema.css
+git commit -m "style(clientes): estilo de la nota en modo claro y oscuro [IA]"
+git push
+
+Si el push dice rejected (fetch first), haz git pull --rebase y repite el git push.
+
+Lo que queda para cerrar la función
+README: documentar que PATCH /clientes/:id acepta favorito y nota.
+Registro de IA: agregar a ia/2026-11-09_manolodeus_favoritos-notas.md los prompts y respuestas nuevos (filtro y nota), actualizar “Qué se incorporó” y completar la Verificación con lo que probaste de verdad.
+
+Dime cómo se ve la nota en la tabla y vemos esos dos cierres.
+```
+
+
+
 
 ## Qué se incorporó al proyecto
 
