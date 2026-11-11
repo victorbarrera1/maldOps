@@ -80,6 +80,8 @@ Las cuatro cuentas están en `public/mocks/usuarios.json`. El login y el registr
 
 También se puede crear una cuenta nueva desde **Registro**; queda con rol `vendedor`.
 
+Desde **Configuración** se puede editar el nombre, el correo y la contraseña de la cuenta, o eliminarla. La única cuenta de administrador no se puede eliminar (`409`). Si se elimina una cuenta de prueba, **Restablecer datos de prueba** la recupera.
+
 ## Vistas
 
 | Vista | Ruta | Cómo llegar | Acceso |
@@ -99,10 +101,11 @@ Las vistas privadas están marcadas con `data-privada="true"` en el `<body>`. Si
 - **Sesión simulada:** login y registro con validación por campo, sesión persistente en `localStorage`, cierre de sesión y guard para las vistas privadas. Los errores `401` vuelven al login.
 - **Roles:** `admin` y `vendedor`. Solo el administrador ve y puede ejecutar la eliminación de clientes y ventas.
 - **Dashboard:** cuatro métricas calculadas con datos reales de la API —clientes totales, ventas obtenidas, ganancias y ticket promedio—, además de las últimas ocho ventas y los primeros cinco clientes.
-- **Clientes:** listado con total y CRUD. Crear y editar usan un diálogo con validación por campo; el nombre duplicado responde `409`. Eliminar pide confirmación y falla con `409` si el cliente tiene ventas asociadas.
-- **Ventas:** listado con total y CRUD. El formulario carga los clientes desde la API, valida un precio entero mayor que 0 y ofrece los servicios y estatus del catálogo. Eliminar también pide confirmación.
-- **Ayuda:** preguntas frecuentes cargadas desde la API (ocho registros) y datos de contacto del equipo.
-- **Configuración:** datos de la cuenta y **simulador de pruebas**: latencia (rápida, normal o lenta), probabilidad de error (0 %, 10 %, 25 % o 50 %), forzar el próximo fallo `500` y restablecer los datos de prueba.
+- **Clientes:** listado con total y CRUD. Crear y editar usan un diálogo con validación por campo; el nombre duplicado responde `409`. Eliminar pide confirmación y falla con `409` si el cliente tiene ventas asociadas. Cada cliente puede marcarse como **favorito** (estrella) y tener una **nota** de hasta 300 caracteres. La lista se puede **buscar** por nombre o nota, filtrar por **solo favoritos** y ordenar.
+- **Ventas:** listado con total y CRUD. El formulario carga los clientes desde la API, valida un precio entero mayor que 0 y ofrece los servicios y estatus del catálogo. Eliminar también pide confirmación. Tres botones **Exportar a Excel** descargan un archivo `.csv` (separador `;`, se abre con doble clic en Excel): reporte de ventas, campañas más vendidas e historial de ventas por cliente. Los reportes cuentan todas las ventas, incluidas las devueltas, igual que el dashboard.
+- **Buscador de la barra superior:** filtra en vivo la lista de Clientes o de Ventas. Desde otra vista, al pulsar Enter abre Clientes con el texto buscado (`clientes.html?q=texto`).
+- **Ayuda:** preguntas frecuentes en acordeón cargadas desde la API (ocho registros) y datos de contacto del equipo; el botón «contactar» abre el correo del integrante.
+- **Configuración:** edición de la cuenta (nombre, correo, contraseña —pide la actual— y eliminar cuenta, con diálogo de confirmación), modo oscuro y **simulador de pruebas**: latencia (rápida, normal o lenta), probabilidad de error (0 %, 10 %, 25 % o 50 %), forzar el próximo fallo `500` y restablecer los datos de prueba.
 - **Estados de interfaz:** cada vista con datos muestra esqueleto de carga, estado vacío y error con botón **Reintentar**. Añadir `?fallar` a la URL fuerza un `500`; `?fallar=404` fuerza ese código.
 - **Avisos y accesibilidad:** toasts para éxito y error, diálogos `<dialog>` nativos y `aria-invalid` en los campos con error.
 
@@ -153,6 +156,8 @@ Las rutas son relativas a `VITE_API_URL`. Por ejemplo, si vale `http://localhost
 | `api.auth.registrar(datos)` | POST | `/auth/registro` | Crea una cuenta con rol `vendedor` e inicia sesión. 201 · 409 (correo en uso) · 422 · 500 |
 | `api.auth.cerrarSesion()` | POST | `/auth/logout` | Cierra la sesión. 200 · 204 |
 | `api.auth.perfil()` 🔒 | GET | `/auth/perfil` | Devuelve la cuenta de la sesión. 200 · 401 · 500 |
+| `api.auth.actualizarPerfil(datos)` 🔒 | PATCH | `/auth/perfil` | Edita `nombre`, `correo` y/o la contraseña (`contrasenaActual` + `contrasenaNueva`). Correo en uso: 409. 200 · 401 · 409 · 422 · 500 |
+| `api.auth.eliminarCuenta()` 🔒 | DELETE | `/auth/perfil` | Elimina la cuenta de la sesión y la cierra. No deja eliminar al único administrador. 200 · 401 · 409 · 500 |
 | `api.clientes.listar()` 🔒 | GET | `/clientes` | Lista todos los clientes. 200 · 401 · 500 |
 | `api.clientes.obtener(id)` 🔒 | GET | `/clientes/:id` | Un cliente por id. 200 · 401 · 404 · 500 |
 | `api.clientes.crear(datos)` 🔒 | POST | `/clientes` | Crea un cliente. 201 · 401 · 409 (nombre repetido) · 422 · 500 |
@@ -204,7 +209,7 @@ Cualquier llamada puede responder `500` si el simulador o `?fallar` lo fuerza.
 | Archivo | Registros | Contenido |
 |---|---|---|
 | `usuarios.json` | 4 | Cuentas con nombre, correo, contraseña de demostración y rol (`admin`/`vendedor`) |
-| `clientes.json` | 12 | `id`, `nombre` y `estatus` (`Activo`/`Inactivo`) |
+| `clientes.json` | 12 | `id`, `nombre` y `estatus` (`Activo`/`Inactivo`). La API agrega `favorito` (`false`) y `nota` (vacía) a cada cliente; se guardan al marcarlos o editarlos |
 | `ventas.json` | 15 | `id`, `clienteId`, `precio` (CLP), `servicio` y `estatus` |
 | `preguntas.json` | 8 | `id`, `pregunta` y `respuesta` para la vista de ayuda |
 
@@ -236,7 +241,8 @@ maldOps/
 │   │   └── http.js            # Transporte fetch para el backend real
 │   ├── css/                   # app.css (tema, reset y componentes), dashboard.css y login.css
 │   ├── main.js                # Alpine, iconos, menú y cierre de sesión
-│   ├── nav.js                 # Menú lateral y barra superior compartidos
+│   ├── nav.js                 # Menú lateral y barra superior (con buscador) compartidos
+│   ├── exportar.js            # Descarga de reportes en CSV para Excel
 │   ├── guard.js               # Protección de vistas privadas
 │   ├── iconos.js              # Ionicons desde npm (solo los iconos usados)
 │   ├── ui.js                  # Estados, badges, toasts y confirmaciones
