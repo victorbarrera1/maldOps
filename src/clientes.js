@@ -21,6 +21,7 @@ const tabla = document.querySelector('#clientes-tabla')
 const cuerpo = document.querySelector('#clientes-cuerpo')
 const total = document.querySelector('#clientes-total')
 const filtroFavoritos = document.querySelector('#clientes-solo-favoritos')
+const campoBusqueda = document.querySelector('#clientes-busqueda')
 const botonNuevo = document.querySelector('#nuevo-cliente')
 const dialogo = document.querySelector('#cliente-dialogo')
 const formulario = document.querySelector('#cliente-form')
@@ -87,8 +88,13 @@ async function alternarFavorito(cliente, boton) {
             return
         }
 
-        cliente.favorito = respuesta.data.favorito
-        pintarFilas(clientesActuales)
+        cliente.favorito = respuesta.data.favorito      
+        mostrarToast(
+            cliente.favorito
+                ? `${cliente.nombre} se agregó a favoritos.`
+                : `${cliente.nombre} se quitó de favoritos.`,
+        )
+        aplicarVista()
     } catch {
         mostrarToast('No se pudo actualizar el favorito. Revisa tu conexión.', 'error')
         boton.disabled = false
@@ -213,10 +219,48 @@ function mostrarVacio() {
     }
 }
 
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
+function aplicarVista() {
+    const texto = (campoBusqueda?.value || '').trim().toLowerCase()
+    const soloFavoritos = Boolean(filtroFavoritos?.checked)
+
+    const visibles = clientesActuales.filter((cliente) => {
+        if (soloFavoritos && cliente.favorito !== true) {
+            return false
+        }
+
+        return (
+            !texto ||
+            cliente.nombre.toLowerCase().includes(texto) ||
+            (cliente.nota || '').toLowerCase().includes(texto)
+        )
+    })
+
+    total.textContent = String(visibles.length)
+
+    if (visibles.length === 0) {
+        pintarFilas([])
+        estado.replaceChildren(
+            crearVacio({
+                titulo: 'Sin resultados',
+                mensaje: 'Prueba con otra búsqueda o desactiva el filtro de favoritos.',
+            }),
+        )
+        return
+    }
+
+    estado.replaceChildren()
+    pintarFilas(visibles)
+}
+
+campoBusqueda?.addEventListener('input', aplicarVista)
+filtroFavoritos?.addEventListener('change', aplicarVista)
+// [IA] fin
+
 async function cargarClientes() {
     mostrarCargando()
 
-    try {
+        try {
         const respuesta = await api.clientes.listar()
 
         if (esNoAutorizado(respuesta)) {
@@ -236,9 +280,7 @@ async function cargarClientes() {
             return
         }
 
-        estado.replaceChildren()
-        total.textContent = String(clientesActuales.length)
-        pintarFilas(clientesActuales)
+        aplicarVista()
         botonNuevo.disabled = false
     } catch {
         mostrarError('No se pudieron cargar los clientes. Revisa tu conexión e intenta de nuevo.')

@@ -26,11 +26,23 @@
                     </button>
                 </div>
                 <!-- [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md -->
-                <div class="flex flex-wrap items-center gap-3 my-4">
-                <input type="checkbox" id="clientes-solo-favoritos" class="size-4 accent-sky-600">
-                <label for="clientes-solo-favoritos" class="cursor-pointer text-sm font-medium">Solo favoritos</label>
+                <div class="relative my-3 max-w-sm">
+                <label for="clientes-busqueda" class="sr-only">Buscar cliente</label>
+                <ion-icon name="search" aria-hidden="true"
+                    class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></ion-icon>
+                <input type="search" id="clientes-busqueda" placeholder="Buscar por nombre o nota..."
+                    class="w-full rounded-full border border-slate-300 bg-white py-2 pl-10 pr-4 text-sm text-slate-800 shadow-sm transition placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100">
                 </div>
-                <!-- [IA] fin -->
+
+                <div class="my-3">
+                <input type="checkbox" id="clientes-solo-favoritos" class="peer sr-only">
+                <label for="clientes-solo-favoritos"
+                    class="inline-flex cursor-pointer select-none items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition duration-150 hover:border-amber-400 hover:bg-slate-100 peer-checked:border-amber-500 peer-checked:bg-amber-500 peer-checked:text-slate-900 peer-focus-visible:ring-2 peer-focus-visible:ring-amber-400 peer-focus-visible:ring-offset-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 dark:peer-checked:border-amber-500 dark:peer-checked:bg-amber-500 dark:peer-checked:text-slate-900 dark:peer-focus-visible:ring-offset-slate-900">
+                <span aria-hidden="true">★</span>
+                Solo favoritos
+                </label>
+                </div>
+<!-- [IA] fin -->
                 <div id="clientes-estado"></div>
                 <table id="clientes-tabla" hidden>
                     <thead>
