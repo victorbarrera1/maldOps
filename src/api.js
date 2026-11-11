@@ -64,10 +64,11 @@ export const auth = {
 }
 
 export const clientes = {
-    async listar() {
-        return llamar('listarClientes')
+//[IA] inicio · ia/2026-11-09_maldonou_busqueda-filtros-clientes-api.md
+    async listar(opciones = {}) {
+        return llamar('listarClientes', opciones)
     },
-
+//[IA] fin
     async obtener(id) {
         return llamar('obtenerCliente', id)
     },

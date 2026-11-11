@@ -26,6 +26,7 @@ interfaz, estructura de proyecto ordenada y README de entrega.
 | D — README | `feat/bloque-d-readme` | [#11](https://github.com/victorbarrera1/maldOps/pull/11) | Completado |
 | E — Cierre | `feat/bloque-e-cierre` | [#12](https://github.com/victorbarrera1/maldOps/pull/12) | Completado |
 | F — Limpieza | `fix/limpieza-entrega` | [#14](https://github.com/victorbarrera1/maldOps/pull/14) | Completado |
+| G — Busqueda, filtros y orden | `feat/bloque-g-busqueda-filtros` |  | En curso |
 
 ## Checklist
 
@@ -147,6 +148,10 @@ verificó con admin, con vendedor y con una cuenta nueva.
   390 px.
 - Consola sin errores; solo queda el aviso verbose de Chrome por el campo de
   contraseña de Configuración, que se resolverá al cablear esa sección.
+
+### G. Búsqueda, filtros y orden
+
+- [x] G1. Implementar funciones de listar con opciones de búsqueda, filtro y orden en `src/api.js` y `src/servidor.js`.
 
 ## Registro de bloqueos
 

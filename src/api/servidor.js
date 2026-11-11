@@ -73,7 +73,14 @@ function almacen() {
 function normalizarTexto(valor) {
     return String(valor ?? '').trim()
 }
-
+//[IA] inicio · ia/2026-11-09_maldonou_busqueda-filtros-clientes-api.md
+function normalizarSinTildes(valor) {
+    return normalizarTexto(valor)
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+}
+//[IA] fin
 function normalizarCorreo(valor) {
     return normalizarTexto(valor).toLowerCase()
 }
@@ -573,12 +580,42 @@ export async function eliminarCuenta() {
 // Clientes
 // ---------------------------------------------------------------------------
 
-export async function listarClientes() {
-    return conSesion(async () => {
-        const db = await inicializarDb()
+export async function listarClientes(opciones = {}) {
+   return conSesion(async () => {
+    const { busqueda = '', estatus = '', orden = 'nombre-asc' } = opciones
+    const ordenesValidos = ['nombre-asc', 'nombre-desc']
+   
+    if(estatus && !ESTATUS_CLIENTE.includes(estatus)) {
+        return fallo('Estatus inválido.', 400)
+    }
+    if(orden && !ordenesValidos.includes(orden)) {
+        return fallo('Orden inválido.', 400)
+    }
 
-        return ok(clonar(db.clientes).map(conExtras)) 
-    })
+    const db = await inicializarDb()
+    let clientes = clonar(db.clientes).map(conExtras) 
+
+    const busquedaNormalizada = normalizarSinTildes(busqueda)
+    if (busquedaNormalizada) {
+        clientes = clientes.filter((cliente) => {
+            const nombreValido = normalizarSinTildes(cliente.nombre)
+            const notaValida = normalizarSinTildes(cliente.nota)
+            return nombreValido.includes(busquedaNormalizada) || notaValida.includes(busquedaNormalizada)
+        })
+    }
+    if (estatus) {
+        clientes = clientes.filter((cliente) => mismoTexto(cliente.estatus, estatus))
+    }
+    //[IA] inicio · ia/2026-11-09_maldonou_busqueda-filtros-clientes-api.md
+    if (orden === 'nombre-asc') {
+    clientes.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+    }
+    else if (orden === 'nombre-desc') {
+    clientes.sort((a, b) => b.nombre.localeCompare(a.nombre, 'es'))
+    }
+    //[IA] fin
+    return ok(clientes)
+   })
 }
 
 export async function obtenerCliente(id) {
