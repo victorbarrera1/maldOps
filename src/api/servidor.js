@@ -462,6 +462,120 @@ export async function perfil() {
     })
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
+/**
+ * Actualiza nombre, correo y/o contraseña de la cuenta con sesión.
+ * Para cambiar la contraseña hay que enviar `contrasenaActual` y `contrasenaNueva`.
+ * Solo se aplican los campos enviados; si no hay cambios responde 200 sin tocar nada.
+ */
+export async function actualizarPerfil(datos = {}) {
+    return conSesion(async (sesion) => {
+        const db = await inicializarDb()
+        const usuario = db.usuarios.find((elemento) => elemento.id === sesion.id)
+
+        if (!usuario) {
+            borrarSesion()
+
+            return fallo('Tu sesión ya no es válida. Inicia sesión de nuevo.', 401)
+        }
+
+        const errores = {}
+        const cambios = {}
+        let conflicto = false
+        const trae = (clave) => Object.prototype.hasOwnProperty.call(datos, clave)
+
+        if (trae('nombre')) {
+            const nombre = normalizarTexto(datos.nombre)
+
+            if (!nombre) {
+                errores.nombre = 'Escribe tu nombre de usuario.'
+            } else if (nombre.length < 2) {
+                errores.nombre = 'El nombre debe tener al menos 2 caracteres.'
+            } else if (nombre.length > 80) {
+                errores.nombre = 'El nombre no puede superar los 80 caracteres.'
+            } else {
+                cambios.nombre = nombre
+            }
+        }
+
+        if (trae('correo')) {
+            const correo = normalizarCorreo(datos.correo)
+
+            if (!correo) {
+                errores.correo = 'Escribe tu correo electrónico.'
+            } else if (!correoPermitido(correo)) {
+                errores.correo = 'Solo puedes usar un correo @gmail.com o @mail.udp.cl.'
+            } else if (
+                db.usuarios.some(
+                    (otro) => otro.id !== usuario.id && normalizarCorreo(otro.correo) === correo,
+                )
+            ) {
+                conflicto = true
+                errores.correo = 'Ya existe una cuenta con ese correo.'
+            } else {
+                cambios.correo = correo
+            }
+        }
+
+        const nueva = String(datos.contrasenaNueva ?? '')
+
+        if (nueva) {
+            if (String(datos.contrasenaActual ?? '') !== usuario.contrasena) {
+                errores.contrasenaActual = 'La contraseña actual no es correcta.'
+            }
+
+            if (nueva.length < 6) {
+                errores.contrasenaNueva = 'La contraseña nueva debe tener al menos 6 caracteres.'
+            } else {
+                cambios.contrasena = nueva
+            }
+        }
+
+        if (hayErrores(errores)) {
+            return fallo('Revisa los datos de tu cuenta.', conflicto ? 409 : 422, errores)
+        }
+
+        Object.assign(usuario, cambios)
+        guardarDb(db)
+
+        const publico = sinContrasena(usuario)
+        guardarSesion(publico)
+
+        return ok(publico)
+    })
+}
+
+/**
+ * Elimina la cuenta con sesión y cierra la sesión.
+ * No deja eliminar a la única cuenta de administrador.
+ */
+export async function eliminarCuenta() {
+    return conSesion(async (sesion) => {
+        const db = await inicializarDb()
+        const indice = db.usuarios.findIndex((elemento) => elemento.id === sesion.id)
+
+        if (indice === -1) {
+            borrarSesion()
+
+            return fallo('Tu sesión ya no es válida. Inicia sesión de nuevo.', 401)
+        }
+
+        const usuario = db.usuarios[indice]
+        const administradores = db.usuarios.filter((otro) => otro.rol === 'admin')
+
+        if (usuario.rol === 'admin' && administradores.length <= 1) {
+            return fallo('No puedes eliminar la única cuenta de administrador.', 409)
+        }
+
+        db.usuarios.splice(indice, 1)
+        guardarDb(db)
+        borrarSesion()
+
+        return ok({ mensaje: 'Cuenta eliminada.' })
+    })
+}
+// [IA] fin
+
 // ---------------------------------------------------------------------------
 // Clientes
 // ---------------------------------------------------------------------------

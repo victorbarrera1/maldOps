@@ -27,17 +27,29 @@
                 </div>
                 <table>
                     <tbody>
+                        <!-- [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md -->
                         <tr>
-                            <td>Editar nombre de la cuenta</td>
-                            <td><input class="input" type="text" id="cuenta-nombre" placeholder="Usuario 1"></td>
+                            <td><label for="cuenta-nombre">Editar nombre de la cuenta</label></td>
+                            <td><input class="input" type="text" id="cuenta-nombre" placeholder="Usuario 1" autocomplete="name"></td>
                         </tr>
                         <tr>
-                            <td>Cambiar contraseña</td>
-                            <td><input class="input" type="password" placeholder="Contraseña"></td>
+                            <td><label for="cuenta-correo">Cambiar correo</label></td>
+                            <td><input class="input" type="email" id="cuenta-correo" placeholder="Correo Electronico" autocomplete="email"></td>
                         </tr>
                         <tr>
-                            <td>Cambiar correo</td>
-                            <td><input class="input" type="text" id="cuenta-correo" placeholder="Correo Electronico"></td>
+                            <td><label for="cuenta-contrasena-actual">Contraseña actual</label></td>
+                            <td><input class="input" type="password" id="cuenta-contrasena-actual" placeholder="Solo si vas a cambiarla" autocomplete="current-password"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="cuenta-contrasena-nueva">Cambiar contraseña</label></td>
+                            <td><input class="input" type="password" id="cuenta-contrasena-nueva" placeholder="Contraseña nueva (mínimo 6)" autocomplete="new-password"></td>
+                        </tr>
+                        <tr>
+                            <td>Guardar cambios de la cuenta</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" id="guardar-cuenta">Guardar cambios</button>
+                                <p id="cuenta-aviso" class="text-sm" role="status" aria-live="polite"></p>
+                            </td>
                         </tr>
 
                         <tr>
@@ -46,13 +58,27 @@
                         </tr>
                         <tr>
                             <td>Eliminar cuenta</td>
-                            <td><button class="btn btn-danger">Eliminar</button></td>
+                            <td><button type="button" class="btn btn-danger" id="eliminar-cuenta">Eliminar</button></td>
                         </tr>
+                        <!-- [IA] fin -->
 
                     </tbody>
                 </table>
             </div>
             <!-- Fin Clientes activos -->
+
+            <!-- [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md -->
+            <dialog id="confirmar-dialogo" class="modal" aria-labelledby="confirmar-titulo">
+                <form method="dialog">
+                    <h2 id="confirmar-titulo">Confirmar eliminación</h2>
+                    <p class="estado-detalle" id="confirmar-mensaje"></p>
+                    <div class="modal-acciones">
+                        <button type="submit" class="btn" value="cancelar">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" value="confirmar">Eliminar</button>
+                    </div>
+                </form>
+            </dialog>
+            <!-- [IA] fin -->
 
             <!-- Simulador de pruebas -->
             <div class="nuevos-clientes">

@@ -17,7 +17,9 @@ import {
     mostrarToast,
     confirmarAccion,
 } from './ui.js'
+// [IA] inicio · ia/2026-11-11_victorbarrera1_exportar-buscador-contactos.md
 import { descargarCsv, fechaParaArchivo } from './exportar.js'
+// [IA] fin
 
 const estado = document.querySelector('#ventas-estado')
 const tabla = document.querySelector('#ventas-tabla')
@@ -147,6 +149,7 @@ function mostrarVacio() {
     }
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_exportar-buscador-contactos.md
 /** Muestra las ventas que coinciden con el texto de la barra superior. */
 function aplicarFiltroVentas() {
     const texto = consultaVentas.trim().toLowerCase()
@@ -190,6 +193,7 @@ document.addEventListener('maldops:buscar', (evento) => {
         aplicarFiltroVentas()
     }
 })
+// [IA] fin
 
 async function cargarVentas() {
     mostrarCargando()
@@ -397,6 +401,7 @@ async function eliminarVenta(venta) {
     }
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_exportar-buscador-contactos.md
 /**
  * Reportes exportables. Las ventas no tienen fecha, así que el historial se
  * ordena por cliente y luego por el orden de registro (id). Igual que el
@@ -487,6 +492,7 @@ function exportarReporte(tipo, boton) {
 document.querySelectorAll('[data-exportar]').forEach((boton) => {
     boton.addEventListener('click', () => exportarReporte(boton.dataset.exportar, boton))
 })
+// [IA] fin
 
 if (estado && tabla && cuerpo && total) {
     cargarVentas()

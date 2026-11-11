@@ -154,6 +154,32 @@ export async function perfil() {
     return respuesta
 }
 
+// [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md
+export async function actualizarPerfil(datos = {}) {
+    const respuesta = await solicitar('/auth/perfil', {
+        metodo: 'PATCH',
+        cuerpo: {
+            nombre: datos.nombre,
+            correo: datos.correo,
+            contrasenaActual: datos.contrasenaActual,
+            contrasenaNueva: datos.contrasenaNueva,
+        },
+    })
+
+    return guardarSesionSiCorresponde(respuesta)
+}
+
+export async function eliminarCuenta() {
+    const respuesta = await solicitar('/auth/perfil', { metodo: 'DELETE' })
+
+    if (respuesta.ok) {
+        borrarSesion()
+    }
+
+    return respuesta
+}
+// [IA] fin
+
 export async function listarClientes() {
     return solicitar('/clientes')
 }
