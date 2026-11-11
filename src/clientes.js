@@ -244,12 +244,32 @@ function mostrarVacio() {
     }
 }
 
+const campoOrden = document.querySelector('#clientes-orden')
+
+/** Ordena una copia de la lista según la opción del menú «Ordenar clientes». */
+function ordenarClientes(lista, criterio = 'nombre-asc') {
+    const porNombre = (a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' })
+    const copia = [...lista]
+
+    if (criterio === 'nombre-desc') {
+        return copia.sort((a, b) => porNombre(b, a))
+    }
+
+    if (criterio === 'favoritos') {
+        return copia.sort(
+            (a, b) => Number(b.favorito === true) - Number(a.favorito === true) || porNombre(a, b),
+        )
+    }
+
+    return copia.sort(porNombre)
+}
+
 // [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
 function aplicarVista() {
     const texto = (campoBusqueda?.value || '').trim().toLowerCase()
     const soloFavoritos = Boolean(filtroFavoritos?.checked)
 
-    const visibles = clientesActuales.filter((cliente) => {
+    const filtrados = clientesActuales.filter((cliente) => {
         if (soloFavoritos && cliente.favorito !== true) {
             return false
         }
@@ -260,6 +280,8 @@ function aplicarVista() {
             (cliente.nota || '').toLowerCase().includes(texto)
         )
     })
+
+    const visibles = ordenarClientes(filtrados, campoOrden?.value)
 
     total.textContent = String(visibles.length)
 
@@ -300,6 +322,7 @@ document.addEventListener('maldops:buscar', (evento) => {
     }
 })
 filtroFavoritos?.addEventListener('change', aplicarVista)
+campoOrden?.addEventListener('change', aplicarVista)
 // [IA] fin
 
 async function cargarClientes() {
