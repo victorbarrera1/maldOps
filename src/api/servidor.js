@@ -632,11 +632,59 @@ export async function eliminarCliente(id) {
 // Ventas
 // ---------------------------------------------------------------------------
 
-export async function listarVentas() {
+export async function listarVentas(opciones = {}) {
     return conSesion(async () => {
-        const db = await inicializarDb()
+        const { busqueda = '', estatus = '', servicio = '', orden = '' } = opciones
+    const ordenesValidos = ['cliente-asc', 'cliente-desc', 'precio-asc', 'precio-desc']
+   
+    if (estatus && !ESTATUS_VENTA.includes(estatus)) {
+        return fallo('Estatus inválido.', 400)
+    }
+    if (servicio && !SERVICIOS.includes(servicio)) {
+        return fallo('Servicio inválido.', 400)
+    }
+    if (orden && !ordenesValidos.includes(orden)) {
+        return fallo('Orden inválido.', 400)
+    }
 
-        return ok(clonar(db.ventas))
+    const mapaClientes = {}
+    const db = await inicializarDb()
+     for (const cliente of db.clientes) {
+        mapaClientes[cliente.id] = cliente.nombre
+    }
+    let ventas = clonar(db.ventas)
+
+    const busquedaNormalizada = normalizarSinTildes(busqueda)
+    if (busquedaNormalizada) {
+        ventas = ventas.filter((venta) => {
+            const clienteValido = normalizarSinTildes(mapaClientes[venta.clienteId] || '')
+            const servicioValido = normalizarSinTildes(venta.servicio)
+            return clienteValido.includes(busquedaNormalizada) || servicioValido.includes(busquedaNormalizada)
+        })
+    }
+
+    if (servicio) {
+        ventas = ventas.filter((venta) => mismoTexto(venta.servicio, servicio))
+    }
+    if (estatus) {
+        ventas = ventas.filter((venta) => mismoTexto(venta.estatus, estatus))
+    }
+    
+    if (orden === 'precio-asc') {
+    ventas.sort((a, b) => a.precio - b.precio)
+    }
+    else if (orden === 'precio-desc') {
+        ventas.sort((a, b) => b.precio - a.precio)
+    }
+    // [IA] inicio · ia/2026-11-11_maldonou_busqueda-filtros-ventas-api.md
+    else if (orden === 'cliente-asc' || orden === 'cliente-desc') {
+        const sentido = orden === 'cliente-asc' ? 1 : -1
+        ventas.sort((a, b) =>
+            sentido * (mapaClientes[a.clienteId] || '').localeCompare(mapaClientes[b.clienteId] || '', 'es'),
+        )
+    }
+    // [IA] fin
+    return ok(ventas)
     })
 }
 

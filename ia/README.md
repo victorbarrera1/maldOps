@@ -19,3 +19,4 @@
 | 2026-11-07 | @victorbarrera1 | Limpieza de entrega: arranque, assets y estilos | [ver](2026-11-07_victorbarrera1_limpieza-entrega.md) |
 | 2026-11-07 | @maldonou |  Reemplaza tabla por acordéon en ayuda| [ver](2026-11-07_maldonou_Acordeon-ayuda.md) |
 | 2026-11-09 | @manolodeus | Clientes favoritos y notas | [ver](2026-11-09_manolodeus_favoritos-notas.md) |
+| 2026-11-11 | @maldonou | Búsqueda, filtros y orden en ventas.listar | [ver](2026-11-11_maldonou_busqueda-filtros-ventas-api.md) |

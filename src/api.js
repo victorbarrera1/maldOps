@@ -77,8 +77,8 @@ export const clientes = {
 }
 
 export const ventas = {
-    async listar() {
-        return llamar('listarVentas')
+    async listar(opciones = {}) {
+        return llamar('listarVentas', opciones)
     },
 
     async obtener(id) {
