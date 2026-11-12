@@ -169,6 +169,12 @@ verificó con admin, con vendedor y con una cuenta nueva.
   `<form>`, errores por campo y modo oscuro persistente. Verificado con admin,
   vendedor y una cuenta temporal eliminada; `npm run build` pasa.
 
+- [x] **G4.** Responsive de `.detalles`: una columna desde 992 px, Clientes sin
+  columna vacía en escritorio, scroll interno de tablas y sin scroll horizontal
+  de página en 375, 412, 768 y 1280 px. Cards pasa a una columna desde 480 px y
+  usa pistas `minmax(0, 1fr)`. Verificado en las cinco vistas; `npm run build`
+  pasa.
+
 ## Registro de bloqueos
 
 _(Sin bloqueos por ahora.)_
