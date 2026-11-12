@@ -60,6 +60,12 @@ html.dark .formulario input:valid + label,
 html.dark #form-login input:not(:placeholder-shown) + label { color: #38bdf8; }
 html.dark .formulario .registro a { color: #38bdf8; }
 html.dark .formulario .campo-error { color: #fca5a5; }
+html.dark .formulario input:focus,
+html.dark .formulario input[type="submit"]:focus-visible,
+html.dark .formulario .registro a:focus-visible,
+html.dark .login-reintentar:focus-visible {
+    outline-color: #38bdf8;
+}
 
 /* Estrella de favorito */
 .btn-favorito {
