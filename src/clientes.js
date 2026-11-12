@@ -79,6 +79,7 @@ function crearBotonFavorito(cliente) {
 }
 // [IA] fin
 
+// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
 async function alternarFavorito(cliente, boton) {
     boton.disabled = true
 
@@ -113,29 +114,6 @@ async function alternarFavorito(cliente, boton) {
 // [IA] fin
 
 
-// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
-function aplicarFiltro() {
-    const soloFavoritos = filtroFavoritos.checked
-    const lista = soloFavoritos
-        ? clientesActuales.filter((cliente) => cliente.favorito)
-        : clientesActuales
-
-    if (soloFavoritos && lista.length === 0) {
-        estado.replaceChildren(
-            crearVacio({
-                titulo: 'Aún no tienes favoritos',
-                mensaje: 'Marca una estrella para verlos aquí.',
-            }),
-        )
-    } else {
-        estado.replaceChildren()
-    }
-
-    pintarFilas(lista)
-}
-// [IA] fin
-
-
 function pintarFilas(clientes) {
     const fragmento = document.createDocumentFragment()
 
@@ -152,10 +130,13 @@ function pintarFilas(clientes) {
         const textos = document.createElement('div')
         textos.className = 'min-w-0'
 
-        const titulo = document.createElement('span')
-        titulo.className = 'block font-medium'
+        // [IA] inicio · ia/2026-11-12_victorbarrera1_cliente-detalle.md
+        const titulo = document.createElement('a')
+        titulo.className = 'block font-medium text-inherit hover:underline'
+        titulo.href = `cliente.html?id=${encodeURIComponent(cliente.id)}`
         titulo.textContent = cliente.nombre
         textos.append(titulo)
+        // [IA] fin
 
         if (cliente.nota) {
             const nota = document.createElement('small')
@@ -289,12 +270,16 @@ function aplicarVista() {
 
     if (visibles.length === 0) {
         pintarFilas([])
-        estado.replaceChildren(
-            crearVacio({
-                titulo: 'Sin resultados',
-                mensaje: 'Prueba con otra búsqueda o desactiva el filtro de favoritos.',
-            }),
-        )
+
+        const soloFavoritosSinBusqueda = soloFavoritos && !texto
+        const titulo = soloFavoritosSinBusqueda ? 'Aún no tienes favoritos' : 'Sin resultados'
+        const mensaje = soloFavoritosSinBusqueda
+            ? 'Marca una estrella para verlos aquí.'
+            : soloFavoritos
+              ? 'No hay favoritos que coincidan con la búsqueda.'
+              : 'Prueba con otra búsqueda.'
+
+        estado.replaceChildren(crearVacio({ titulo, mensaje }))
         return
     }
 
@@ -508,7 +493,3 @@ if (botonNuevo && dialogo && formulario) {
     botonCancelar.addEventListener('click', () => dialogo.close())
     formulario.addEventListener('submit', guardarCliente)
 }
-
-// [IA] inicio · ia/2026-11-09_manolodeus_favoritos-notas.md
-filtroFavoritos?.addEventListener('change', aplicarFiltro)
-// [IA] fin

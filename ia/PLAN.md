@@ -152,6 +152,22 @@ verificó con admin, con vendedor y con una cuenta nueva.
 ### G. Búsqueda, filtros y orden
 
 - [x] G1. Implementar funciones de listar con opciones de búsqueda, filtro y orden en `src/api.js` y `src/servidor.js`.
+- [x] **G2.** Unificar búsqueda, favoritos y orden en Clientes: un solo
+  listener `filtroFavoritos → aplicarVista`, eliminar `aplicarFiltro()` y
+  distinguir los estados vacíos «Aún no tienes favoritos», «No hay favoritos
+  que coincidan con la búsqueda» y «Prueba con otra búsqueda». Verificado con
+  admin y vendedor; `npm run build` pasa.
+
+  Nota: el build estaba bloqueado por un `;` faltante y un `//` suelto en
+  `src/css/dashboard.css` (regla de foco del acordeón). Se corrigió en el
+  commit aparte `fix(css): corrige sintaxis del foco del acordeón`.
+
+- [x] **G3.** Crear `cliente.html?id=...` con el detalle del cliente y sus
+  ventas, y dejar el panel de cuenta de Configuración funcional. La vista
+  resuelve carga, falta de id, 404, error con «Reintentar» y sesión vencida;
+  el guard conserva el query string en `?volver=`. El panel de cuenta usa
+  `<form>`, errores por campo y modo oscuro persistente. Verificado con admin,
+  vendedor y una cuenta temporal eliminada; `npm run build` pasa.
 
 ## Registro de bloqueos
 
