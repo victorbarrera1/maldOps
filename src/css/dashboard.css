@@ -488,7 +488,7 @@ section {
         background-color: var(--white);
         margin-bottom: 8px;
     }
-
+/*[IA] inicio · ia/2026-11-11_maldonou_css-ayuda-modo-oscuro.md*/
     .detalles .ordenes-recientes #ayuda-lista button{
         width: 100%;
         display: flex;
@@ -505,12 +505,14 @@ section {
         transition: 0.2s;
     } 
     .detalles .ordenes-recientes #ayuda-lista button:hover{
-        background-color: #f7f7f7;
+        background-color: color-mix(in srgb, var(--black) 8%, transparent);
     }
     .detalles .ordenes-recientes #ayuda-lista button:focus-visible{
-        outline: 2px solid black;
+        outline: 2px solid var(--black)
         outline-offset: 2px;
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--black) 25%, transparent);
     }
+    /*[IA] fin*/
     .detalles .ordenes-recientes #ayuda-lista button::after{
         content: '>';
         transition: 0.2s;
@@ -525,4 +527,4 @@ section {
     line-height: 1.6; 
     font-size: 14px;
     }
-
+//
