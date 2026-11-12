@@ -508,7 +508,7 @@ section {
         background-color: color-mix(in srgb, var(--black) 8%, transparent);
     }
     .detalles .ordenes-recientes #ayuda-lista button:focus-visible{
-        outline: 2px solid var(--black)
+        outline: 2px solid var(--black);
         outline-offset: 2px;
         box-shadow: 0 0 0 4px color-mix(in srgb, var(--black) 25%, transparent);
     }
@@ -527,4 +527,3 @@ section {
     line-height: 1.6; 
     font-size: 14px;
     }
-//
