@@ -192,8 +192,12 @@ section {
     width: 100%;
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-gap: 30px;
+}
+
+.cards > * {
+    min-width: 0;
 }
 
 .cards .card {
@@ -254,9 +258,14 @@ section {
     margin-top: 10px;
 }
 
-/* El detalle de cliente usa un solo panel: evita la columna vacía. */
-main.detalles--unico {
+/* Las vistas con un solo panel usan una columna: evita la columna vacía. */
+.detalles--unico {
     grid-template-columns: 1fr;
+}
+
+/* Permite que las tablas anchas encojan dentro del grid y no desborden la página. */
+.detalles > * {
+    min-width: 0;
 }
 
 .cliente-ficha {
@@ -311,6 +320,7 @@ html.dark .cliente-favorito {
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .header {
@@ -442,7 +452,7 @@ html.dark .cliente-favorito {
 
 @media only screen and (max-width: 1200px) {
     .cards {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -465,25 +475,31 @@ html.dark .cliente-favorito {
     .container.active {
         left: 300px;
     }
+
+    .detalles {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 }
 
 /* -- Tablets -- */
 @media only screen and (max-width: 768px) {
-    .detalles {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .ordenes-recientes,
-    .nuevos-clientes {
-        overflow-x: auto;
-    }
-
     .estatus.en-progreso {
         white-space: nowrap;
     }
 }
 
 /* -- Celulares -- */
+@media only screen and (max-width: 480px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media only screen and (max-width: 400px) {
     .nav {
         width: 100%;
@@ -505,10 +521,6 @@ html.dark .cliente-favorito {
         left: initial;
         right: 0;
         z-index: 10000;
-    }
-
-    .cards {
-        grid-template-columns: repeat(1, 1fr);
     }
 
     .perfil-usuario {
