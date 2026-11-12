@@ -175,6 +175,14 @@ verificó con admin, con vendedor y con una cuenta nueva.
   usa pistas `minmax(0, 1fr)`. Verificado en las cinco vistas; `npm run build`
   pasa.
 
+- [x] **G5.** Accesibilidad semántica: un `<main>` por vista sin anidarlos,
+  cierres de `.detalles` y `.container` y sin `</section>` sueltos. En cuenta,
+  los cuatro labels están asociados, `#modo-oscuro` tiene label visible y
+  `#cuenta-aviso` es `role="status"`. Login y registro usan labels `#475569`,
+  foco `#0369a1` con outline visible y contraste 7.58:1/5.93:1 (6.92:1/8.28:1
+  en oscuro). Verificado con Tab, árbol de accesibilidad y Lighthouse 100;
+  `npm run build` pasa.
+
 ## Registro de bloqueos
 
 _(Sin bloqueos por ahora.)_

@@ -27,3 +27,4 @@
 | 2026-11-12 | @victorbarrera1 | Clientes: búsqueda, favoritos y orden con un solo listener | [ver](2026-11-12_victorbarrera1_clientes-orden.md) |
 | 2026-11-12 | @victorbarrera1 | Detalle de cliente y panel de cuenta funcional | [ver](2026-11-12_victorbarrera1_cliente-detalle.md) |
 | 2026-11-12 | @victorbarrera1 | Responsive de `.detalles`: una columna bajo 992 px | [ver](2026-11-12_victorbarrera1_responsive-detalles.md) |
+| 2026-11-12 | @victorbarrera1 | Accesibilidad: foco, contraste y semántica | [ver](2026-11-12_victorbarrera1_accesibilidad-semantica.md) |

@@ -55,7 +55,7 @@ body {
     top: 0;
     left: 0;
     padding: 10px 0;
-    color: #ccc;
+    color: #475569;
     transition: all 0.5s ease;
     pointer-events: none;
 }
@@ -68,13 +68,15 @@ body {
 .password input:valid+label {
     top: -15px;
     font-size: 12px;
-    color: #2691d9;
+    color: #0369a1;
 }
 
 .correo input:focus,
 .username input:focus,
 .password input:focus {
-    border-bottom-color: #2691d9;
+    border-bottom-color: #0369a1;
+    outline: 2px solid #0369a1;
+    outline-offset: 2px;
 }
 
 .formulario input[type="submit"] {
@@ -91,12 +93,18 @@ body {
     outline: none;
 }
 
+.formulario input[type="submit"]:focus-visible,
+.registro a:focus-visible {
+    outline: 2px solid #0369a1;
+    outline-offset: 2px;
+}
+
 .registro {
     margin-top: 16px;
 }
 
 .registro a {
-    color: #2691d9;
+    color: #0369a1;
     text-decoration: underline;
 }
 
@@ -144,7 +152,7 @@ body {
 }
 
 .login-reintentar:focus-visible {
-    outline: 2px solid #2691d9;
+    outline: 2px solid #0369a1;
     outline-offset: 2px;
 }
 
@@ -159,5 +167,5 @@ body {
     top: -20px;
     padding: 0;
     font-size: 12px;
-    color: #2691d9;
+    color: #0369a1;
 }
