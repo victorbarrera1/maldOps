@@ -25,3 +25,4 @@
 | 2026-11-11 | @victorbarrera1 | Asistente de IA | Edición y eliminación de cuenta, orden de clientes y README | [ver](2026-11-11_victorbarrera1_cuenta-orden-readme.md) |
 | 2026-11-11 | @maldonou | Corrección de hover y foco del acordeón en modo oscuro | [ver](2026-11-11_maldonou_css-ayuda-modo-oscuro.md) |
 | 2026-11-12 | @victorbarrera1 | Clientes: búsqueda, favoritos y orden con un solo listener | [ver](2026-11-12_victorbarrera1_clientes-orden.md) |
+| 2026-11-12 | @victorbarrera1 | Detalle de cliente y panel de cuenta funcional | [ver](2026-11-12_victorbarrera1_cliente-detalle.md) |

@@ -25,36 +25,50 @@
                 <div class="header">
                     <h2>Panel de configuraciones</h2>
                 </div>
+                <!-- [IA] inicio · ia/2026-11-12_victorbarrera1_cliente-detalle.md -->
+                <form id="form-cuenta" novalidate>
                 <table>
                     <tbody>
                         <!-- [IA] inicio · ia/2026-11-11_victorbarrera1_cuenta-orden-readme.md -->
                         <tr>
                             <td><label for="cuenta-nombre">Editar nombre de la cuenta</label></td>
-                            <td><input class="input" type="text" id="cuenta-nombre" placeholder="Usuario 1" autocomplete="name"></td>
+                            <td>
+                                <input class="input" type="text" id="cuenta-nombre" placeholder="Usuario 1" autocomplete="name" aria-describedby="cuenta-error-nombre">
+                                <p class="campo-error" id="cuenta-error-nombre" hidden></p>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="cuenta-correo">Cambiar correo</label></td>
-                            <td><input class="input" type="email" id="cuenta-correo" placeholder="Correo Electronico" autocomplete="email"></td>
+                            <td>
+                                <input class="input" type="email" id="cuenta-correo" placeholder="Correo Electronico" autocomplete="email" aria-describedby="cuenta-error-correo">
+                                <p class="campo-error" id="cuenta-error-correo" hidden></p>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="cuenta-contrasena-actual">Contraseña actual</label></td>
-                            <td><input class="input" type="password" id="cuenta-contrasena-actual" placeholder="Solo si vas a cambiarla" autocomplete="current-password"></td>
+                            <td>
+                                <input class="input" type="password" id="cuenta-contrasena-actual" placeholder="Solo si vas a cambiarla" autocomplete="current-password" aria-describedby="cuenta-error-contrasena-actual">
+                                <p class="campo-error" id="cuenta-error-contrasena-actual" hidden></p>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="cuenta-contrasena-nueva">Cambiar contraseña</label></td>
-                            <td><input class="input" type="password" id="cuenta-contrasena-nueva" placeholder="Contraseña nueva (mínimo 6)" autocomplete="new-password"></td>
+                            <td>
+                                <input class="input" type="password" id="cuenta-contrasena-nueva" placeholder="Contraseña nueva (mínimo 6)" autocomplete="new-password" aria-describedby="cuenta-error-contrasena-nueva">
+                                <p class="campo-error" id="cuenta-error-contrasena-nueva" hidden></p>
+                            </td>
                         </tr>
                         <tr>
                             <td>Guardar cambios de la cuenta</td>
                             <td>
-                                <button type="button" class="btn btn-primary" id="guardar-cuenta">Guardar cambios</button>
-                                <p id="cuenta-aviso" class="text-sm" role="status" aria-live="polite"></p>
+                                <button type="submit" class="btn btn-primary" id="guardar-cuenta">Guardar cambios</button>
+                                <p id="cuenta-aviso" class="text-sm" role="status" aria-live="polite" aria-atomic="true"></p>
                             </td>
                         </tr>
 
                         <tr>
-                            <td>Modo oscuro</td>
-                            <td><input type="checkbox" id="modo-oscuro" aria-label="Activar modo oscuro"></td>
+                            <td><label for="modo-oscuro">Modo oscuro</label></td>
+                            <td><input type="checkbox" id="modo-oscuro"></td>
                         </tr>
                         <tr>
                             <td>Eliminar cuenta</td>
@@ -64,6 +78,8 @@
 
                     </tbody>
                 </table>
+                </form>
+                <!-- [IA] fin -->
             </div>
             <!-- Fin Clientes activos -->
 

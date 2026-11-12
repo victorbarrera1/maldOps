@@ -130,10 +130,13 @@ function pintarFilas(clientes) {
         const textos = document.createElement('div')
         textos.className = 'min-w-0'
 
-        const titulo = document.createElement('span')
-        titulo.className = 'block font-medium'
+        // [IA] inicio · ia/2026-11-12_victorbarrera1_cliente-detalle.md
+        const titulo = document.createElement('a')
+        titulo.className = 'block font-medium text-inherit hover:underline'
+        titulo.href = `cliente.html?id=${encodeURIComponent(cliente.id)}`
         titulo.textContent = cliente.nombre
         textos.append(titulo)
+        // [IA] fin
 
         if (cliente.nota) {
             const nota = document.createElement('small')

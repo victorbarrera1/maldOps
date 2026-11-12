@@ -11,6 +11,7 @@ import { leerSesion } from './api/sesion.js'
 const VISTAS_PRIVADAS = [
     'dashboard.html',
     'clientes.html',
+    'cliente.html',
     'ventas.html',
     'configuracion.html',
     'ayuda.html',
@@ -33,9 +34,11 @@ export function rutaActual() {
 
 export function destinoSeguro(valor, porDefecto = DESTINO_POR_DEFECTO) {
     const texto = String(valor || '').trim()
-    const archivo = texto.split('?')[0].split('#')[0]
+    const indice = texto.search(/[?#]/)
+    const archivo = indice === -1 ? texto : texto.slice(0, indice)
+    const sufijo = indice === -1 ? '' : texto.slice(indice)
 
-    return VISTAS_PRIVADAS.includes(archivo) ? archivo : porDefecto
+    return VISTAS_PRIVADAS.includes(archivo) ? `${archivo}${sufijo}` : porDefecto
 }
 
 export function urlLogin() {
@@ -43,7 +46,7 @@ export function urlLogin() {
     const vista = rutaActual()
 
     if (VISTAS_PRIVADAS.includes(vista)) {
-        url.searchParams.set('volver', vista)
+        url.searchParams.set('volver', `${vista}${window.location.search}`)
     }
 
     return url

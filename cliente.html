@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del cliente - MaldOps</title>
+    <link rel="icon" type="image/png" href="img/logo-maldops.png">
+    <link rel="stylesheet" href="src/css/dashboard.css">
+</head>
+
+<body data-privada="true">
+    <!-- [IA] inicio · ia/2026-11-12_victorbarrera1_cliente-detalle.md -->
+    <div class="container">
+        <div id="nav-root"></div>
+
+        <main class="detalles detalles--unico">
+            <div class="ordenes-recientes">
+                <div class="header">
+                    <h2>Detalle del cliente</h2>
+                    <a class="btn" href="clientes.html">Volver a Clientes</a>
+                </div>
+
+                <div id="cliente-estado"></div>
+
+                <div id="cliente-contenido" hidden>
+                    <div class="cliente-ficha">
+                        <h3 id="cliente-nombre"></h3>
+                        <p id="cliente-estatus" class="cliente-estatus"></p>
+                        <p id="cliente-nota" class="cliente-nota" hidden></p>
+                        <p id="cliente-favorito" class="cliente-favorito" hidden></p>
+                    </div>
+
+                    <div class="header cliente-ventas-header">
+                        <h3>Ventas del cliente <span id="cliente-ventas-total" class="badge"></span></h3>
+                    </div>
+
+                    <div id="cliente-ventas-estado"></div>
+
+                    <table id="cliente-ventas-tabla" hidden>
+                        <thead>
+                            <tr>
+                                <th>Servicio</th>
+                                <th>Precio</th>
+                                <th>Estatus</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cliente-ventas-cuerpo"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- [IA] fin -->
+
+    <script type="module" src="/src/guard.js"></script>
+    <script type="module" src="/src/cliente.js"></script>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

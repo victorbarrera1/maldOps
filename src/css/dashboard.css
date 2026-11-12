@@ -254,6 +254,52 @@ section {
     margin-top: 10px;
 }
 
+/* El detalle de cliente usa un solo panel: evita la columna vacía. */
+main.detalles--unico {
+    grid-template-columns: 1fr;
+}
+
+.cliente-ficha {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid color-mix(in srgb, var(--black) 15%, transparent);
+}
+
+.cliente-ficha h3 {
+    margin-bottom: 6px;
+    color: var(--black);
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.cliente-estatus {
+    margin-bottom: 8px;
+}
+
+.cliente-nota {
+    margin-bottom: 8px;
+    color: var(--grey);
+    font-style: italic;
+}
+
+.cliente-favorito {
+    color: #b45309;
+    font-weight: 600;
+}
+
+.cliente-ventas-header {
+    margin-top: 20px;
+}
+
+.cliente-ventas-header h3 {
+    color: var(--black);
+    font-weight: 700;
+}
+
+html.dark .cliente-favorito {
+    color: #fbbf24;
+}
+
 .detalles .ordenes-recientes,
 .detalles .nuevos-clientes {
     position: relative;

@@ -162,6 +162,13 @@ verificó con admin, con vendedor y con una cuenta nueva.
   `src/css/dashboard.css` (regla de foco del acordeón). Se corrigió en el
   commit aparte `fix(css): corrige sintaxis del foco del acordeón`.
 
+- [x] **G3.** Crear `cliente.html?id=...` con el detalle del cliente y sus
+  ventas, y dejar el panel de cuenta de Configuración funcional. La vista
+  resuelve carga, falta de id, 404, error con «Reintentar» y sesión vencida;
+  el guard conserva el query string en `?volver=`. El panel de cuenta usa
+  `<form>`, errores por campo y modo oscuro persistente. Verificado con admin,
+  vendedor y una cuenta temporal eliminada; `npm run build` pasa.
+
 ## Registro de bloqueos
 
 _(Sin bloqueos por ahora.)_

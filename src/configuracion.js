@@ -216,16 +216,29 @@ if (formulario) {
 /* Cuenta: guardar cambios y eliminar                                         */
 /* ------------------------------------------------------------------------- */
 
-const botonGuardarCuenta = document.querySelector('#guardar-cuenta')
+const formularioCuenta = document.querySelector('#form-cuenta')
 const botonEliminarCuenta = document.querySelector('#eliminar-cuenta')
 
-if (botonGuardarCuenta && botonEliminarCuenta) {
-    const avisoCuenta = document.querySelector('#cuenta-aviso')
+if (formularioCuenta && botonEliminarCuenta) {
+    const avisoCuenta = formularioCuenta.querySelector('#cuenta-aviso')
+    const botonGuardarCuenta = formularioCuenta.querySelector('#guardar-cuenta')
     const campos = {
-        nombre: document.querySelector('#cuenta-nombre'),
-        correo: document.querySelector('#cuenta-correo'),
-        contrasenaActual: document.querySelector('#cuenta-contrasena-actual'),
-        contrasenaNueva: document.querySelector('#cuenta-contrasena-nueva'),
+        nombre: {
+            campo: formularioCuenta.querySelector('#cuenta-nombre'),
+            error: formularioCuenta.querySelector('#cuenta-error-nombre'),
+        },
+        correo: {
+            campo: formularioCuenta.querySelector('#cuenta-correo'),
+            error: formularioCuenta.querySelector('#cuenta-error-correo'),
+        },
+        contrasenaActual: {
+            campo: formularioCuenta.querySelector('#cuenta-contrasena-actual'),
+            error: formularioCuenta.querySelector('#cuenta-error-contrasena-actual'),
+        },
+        contrasenaNueva: {
+            campo: formularioCuenta.querySelector('#cuenta-contrasena-nueva'),
+            error: formularioCuenta.querySelector('#cuenta-error-contrasena-nueva'),
+        },
     }
 
     function mostrarAvisoCuenta(mensaje, tipo = 'info') {
@@ -238,43 +251,105 @@ if (botonGuardarCuenta && botonEliminarCuenta) {
                   : 'var(--color-texto-suave, #475569)'
     }
 
-    function limpiarErroresCuenta() {
-        for (const campo of Object.values(campos)) {
-            campo?.removeAttribute('aria-invalid')
+    function limpiarErrorCuenta(clave) {
+        const entrada = campos[clave]
+
+        if (!entrada) {
+            return
         }
+
+        entrada.campo?.removeAttribute('aria-invalid')
+
+        if (entrada.error) {
+            entrada.error.textContent = ''
+            entrada.error.hidden = true
+        }
+    }
+
+    function limpiarErroresCuenta() {
+        for (const clave of Object.keys(campos)) {
+            limpiarErrorCuenta(clave)
+        }
+    }
+
+    function mostrarErrorCuenta(clave, mensaje) {
+        const entrada = campos[clave]
+
+        if (!entrada) {
+            return null
+        }
+
+        entrada.campo?.setAttribute('aria-invalid', 'true')
+
+        if (entrada.error) {
+            entrada.error.textContent = mensaje
+            entrada.error.hidden = false
+        }
+
+        return entrada.campo
     }
 
     function marcarErroresCuenta(errores) {
         const mensajes = []
+        let primero = null
 
         for (const [clave, mensaje] of Object.entries(errores || {})) {
-            campos[clave]?.setAttribute('aria-invalid', 'true')
+            const campo = mostrarErrorCuenta(clave, mensaje)
+
+            if (!campo) {
+                continue
+            }
+
             mensajes.push(mensaje)
+            primero = primero || campo
         }
 
-        return mensajes
+        return { mensajes, primero }
     }
 
-    botonGuardarCuenta.addEventListener('click', async () => {
+    for (const [clave, entrada] of Object.entries(campos)) {
+        entrada.campo?.addEventListener('input', () => limpiarErrorCuenta(clave))
+    }
+
+    formularioCuenta.addEventListener('submit', async (evento) => {
+        evento.preventDefault()
         limpiarErroresCuenta()
+        mostrarAvisoCuenta('')
 
         const datos = {
-            nombre: campos.nombre.value,
-            correo: campos.correo.value,
+            nombre: campos.nombre.campo.value,
+            correo: campos.correo.campo.value,
         }
+        const contrasenaActual = campos.contrasenaActual.campo.value
+        const contrasenaNueva = campos.contrasenaNueva.campo.value
 
-        if (campos.contrasenaActual.value || campos.contrasenaNueva.value) {
-            if (!campos.contrasenaNueva.value) {
-                campos.contrasenaNueva.setAttribute('aria-invalid', 'true')
-                mostrarAvisoCuenta('Escribe la contraseña nueva.', 'error')
+        if (contrasenaActual || contrasenaNueva) {
+            if (!contrasenaActual) {
+                const campo = mostrarErrorCuenta(
+                    'contrasenaActual',
+                    'Escribe tu contraseña actual.',
+                )
+                campo?.focus()
                 return
             }
 
-            datos.contrasenaActual = campos.contrasenaActual.value
-            datos.contrasenaNueva = campos.contrasenaNueva.value
+            if (!contrasenaNueva) {
+                const campo = mostrarErrorCuenta(
+                    'contrasenaNueva',
+                    'Escribe la contraseña nueva.',
+                )
+                campo?.focus()
+                return
+            }
+
+            datos.contrasenaActual = contrasenaActual
+            datos.contrasenaNueva = contrasenaNueva
         }
 
+        const textoBoton = botonGuardarCuenta.textContent
+
         botonGuardarCuenta.disabled = true
+        botonGuardarCuenta.textContent = 'Guardando…'
         mostrarAvisoCuenta('Guardando cambios…')
 
         try {
@@ -286,7 +361,7 @@ if (botonGuardarCuenta && botonEliminarCuenta) {
             }
 
             if (!respuesta.ok) {
-                const mensajes = marcarErroresCuenta(respuesta.errores)
+                const { mensajes, primero } = marcarErroresCuenta(respuesta.errores)
 
                 mostrarAvisoCuenta(
                     mensajes.length > 0
@@ -294,15 +369,16 @@ if (botonGuardarCuenta && botonEliminarCuenta) {
                         : mensajeDeError(respuesta, 'No se pudieron guardar los cambios.'),
                     'error',
                 )
+                primero?.focus()
                 return
             }
 
             const perfil = respuesta.data
 
-            campos.nombre.value = perfil.nombre || ''
-            campos.correo.value = perfil.correo || ''
-            campos.contrasenaActual.value = ''
-            campos.contrasenaNueva.value = ''
+            campos.nombre.campo.value = perfil.nombre || ''
+            campos.correo.campo.value = perfil.correo || ''
+            campos.contrasenaActual.campo.value = ''
+            campos.contrasenaNueva.campo.value = ''
 
             const nombreEnMenu = document.querySelector('.nav-usuario-nombre')
 
@@ -316,6 +392,7 @@ if (botonGuardarCuenta && botonEliminarCuenta) {
             mostrarAvisoCuenta('No se pudieron guardar los cambios. Revisa tu conexión.', 'error')
         } finally {
             botonGuardarCuenta.disabled = false
+            botonGuardarCuenta.textContent = textoBoton
         }
     })
 
